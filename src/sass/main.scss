@@ -1,0 +1,89 @@
+@import "_variable.scss";
+@import "_mixin.scss";
+
+$color-slot: (
+  text: color,
+  bg: background,
+);
+$color-list: ("primary", "secondary", "accent", "invert");
+
+@each $slot-title, $slot in $color-slot {
+  @each $color in $color-list {
+    .#{$color}-darkest-#{$slot-title} {
+      #{$slot}: darken(map-get($theme-color, $color), 30%);
+    }
+
+    .#{$color}-darker-#{$slot-title} {
+      #{$slot}: darken(map-get($theme-color, $color), 20%);
+    }
+
+    .#{$color}-dark-#{$slot-title} {
+      #{$slot}: darken(map-get($theme-color, $color), 10%);
+    }
+
+    .#{$color}-#{$slot-title} {
+      #{$slot}: map-get($theme-color, $color);
+    }
+
+    .#{$color}-light-#{$slot-title} {
+      #{$slot}: lighten(map-get($theme-color, $color), 10%);
+    }
+
+    .#{$color}-lighter-#{$slot-title} {
+      #{$slot}: lighten(map-get($theme-color, $color), 20%);
+    }
+
+    .#{$color}-lightest-#{$slot-title} {
+      #{$slot}: lighten(map-get($theme-color, $color), 30%);
+    }
+  }
+}
+
+// 모바일 세로 화면
+@media (max-width: 575.98px) {
+  // 코드 작성
+}
+
+// 모바일 가로 화면
+@media (min-width: 576px) and (max-width: 767.98px) {
+  // 코드 작성
+}
+
+// 태블릿(갤럭시 탭, 아이패드) 화면
+@media (min-width: 768px) and (max-width: 991.98px) {
+  // 코드 작성
+}
+
+// PC 화면 1200px 이하
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  // 코드 작성
+}
+
+// PC 화면 1200px 이상 1920px 이하
+@media (min-width: 1200px) and (max-width: 1199.98px) {
+  // 코드 작성
+}
+
+.row {
+  display: flex;
+}
+
+.col {
+  width: 100%;
+}
+
+@for $i from 1 through 12 {
+  .col.take-#{$i} {
+    width: $i * (1 / 12) * 100%;
+  }
+}
+
+@each $size-key, $size in $screen-size {
+  @include screen-larger-than($size-key) {
+    @for $i from 1 through 12 {
+      .col.take-#{$i}-#{$size-key} {
+        width: $i * (1 / 12) * 100%;
+      }
+    }
+  }
+}

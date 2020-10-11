@@ -9,6 +9,7 @@
       href="https://fonts.googleapis.com/css2?family=Material+Icons"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="../dist/main.css" />
   </head>
   <body>
     <!-- 
@@ -32,6 +33,16 @@
       <hr />
       <div>42</div>
     </drop-down>
+    <!-- this.body -->
+    <div class="dropdown" id="drop1" data-title="값 선택">
+      <button class="dropdown-head icon-btn">
+        <span class="title">눌러서 선택</span>
+        <span class="material-icons"> keyboard_arrow_down </span>
+      </button>
+      <div class="dropdown-content">
+        <div class="selected">1</div>
+      </div>
+    </div>
     <!-- Table -->
     <table-
       id="tb-test"
@@ -43,6 +54,11 @@
       [4 5, 6, 7]
       "
     ></table->
+
+    <row- id="row-1" data-cols="12">
+      <col- data-size="4">안녕하세요</col->
+      <col- id="col-2" data-size="8">두번째</col->
+    </row->
 
     <style>
       .material-icons {

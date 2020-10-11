@@ -1,6 +1,3 @@
-import highwayLoader from "./util/HighwayLoader.js";
-highwayLoader();
-
 // 템플릿 요소들의 부모 클래스 역할을 하는 TemplateElement 클래스
 
 // 용어 정리
@@ -121,7 +118,6 @@ class TemplateElement extends HTMLElement {
         highway.isElement(addedNode) ||
         !highway.isEmpty(addedNode.data.replace(/(\s*)/g, ""))
       ) {
-        console.log(addedNode);
         this._childHandler(addedNode);
       }
     }

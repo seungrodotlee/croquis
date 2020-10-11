@@ -1,6 +1,5 @@
 // highway 객체와
-
-export default function () {
+(function () {
   window.highway = window.highway || {};
 
   highway.isElement = (obj) => {
@@ -34,8 +33,13 @@ export default function () {
   };
 
   String.prototype.toCamelCase = function () {
-    return this.replace(/-([a-z])/g, function (g) {
-      return g[1].toUpperCase();
+    return this.replace(/-([a-z0-9+])/g, function (g) {
+      let reg = /^[a-z]/g;
+      if (reg.test(g[1])) {
+        return g[1].toUpperCase();
+      } else {
+        return g[1];
+      }
     });
   };
 
@@ -48,4 +52,4 @@ export default function () {
 
     return this;
   };
-}
+})();

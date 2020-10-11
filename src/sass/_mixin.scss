@@ -1,0 +1,11 @@
+@mixin screen-larger-than($size) {
+  @media (min-width: map-get($screen-size, $size)) {
+    @content;
+  }
+}
+
+@mixin screen-between($s1, $s2) {
+  @media (min-width: map-get($screen-size, $s1)) and (max-width: map-get($screen-size, $s2) - 1px) {
+    @content;
+  }
+}
