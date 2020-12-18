@@ -45,6 +45,7 @@ class DropDown extends TemplateElement {
       dataHandler: {
         title: (newVal) => {
           this.head.textContent = newVal;
+          this._title = newVal;
         },
       },
     });

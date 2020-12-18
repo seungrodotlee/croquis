@@ -35,11 +35,7 @@ class Table extends TemplateElement {
         this.addColBtn = this.fromTemplate(".add-col-btn");
 
         this.addRowBtn.addEventListener("click", () => {
-          let tr = this.newTableRow(() => {
-            let addColBtnCell = document.createElement("div");
-            addColBtnCell.innerHTML = "&nbsp;";
-            this.addColBtn.appendChild(addColBtnCell);
-          });
+          let tr = this.newTableRow();
 
           for (let j = 0; j < this.colCount; j++) {
             tr.appendChild(this.newTableData("&nbsp;"));
@@ -111,10 +107,6 @@ class Table extends TemplateElement {
               this.rows[i] = this.rows[i].trim().replace(this.closeBracket, "");
 
               this.data[i] = this.rows[i].split(this.contentBreakpoint);
-
-              let addColBtnCell = document.createElement("div");
-              addColBtnCell.innerHTML = "&nbsp;";
-              this.addColBtn.appendChild(addColBtnCell);
             });
 
             for (let j = 0; j < this.data[i].length; j++) {
@@ -164,7 +156,10 @@ class Table extends TemplateElement {
 
   newTableRow(callback) {
     let tr = document.createElement("tr");
-    callback();
+    if(callback != null) {
+      callback();
+    }
+    
     this.content.appendChild(tr);
 
     this.rowCount++;
@@ -192,8 +187,6 @@ class Table extends TemplateElement {
     delBtn.innerHTML = `<span class="material-icons"> close </span>`;
     delBtn.addEventListener("click", () => {
       this.content.removeChild(tr);
-      let addColBtnCell = this.addColBtn.querySelector("div:last-child");
-      this.addColBtn.removeChild(addColBtnCell);
     });
 
     let lastCell = tr.querySelector("td:last-child");
