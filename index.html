@@ -4,8 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <!-- <script src="../dist/build.js"></script> -->
-    <script type="module" src="../dist/build.js"></script>
+    <script src="../dist/build.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Icons"
       rel="stylesheet"
@@ -15,9 +14,6 @@
     <link rel="stylesheet" href="../dist/main.css" />
   </head>
   <body>
-    <!-- 
-      탭  알림  페럴렉스  탑버튼
-    -->
     <!-- Tabs -->
     <tabs->
       <div data-title="배고파" class="selected">배가고프다</div>
@@ -54,33 +50,10 @@
     </row->
     <!-- Modal -->
     <modal- id="testm" data-title="하이">안녕</modal->
-    <!-- <div class="modal">
-      <div class="modal-backdrop"></div>
-      <div class="modal-main">
-        <div class="modal-title">제목</div>
-        <div class="modal-body">내용</div>
-        <div class="modal-footer">
-          <div class="button-wrap flex align-right">
-            <button>취소</button>
-            <button>확인</button>
-          </div>
-        </div>
-      </div>
-    </div> -->
-    <button id="modal-test">테스트</button>
-    <script>
-      let test = document.querySelector("#modal-test");
-      test.addEventListener("click", () => {
-        let a = highway.newModal({
-          id: "test-modal",
-          title: "test",
-          content: "테스트",
-          callback: () => {
-            console.log("test");
-          }
-        });
-      })
-    </script>
+    <!-- Collapse -->
+    <collapse- id="testc" data-title="헬로우">
+      하이
+    </collapse->
     <style>
       html, body {
         font-family: 'Noto Sans KR', sans-serif;
@@ -115,9 +88,40 @@
       .flex.align-right {
         justify-content: flex-end;
       }
+      
+      .box-shadow-s {
+        box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.1),
+          0 0 0 1px rgba(0, 0, 0, 0.02);
+      }
+
+      .box-shadow-l {
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+      }
+
+      .tabpanel {
+        border-radius: .5rem;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+      }
+
+      .tab-buttons {
+        padding: 1rem 0;
+        padding-left: 0.25rem;
+        background: #e9e9e9;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+      }
+
+      .tab-buttons > button {
+        border: 0;
+        background: transparent;
+      }
+
+      .tab-buttons > button.selected {
+        font-weight: bold;
+      }
 
       .tab-content > div {
         display: none;
+        padding: 1rem;
       }
 
       .tab-content > div.selected {
@@ -141,8 +145,6 @@
         width: 100%;
         border-radius: 0.5rem;
         background: #e9e9e9;
-        box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.2),
-          0 0 0 1px rgba(0, 0, 0, 0.1);
       }
 
       .alert button {
@@ -179,8 +181,6 @@
         padding: 0.5rem 0;
         border-radius: 0.25rem;
         min-width: 100%;
-        box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.1),
-          0 0 0 1px rgba(0, 0, 0, 0.02);
         background: white;
       }
 
@@ -210,11 +210,6 @@
         height: 1px;
         background: #dadada;
         border: 0;
-      }
-
-      .box-shadow {
-        box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.1),
-          0 0 0 1px rgba(0, 0, 0, 0.02);
       }
 
       .table-wrap {
@@ -334,7 +329,6 @@
         width: 600px;
         border-radius: 8px;
         background: white;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
       }
 
       .modal-main > div {
@@ -362,6 +356,30 @@
 
       .button-wrap > button:first-child {
         margin-left: 0;
+      }
+
+      .collapse {
+        border-radius: .5rem;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        background: #e9e9e9;
+        overflow: hidden;
+        transition: height 1s;
+      }
+
+      .collapse-trigger {
+        display: inline-block;
+        height: fit-content;
+        font-weight: bold;
+        padding: 1rem;
+        border: 0;
+        background: transparent;
+        transition: height 1s;
+      }
+    
+      .collapse-content {
+        padding: 1rem;
+        background: white;
+        border-top: 1px solid rgba(0, 0, 0, 0.15);
       }
     </style>
   </body>
