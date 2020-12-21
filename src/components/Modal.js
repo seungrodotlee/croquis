@@ -6,7 +6,7 @@ export default class Modal extends TemplateElement {
       template: `
         <div class="modal">
           <div class="modal-backdrop"></div>
-          <div class="modal-main">
+          <div class="modal-main box-shadow-l">
             <div class="modal-title">&nbsp;</div>
             <div class="modal-body">&nbsp;</div>
             <div class="modal-footer">

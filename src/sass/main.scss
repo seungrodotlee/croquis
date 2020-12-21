@@ -1,6 +1,19 @@
 @import "_variable.scss";
 @import "_mixin.scss";
 
+
+:root {
+  @each $color-name, $color in $theme-color {
+    --#{$color-name}-darkest: #{darken($color, 30%)};
+    --#{$color-name}-darker: #{darken($color, 20%)};
+    --#{$color-name}-dark: #{darken($color, 10%)};
+    --#{$color-name}: #{$color};
+    --#{$color-name}-light: #{lighten($color, 10%)};
+    --#{$color-name}-lighter: #{lighten($color, 20%)};
+    --#{$color-name}-lightest: #{lighten($color, 30%)};
+  }
+}
+
 $color-slot: (
   text: color,
   bg: background,
@@ -39,30 +52,30 @@ $color-list: ("primary", "secondary", "accent", "invert");
   }
 }
 
-// 모바일 세로 화면
-@media (max-width: 575.98px) {
-  // 코드 작성
-}
+// // 모바일 세로 화면
+// @media (max-width: 575.98px) {
+//   // 코드 작성
+// }
 
-// 모바일 가로 화면
-@media (min-width: 576px) and (max-width: 767.98px) {
-  // 코드 작성
-}
+// // 모바일 가로 화면
+// @media (min-width: 576px) and (max-width: 767.98px) {
+//   // 코드 작성
+// }
 
-// 태블릿(갤럭시 탭, 아이패드) 화면
-@media (min-width: 768px) and (max-width: 991.98px) {
-  // 코드 작성
-}
+// // 태블릿(갤럭시 탭, 아이패드) 화면
+// @media (min-width: 768px) and (max-width: 991.98px) {
+//   // 코드 작성
+// }
 
-// PC 화면 1200px 이하
-@media (min-width: 992px) and (max-width: 1199.98px) {
-  // 코드 작성
-}
+// // PC 화면 1200px 이하
+// @media (min-width: 992px) and (max-width: 1199.98px) {
+//   // 코드 작성
+// }
 
-// PC 화면 1200px 이상 1920px 이하
-@media (min-width: 1200px) and (max-width: 1199.98px) {
-  // 코드 작성
-}
+// // PC 화면 1200px 이상 1920px 이하
+// @media (min-width: 1200px) and (max-width: 1199.98px) {
+//   // 코드 작성
+// }
 
 .row {
   display: flex;

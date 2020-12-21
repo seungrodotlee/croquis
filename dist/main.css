@@ -1,3 +1,34 @@
+:root {
+  --primary-darkest: #4b0909;
+  --primary-darker: #790e0e;
+  --primary-dark: #a61414;
+  --primary: #d41919;
+  --primary-light: #e83838;
+  --primary-lighter: #ed6666;
+  --primary-lightest: #f29494;
+  --secondary-darkest: #5f240e;
+  --secondary-darker: #8b3415;
+  --secondary-dark: #b8451b;
+  --secondary: #df5827;
+  --secondary-light: #e67a53;
+  --secondary-lighter: #ec9d80;
+  --secondary-lightest: #f3bfac;
+  --accent-darkest: #000b2d;
+  --accent-darker: #01185f;
+  --accent-dark: #012592;
+  --accent: #0232c4;
+  --accent-light: #033ff6;
+  --accent-lighter: #2f62fd;
+  --accent-lightest: #6288fd;
+  --invert-darkest: #004718;
+  --invert-darker: #007a29;
+  --invert-dark: #00ad3a;
+  --invert: #00e04b;
+  --invert-light: #14ff63;
+  --invert-lighter: #47ff85;
+  --invert-lightest: #7affa7;
+}
+
 .primary-darkest-text {
   color: #4b0909;
 }
@@ -425,3 +456,5 @@
     width: 100%;
   }
 }
+
+/*# sourceMappingURL=main.css.map */

@@ -1,7 +1,9 @@
 {
   "scripts": {
     "build": "./node_modules/.bin/webpack",
-    "watch": "./node_modules/.bin/webpack --watch"
+    "watch": "./node_modules/.bin/webpack --watch",
+    "build:sass": "sass src/sass/main.scss:dist/main.css",
+    "watch:sass": "sass --watch src/sass/main.scss:dist/main.css"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",

@@ -4,7 +4,7 @@ export default class Alert extends TemplateElement {
   constructor() {
     super({
       template: `
-      <div class="alert">
+      <div class="alert box-shadow-s">
         <span class="alert-content"></span>
         <button class="material-icons">close</button>
       </div>

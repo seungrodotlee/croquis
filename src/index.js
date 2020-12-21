@@ -5,6 +5,7 @@ import Alert from "./components/Alert.js";
 import TopButton from "./components/TopButton.js";
 import Table from "./components/Table.js";
 import Modal from "./components/Modal.js";
+import Collapse from "./components/Collapse.js";
 import { Row, Col } from "./components/Grid.js";
 
 let title = document.querySelector("title");
@@ -32,6 +33,7 @@ customElements.define("alert-", Alert);
 customElements.define("top-button", TopButton);
 customElements.define("table-", Table);
 customElements.define("modal-", Modal);
+customElements.define("collapse-", Collapse);
 customElements.define("row-", Row);
 customElements.define("col-", Col);
 

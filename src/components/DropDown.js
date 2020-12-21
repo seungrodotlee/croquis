@@ -9,7 +9,7 @@ class DropDown extends TemplateElement {
           <span class="title">눌러서 선택</span>
           <span class="material-icons"> keyboard_arrow_down </span>
         </button>
-        <div class="dropdown-content">
+        <div class="dropdown-content box-shadow-s">
         </div>
       </div>
       `,
