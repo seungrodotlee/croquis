@@ -1,4 +1,4 @@
-import TemplateElement from "../TemplateElement.js";
+import TemplateElement from "../util/Highway.js";
 
 export default class Alert extends TemplateElement {
   constructor() {

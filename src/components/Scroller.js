@@ -1,4 +1,4 @@
-import TemplateElement from "../TemplateElement.js";
+import TemplateElement from "../util/Highway.js";
 
 export default class Scroller extends TemplateElement {
   constructor() {
