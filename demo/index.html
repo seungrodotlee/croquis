@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="../dist/main.css" />
   </head>
   <body>
-    <!-- Tabs -->
+    <div class="root-container">
+      <!-- Tabs -->
     <tabs->
       <div data-title="배고파" class="selected">배가고프다</div>
       <div data-title="피곤해">피곤하다</div>
@@ -22,8 +23,6 @@
     </tabs->
     <!-- Alert -->
     <alert->테스트입니다</alert->
-    <!-- Top Button -->
-    <top-button>맨위로</top-button>
     <!-- Drop Down -->
     <drop-down id="drop1" data-title="값 선택">
       <div class="selected">1</div>
@@ -54,9 +53,29 @@
     <collapse- id="testc" data-title="헬로우">
       하이
     </collapse->
+    <!-- Carousel -->
+    <carousel- id="test-car" data-ratio="16:9" data-autoplay="true">
+      <img src="http://unsplash.it/800/600?image=180">
+      <img src="http://unsplash.it/800/600?image=170">
+      <img src="http://unsplash.it/800/600?image=160">
+      <img src="http://unsplash.it/800/600?image=165">
+    </carousel->
+    <!-- Top Button -->
+    <top-button>맨위로</top-button>
+    </div>
+    
     <style>
       html, body {
         font-family: 'Noto Sans KR', sans-serif;
+      }
+
+      .root-container {
+        margin: 0 1rem;
+        border: 1px solid transparent;
+      }
+
+      .root-container > div {
+        margin: 1rem 0;
       }
 
       .material-icons {
@@ -182,6 +201,7 @@
         border-radius: 0.25rem;
         min-width: 100%;
         background: white;
+        z-index: 10;
       }
 
       .dropdown.active .dropdown-content {
@@ -380,6 +400,59 @@
         padding: 1rem;
         background: white;
         border-top: 1px solid rgba(0, 0, 0, 0.15);
+      }
+
+      .scroller {
+        position: relative;
+      }
+
+      .scroller > button {
+        position: absolute;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        top: 50%;
+        height: 1.5rem;
+        width: 1.5rem;
+        border: 1px solid #e9e9e9;
+        border-radius: 50%;
+        margin: 0;
+        transform: translateY(-50%);
+        background: white;
+        opacity: .3;
+        transition: opacity .5s;
+      }
+
+      .scroller > button:hover {
+        opacity: 1;
+      }
+
+      .scroller > button > .material-icons {
+        margin: 0;
+      }
+
+      .scroller-prev-btn {
+        left: 1rem;
+      }
+
+      .scroller-next-btn {
+        right: 1rem;
+      }
+      
+      .scroller-content {
+        overflow: hidden;
+      }
+
+      .scroller-content > div,
+      .scroller-content > img {
+        display: none;
+        object-fit: cover;
+        min-width: 100%;
+      }
+
+      .scroller-content > div.current,
+      .scroller-content > img.current {
+        display: inline-block;
       }
     </style>
   </body>

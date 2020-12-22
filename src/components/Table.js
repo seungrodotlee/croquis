@@ -57,6 +57,8 @@ class Table extends TemplateElement {
 
           this.colCount++;
         });
+
+        this.body.redrawTable = this.redrawTable;
       },
       dataHandler: {
         editable: (newVal) => {
@@ -102,20 +104,15 @@ class Table extends TemplateElement {
 
           this.rows.shift();
 
+          this.content.innerHTML = "";
+
           for (let i = 0; i < this.rows.length; i++) {
-            let tr = this.newTableRow(() => {
-              this.rows[i] = this.rows[i].trim().replace(this.closeBracket, "");
+            this.rows[i] = this.rows[i].trim().replace(this.closeBracket, "");
 
-              this.data[i] = this.rows[i].split(this.contentBreakpoint);
-            });
-
-            for (let j = 0; j < this.data[i].length; j++) {
-              this.data[i][j] = this.data[i][j].trim();
-              tr.appendChild(this.newTableData(this.data[i][j]));
-            }
-
-            this.registRowDelBtn(tr);
+            this.data[i] = this.rows[i].split(this.contentBreakpoint);
           }
+
+          this.redrawTable(newVal);
         },
       },
     });
@@ -199,6 +196,28 @@ class Table extends TemplateElement {
     td.innerHTML = data;
 
     return td;
+  }
+
+  redrawTable () {
+    this.content.innerHTML = "";
+
+    for (let i = 0; i < this.rows.length; i++) {
+      let tr = this.newTableRow(() => {});
+
+      for (let j = 0; j < this.data[i].length; j++) {
+        if(this.data[i].length != this.colCount) {
+          this.content.innerHTML = "";
+          throw new Error("unvalid content data: mismatch column count");
+        }
+
+        this.data[i][j] = this.data[i][j].trim();
+        tr.appendChild(this.newTableData(this.data[i][j]));
+      }
+
+      this.registRowDelBtn(tr);
+    }
+
+    console.log(this.data);
   }
 }
 

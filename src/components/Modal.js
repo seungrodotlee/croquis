@@ -32,6 +32,9 @@ export default class Modal extends TemplateElement {
         this.body.removeSubmitAction = (callback) => {
           this.submitBtn.removeEventListener(callback);
         }
+
+        this.body.onSubmit = this.onSubmit;
+        document.body.appendChild(this.body);
       },
       childHandler: (addedNode) => {
         this.content.innerHTML = "";

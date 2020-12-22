@@ -34,13 +34,16 @@ export default class Collapse extends TemplateElement {
       childHandler: (addedNode) => {
         this.content.appendChild(addedNode);
         
-        this.getSizes();
+        setTimeout(() => {
+          this.getSizes();
 
-        if(this._closed) {
-          this.body.setAttribute("style", `height: ${this._headHeight}px`);
-        } else {
-          this.body.setAttribute("style", `height: ${this._height}px`);
-        }
+          if(this._closed) {
+            this.body.setAttribute("style", `height: ${this._headHeight}px`);
+          } else {
+            this.body.setAttribute("style", `height: ${this._height}px`);
+          }
+        }, 1);
+        
       },
       dataHandler: {
         closed: (newValue) => {
@@ -50,7 +53,6 @@ export default class Collapse extends TemplateElement {
           this._title = newValue;
           this.head.textContent = newValue;
           this._height = this._headHeight + this._contentHeight;
-          console.log("height = " + this._height);
         }
       }
     })
