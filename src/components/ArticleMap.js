@@ -63,7 +63,7 @@ export default class ArticleMap extends TemplateElement {
 
             for (let i = 0; i < targets.length; i++) {
               let item = this._items[targets[i].getAttribute("id")];
-              if (targets[i] == this._current) {
+              if (item == this._current) {
                 continue;
               }
 
