@@ -4,71 +4,104 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="../dist/build.js"></script>
+    <!-- <script src="../dist/build.js"></script> -->
+    <script type="module" src="../src/index.js"></script>
+
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Icons"
       rel="stylesheet"
     />
     <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../dist/main.css" />
   </head>
   <body>
-    <div class="root-container">
+    <row- id="root" class="root-container">
       <!-- Tabs -->
-    <tabs->
-      <div data-title="배고파" class="selected">배가고프다</div>
-      <div data-title="피곤해">피곤하다</div>
-      <div data-title="비오나?">비 오지 마라...</div>
-    </tabs->
-    <!-- Alert -->
-    <alert->테스트입니다</alert->
-    <!-- Drop Down -->
-    <drop-down id="drop1" data-title="값 선택">
-      <div class="selected">1</div>
-      <div>2</div>
-      <div>3</div>
-      <hr />
-      <div>42</div>
-    </drop-down>
-    <!-- Table -->
-    <table-
-      id="tb-test"
-      data-editable="true"
-      data-field-breakpoint="|"
-      data-fields="a|b|c"
-      data-content="
-      [1, 2, 3]
-      [4, 5, 6]
-      "
-    ></table->
-    <!-- Grid -->
-    <row- id="row-1" data-cols="12">
-      <col- data-size="4">안녕하세요</col->
-      <col- id="col-2" data-size="8">두번째</col->
+      <col- data-size="10">
+        <tabs->
+          <div data-title="배고파" class="selected">배가고프다</div>
+          <div data-title="피곤해">피곤하다</div>
+          <div data-title="비오나?">비 오지 마라...</div>
+        </tabs->
+        <!-- Alert -->
+        <alert->테스트입니다</alert->
+        <!-- Drop Down -->
+        <drop-down id="drop1" data-title="값 선택">
+          <div class="selected">1</div>
+          <div>2</div>
+          <div>3</div>
+          <hr />
+          <div>42</div>
+        </drop-down>
+        <!-- Table -->
+        <table-
+          id="tb-test"
+          data-editable="true"
+          data-field-breakpoint="|"
+          data-fields="a|b|c"
+          data-content="
+          [1, 2, 3]
+          [4, 5, 6]
+          "
+        ></table->
+        <!-- Grid -->
+        <row- id="row-1" data-cols="12">
+          <col- data-size="4">안녕하세요</col->
+          <col- id="col-2" data-size="8">두번째</col->
+        </row->
+        <!-- Modal -->
+        <modal- id="testm" data-title="하이">안녕</modal->
+        <!-- Collapse -->
+        <collapse- id="testc" data-title="헬로우">
+          하이
+        </collapse->
+        <!-- Carousel -->
+        <carousel- id="test-car" data-ratio="16:9" data-autoplay="true">
+          <img src="http://unsplash.it/800/600?image=180">
+          <img src="http://unsplash.it/800/600?image=170">
+          <img src="http://unsplash.it/800/600?image=160">
+          <img src="http://unsplash.it/800/600?image=165">
+        </carousel->
+        <!-- Top Button -->
+        <top-button>맨위로</top-button>
+        <div id="test-article">
+          <h1 id="title-1" data-depth="1">테스트 1</h1>
+          <h2 id="sub-title-1" data-depth="2">가나다</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quis tenetur consectetur officiis nulla voluptas aut laboriosam debitis dolores architecto commodi reprehenderit vero, nam expedita quam eum maxime ipsa odit!</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quis tenetur consectetur officiis nulla voluptas aut laboriosam debitis dolores architecto commodi reprehenderit vero, nam expedita quam eum maxime ipsa odit!</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quis tenetur consectetur officiis nulla voluptas aut laboriosam debitis dolores architecto commodi reprehenderit vero, nam expedita quam eum maxime ipsa odit!</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quis tenetur consectetur officiis nulla voluptas aut laboriosam debitis dolores architecto commodi reprehenderit vero, nam expedita quam eum maxime ipsa odit!</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quis tenetur consectetur officiis nulla voluptas aut laboriosam debitis dolores architecto commodi reprehenderit vero, nam expedita quam eum maxime ipsa odit!</p>
+          
+          <h1 id="title-2" data-depth="1">테스트 2</h1>
+          <h2 id="sub-title-2" data-depth="2">라마바</h2>
+          <h2 id="sub-title-3" data-depth="3">ㅇㅎㅇㄴ</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quis tenetur consectetur officiis nulla voluptas aut laboriosam debitis dolores architecto commodi reprehenderit vero, nam expedita quam eum maxime ipsa odit!</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quis tenetur consectetur officiis nulla voluptas aut laboriosam debitis dolores architecto commodi reprehenderit vero, nam expedita quam eum maxime ipsa odit!</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quis tenetur consectetur officiis nulla voluptas aut laboriosam debitis dolores architecto commodi reprehenderit vero, nam expedita quam eum maxime ipsa odit!</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quis tenetur consectetur officiis nulla voluptas aut laboriosam debitis dolores architecto commodi reprehenderit vero, nam expedita quam eum maxime ipsa odit!</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quis tenetur consectetur officiis nulla voluptas aut laboriosam debitis dolores architecto commodi reprehenderit vero, nam expedita quam eum maxime ipsa odit!</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quis tenetur consectetur officiis nulla voluptas aut laboriosam debitis dolores architecto commodi reprehenderit vero, nam expedita quam eum maxime ipsa odit!</p>
+          <div>
+            <h1 id="title-3" data-depth="1">테스트 3</h1>
+            <h2 id="sub-title-3" data-depth="2">아차카</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quis tenetur consectetur officiis nulla voluptas aut laboriosam debitis dolores architecto commodi reprehenderit vero, nam expedita quam eum maxime ipsa odit!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quis tenetur consectetur officiis nulla voluptas aut laboriosam debitis dolores architecto commodi reprehenderit vero, nam expedita quam eum maxime ipsa odit!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quis tenetur consectetur officiis nulla voluptas aut laboriosam debitis dolores architecto commodi reprehenderit vero, nam expedita quam eum maxime ipsa odit!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quis tenetur consectetur officiis nulla voluptas aut laboriosam debitis dolores architecto commodi reprehenderit vero, nam expedita quam eum maxime ipsa odit!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quis tenetur consectetur officiis nulla voluptas aut laboriosam debitis dolores architecto commodi reprehenderit vero, nam expedita quam eum maxime ipsa odit!</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum quis tenetur consectetur officiis nulla voluptas aut laboriosam debitis dolores architecto commodi reprehenderit vero, nam expedita quam eum maxime ipsa odit!</p>
+          </div>
+          </div>
+        <div style="height: 100vh;"></div>
+      </col->
+      <col- data-size="2">
+        <article-map id="article-map" data-target="test-article" class="fixed">
+        </article-map>
+      </col->
     </row->
-    <!-- Modal -->
-    <modal- id="testm" data-title="하이">안녕</modal->
-    <!-- Collapse -->
-    <collapse- id="testc" data-title="헬로우">
-      하이
-    </collapse->
-    <!-- Carousel -->
-    <carousel- id="test-car" data-ratio="16:9" data-autoplay="true">
-      <img src="http://unsplash.it/800/600?image=180">
-      <img src="http://unsplash.it/800/600?image=170">
-      <img src="http://unsplash.it/800/600?image=160">
-      <img src="http://unsplash.it/800/600?image=165">
-    </carousel->
-    <!-- Top Button -->
-    <top-button>맨위로</top-button>
-    </div>
-    
     <style>
-      html, body {
-        font-family: 'Noto Sans KR', sans-serif;
-      }
-
       .root-container {
         margin: 0 1rem;
         border: 1px solid transparent;
@@ -76,6 +109,23 @@
 
       .root-container > div {
         margin: 1rem 0;
+      }
+
+      #article-map {
+        margin-left: 1rem;
+      }
+    </style>
+    <style>
+      html, body {
+        font-family: 'Noto Sans KR', sans-serif;
+      }
+
+      ul {
+        list-style: none;
+      }
+
+      ul ul {
+        margin-left: 1rem;
       }
 
       .material-icons {
@@ -98,6 +148,10 @@
 
       button {
         cursor: pointer;
+      }
+
+      .fixed {
+        position: fixed;
       }
 
       .flex {
@@ -453,6 +507,16 @@
       .scroller-content > div.current,
       .scroller-content > img.current {
         display: inline-block;
+      }
+
+      .article-map a {
+        font-size: 0.75rem;
+        text-decoration: none;
+        color: rgb(58, 58, 58);
+      }
+
+      .article-map a.current {
+        font-weight: bold;
       }
     </style>
   </body>
