@@ -62,9 +62,7 @@ export default class Scroller extends TemplateElement {
             if(!isNaN(newVal)) {
               this.delay = newVal;
             }
-            
-            console.log("start intv delay : " + this.delay);
-            
+
             clearInterval(this.interval);
 
             this.interval = setInterval(() => {
@@ -97,9 +95,12 @@ export default class Scroller extends TemplateElement {
 
   applyRatio() {
     let contentStyles = window.getComputedStyle(this.content);
-    this._contentWidth = Number(contentStyles.getPropertyValue("width").replace("px", ""));
 
-    this.content.setAttribute("style", `height: ${parseInt(this._contentWidth * this._ratio)}px`);
+    setTimeout(() => {
+      this._contentWidth = Number(contentStyles.getPropertyValue("width").replace("px", ""));
+
+      this.content.setAttribute("style", `height: ${parseInt(this._contentWidth * this._ratio)}px`);  
+    }, 1);
   }
 
   // scroll() {

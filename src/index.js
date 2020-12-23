@@ -10,17 +10,17 @@ import ArticleMap from "./components/ArticleMap.js";
 import { Row, Col } from "./components/Grid.js";
 
 // custom element 등록
-customElements.define("drop-down", DropDown);
-customElements.define("tabs-", Tabs);
-customElements.define("alert-", Alert);
-customElements.define("top-button", TopButton);
-customElements.define("table-", Table);
-customElements.define("modal-", Modal);
-customElements.define("collapse-", Collapse);
-customElements.define("carousel-", Scroller);
-customElements.define("article-map", ArticleMap);
-customElements.define("row-", Row);
-customElements.define("col-", Col);
+highway.define("drop-down", DropDown);
+highway.define("tabs-", Tabs);
+highway.define("alert-", Alert);
+highway.define("top-button", TopButton);
+highway.define("table-", Table);
+highway.define("modal-", Modal);
+highway.define("collapse-", Collapse);
+highway.define("carousel-", Scroller);
+highway.define("article-map", ArticleMap);
+highway.define("row-", Row);
+highway.define("col-", Col);
 
 window.addEventListener("DOMContentLoaded", () => {
   // alertWrap DOM에 등록

@@ -1,4 +1,3 @@
-// highway 객체
 (function () {
   window.highway = window.highway || {};
 
@@ -22,6 +21,10 @@
       return false;
     }
   };
+
+  highway.define = (name, constructor) => {
+    customElements.define(name, constructor);
+  }
 
   highway._alertWrap = document.createElement("div");
   highway._alertWrap.classList.add("alert-wrap");
@@ -55,21 +58,21 @@
 
   let title = document.querySelector("title");
 
-if (window.customElements) {
-  let script = document.createElement("script");
-  script.setAttribute(
-    "src",
-    "https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/custom-elements-es5-adapter.js"
-  );
-  title.insertAfter(script);
-} else {
-  let script = document.createElement("script");
-  script.setAttribute(
-    "src",
-    "https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/webcomponents-bundle.js"
-  );
-  title.insertAfter(script);
-}
+  if (window.customElements) {
+    let script = document.createElement("script");
+    script.setAttribute(
+      "src",
+      "https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/custom-elements-es5-adapter.js"
+    );
+    title.insertAfter(script);
+  } else {
+    let script = document.createElement("script");
+    script.setAttribute(
+      "src",
+      "https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/webcomponents-bundle.js"
+    );
+    title.insertAfter(script);
+  }
 })();
 
 // 템플릿 요소들의 부모 클래스 역할을 하는 TemplateElement 클래스
@@ -210,6 +213,8 @@ class TemplateElement extends HTMLElement {
         this.body.classList.add(this.classList[i]);
       }
     }
+
+    this.body.classList.remove("_hidden");
 
     // 템플릿 요소를 highway 객체에 등록
     // 등록될 때는 카멜케이스로 변환되어 등록된다 ( some-el => someEl )

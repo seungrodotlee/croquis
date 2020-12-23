@@ -19,10 +19,6 @@ export default class ArticleMap extends TemplateElement {
           this.content.innerHTML = "";
           this._target = document.querySelector(`#${newVal}`);
 
-          console.log(this._target.children);
-
-          //this.searchChildren(this._target);
-
           let targets = this._target.querySelectorAll("[data-depth]");
 
           for(let i = 0; i < targets.length; i++) {
