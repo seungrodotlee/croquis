@@ -6,6 +6,7 @@ import Table from "./components/Table.js";
 import Modal from "./components/Modal.js";
 import Collapse from "./components/Collapse.js";
 import Scroller from "./components/Scroller.js";
+import ArticleMap from "./components/ArticleMap.js";
 import { Row, Col } from "./components/Grid.js";
 
 // custom element 등록
@@ -17,6 +18,7 @@ customElements.define("table-", Table);
 customElements.define("modal-", Modal);
 customElements.define("collapse-", Collapse);
 customElements.define("carousel-", Scroller);
+customElements.define("article-map", ArticleMap);
 customElements.define("row-", Row);
 customElements.define("col-", Col);
 
