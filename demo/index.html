@@ -182,7 +182,12 @@
         <div style="height: 100vh"></div>
       </col->
       <col- data-size="2">
-        <article-map id="article-map" data-target="test-article" class="fix">
+        <article-map
+          id="article-map"
+          data-target="test-article"
+          data-fold="true"
+          class="fix"
+        >
         </article-map>
       </col->
     </row->
@@ -925,6 +930,10 @@
       .scroller-content > div.current,
       .scroller-content > img.current {
         display: inline-block;
+      }
+
+      .article-map.always-opened ul ul {
+        display: block;
       }
 
       .article-map a {

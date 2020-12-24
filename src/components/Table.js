@@ -62,7 +62,9 @@ class Table extends TemplateElement {
       },
       dataHandler: {
         editable: (newVal) => {
-          if (newVal == "true") {
+          newVal = JSON.parse(newVal);
+
+          if (newVal) {
             for (let i = 0; i < this.delBtnList.length; i++) {
               this.delBtnList[i].classList.add("active");
             }
@@ -153,10 +155,10 @@ class Table extends TemplateElement {
 
   newTableRow(callback) {
     let tr = document.createElement("tr");
-    if(callback != null) {
+    if (callback != null) {
       callback();
     }
-    
+
     this.content.appendChild(tr);
 
     this.rowCount++;
@@ -198,14 +200,14 @@ class Table extends TemplateElement {
     return td;
   }
 
-  redrawTable () {
+  redrawTable() {
     this.content.innerHTML = "";
 
     for (let i = 0; i < this.rows.length; i++) {
       let tr = this.newTableRow(() => {});
 
       for (let j = 0; j < this.data[i].length; j++) {
-        if(this.data[i].length != this.colCount) {
+        if (this.data[i].length != this.colCount) {
           this.content.innerHTML = "";
           throw new Error("unvalid content data: mismatch column count");
         }

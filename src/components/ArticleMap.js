@@ -12,6 +12,7 @@ export default class ArticleMap extends TemplateElement {
       templateHandler() {
         this.content = this.fromTemplate(".article-map > ul");
         this._parent = this.content;
+        this._fold = true;
         this._nest = [];
         this._items = [];
         this._opened = [];
@@ -84,6 +85,16 @@ export default class ArticleMap extends TemplateElement {
             }
           });
         },
+        fold: (newValue) => {
+          newValue = JSON.parse(newValue);
+          this._fold = newValue;
+
+          if (newValue) {
+            this.body.classList.remove("always-opened");
+          } else {
+            this.body.classList.add("always-opened");
+          }
+        },
       },
     });
   }
@@ -91,13 +102,15 @@ export default class ArticleMap extends TemplateElement {
   changeCurrentTo(current, target) {
     let d = target.dataset.depth;
 
-    if (this._opened[d] != undefined) {
-      this._opened[d].classList.remove("opened");
-    }
+    if (this._fold) {
+      if (this._opened[d] != undefined) {
+        this._opened[d].classList.remove("opened");
+      }
 
-    if (current.nextElementSibling != null) {
-      current.nextElementSibling.classList.add("opened");
-      this._opened[d] = current.nextElementSibling;
+      if (current.nextElementSibling != null) {
+        current.nextElementSibling.classList.add("opened");
+        this._opened[d] = current.nextElementSibling;
+      }
     }
 
     if (this._current != undefined) {
