@@ -14,6 +14,7 @@ export default class ArticleMap extends TemplateElement {
         this._parent = this.content;
         this._nest = [];
         this._items = [];
+        this._opened = [];
       },
       dataHandler: {
         target: (newVal) => {
@@ -49,7 +50,7 @@ export default class ArticleMap extends TemplateElement {
             }
 
             link.addEventListener("click", () => {
-              this.changeCurrentTo(link);
+              this.changeCurrentTo(link, t);
             });
 
             this._items[t.getAttribute("id")] = link;
@@ -63,21 +64,21 @@ export default class ArticleMap extends TemplateElement {
 
             for (let i = 0; i < targets.length; i++) {
               let item = this._items[targets[i].getAttribute("id")];
+
               if (item == this._current) {
                 continue;
               }
 
               if (i == targets.length - 1) {
                 if (pos >= targets[i].offsetTop) {
-                  this.changeCurrentTo(item);
+                  this.changeCurrentTo(item, targets[i]);
                 }
               } else {
                 if (
                   pos >= targets[i].offsetTop &&
                   pos < targets[i + 1].offsetTop
                 ) {
-                  console.log(this._items[targets[i].getAttribute("id")]);
-                  this.changeCurrentTo(item);
+                  this.changeCurrentTo(item, targets[i]);
                 }
               }
             }
@@ -87,29 +88,18 @@ export default class ArticleMap extends TemplateElement {
     });
   }
 
-  // searchChildren(el) {
-  //   for(let i = 0; i < this._target.children.length; i++) {
-  //     let c = this._target.children[i];
+  changeCurrentTo(current, target) {
+    let d = target.dataset.depth;
 
-  //     if(highway.isElement(c)) {
-  //       console.log(c);
-  //       console.log(c.children.length);
-  //       if(c.dataset.depth != undefined) {
-  //         let item = document.createElement("li");
-  //         let link = document.createElement("a");
-  //         link.setAttribute("href", `#${c.getAttribute("id")}`);
-  //         item.appendChild(link);
-  //         this.content.appendChild(item);
-  //       }
+    if (this._opened[d] != undefined) {
+      this._opened[d].classList.remove("opened");
+    }
 
-  //       if(c.children.length != 0) {
-  //         this.searchChildren(c);
-  //       }
-  //     }
-  //   }
-  // }
+    if (current.nextElementSibling != null) {
+      current.nextElementSibling.classList.add("opened");
+      this._opened[d] = current.nextElementSibling;
+    }
 
-  changeCurrentTo(current) {
     if (this._current != undefined) {
       this._current.classList.remove("current");
     }
