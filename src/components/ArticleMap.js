@@ -1,6 +1,6 @@
 import TemplateElement from "../util/Highway.js";
 
-export default class ArticleMap extends TemplateElement {
+class ArticleMap extends TemplateElement {
   constructor() {
     super({
       template: `
@@ -9,7 +9,7 @@ export default class ArticleMap extends TemplateElement {
           </ul>
         </div>
       `,
-      templateHandler() {
+      templateHandler: () => {
         this.content = this.fromTemplate(".article-map > ul");
         this._parent = this.content;
         this._fold = true;
@@ -121,3 +121,7 @@ export default class ArticleMap extends TemplateElement {
     this._current = current;
   }
 }
+
+highway.define("article-map", ArticleMap);
+
+export default ArticleMap;

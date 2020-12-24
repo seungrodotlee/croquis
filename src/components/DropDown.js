@@ -53,4 +53,6 @@ class DropDown extends TemplateElement {
   }
 }
 
+highway.define("drop-down", DropDown);
+
 export default DropDown;

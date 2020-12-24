@@ -1,6 +1,6 @@
 import TemplateElement from "../util/Highway.js";
 
-export default class Scroller extends TemplateElement {
+class Scroller extends TemplateElement {
   constructor() {
     super({
       template: `
@@ -14,18 +14,18 @@ export default class Scroller extends TemplateElement {
           <div class="scroller-content"></div>
         </div>
       `,
-      templateHandler() {
+      templateHandler: () => {
         this.prevBtn = this.fromTemplate(".scroller-prev-btn");
         this.nextBtn = this.fromTemplate(".scroller-next-btn");
         this.content = this.fromTemplate(".scroller-content");
-      
+
         this.current = 0;
         this.length = 0;
         this.pages = [];
         this.delay = 3000;
 
         this.prevBtn.addEventListener("click", () => {
-          if(this.current != 0) {
+          if (this.current != 0) {
             this.pages[this.current].classList.remove("current");
             this.current--;
             this.pages[this.current].classList.add("current");
@@ -33,12 +33,12 @@ export default class Scroller extends TemplateElement {
         });
 
         this.nextBtn.addEventListener("click", () => {
-          if(this.current + 1 < this.length) {
+          if (this.current + 1 < this.length) {
             this.pages[this.current].classList.remove("current");
             this.current++;
             this.pages[this.current].classList.add("current");
           }
-        })
+        });
 
         this.body.applyRatio = this.applyRatio;
 
@@ -46,8 +46,8 @@ export default class Scroller extends TemplateElement {
           this.applyRatio();
         });
       },
-      childHandler(addedNode) {
-        if(this.length == 0) {
+      childHandler: (addedNode) => {
+        if (this.length == 0) {
           addedNode.classList.add("current");
         }
 
@@ -58,8 +58,8 @@ export default class Scroller extends TemplateElement {
       },
       dataHandler: {
         autoplay: (newVal) => {
-          if(this._auto != false) {
-            if(!isNaN(newVal)) {
+          if (this._auto != false) {
+            if (!isNaN(newVal)) {
               this.delay = newVal;
             }
 
@@ -69,7 +69,7 @@ export default class Scroller extends TemplateElement {
               this.pages[this.current].classList.remove("current");
               this.current++;
 
-              if(this.current == this.length) {
+              if (this.current == this.length) {
                 this.current = 0;
               }
 
@@ -79,17 +79,16 @@ export default class Scroller extends TemplateElement {
             console.log("stop intv");
             clearInterval(this.interval);
           }
-          
         },
         ratio: (newVal) => {
           let particle = newVal.split(":");
           let w = particle[0];
           let h = particle[1];
-          this._ratio = h/w;
-          
+          this._ratio = h / w;
+
           this.applyRatio();
-        }
-      }
+        },
+      },
     });
   }
 
@@ -97,9 +96,14 @@ export default class Scroller extends TemplateElement {
     let contentStyles = window.getComputedStyle(this.content);
 
     setTimeout(() => {
-      this._contentWidth = Number(contentStyles.getPropertyValue("width").replace("px", ""));
+      this._contentWidth = Number(
+        contentStyles.getPropertyValue("width").replace("px", "")
+      );
 
-      this.content.setAttribute("style", `height: ${parseInt(this._contentWidth * this._ratio)}px`);  
+      this.content.setAttribute(
+        "style",
+        `height: ${parseInt(this._contentWidth * this._ratio)}px`
+      );
     }, 1);
   }
 
@@ -115,3 +119,7 @@ export default class Scroller extends TemplateElement {
   //   this.pages[this.current].classList.add("current");
   // }
 }
+
+highway.define("scroller-", Scroller);
+
+export default Scroller;

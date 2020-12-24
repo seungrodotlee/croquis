@@ -1,6 +1,6 @@
 import TemplateElement from "../util/Highway.js";
 
-export default class Alert extends TemplateElement {
+class Alert extends TemplateElement {
   constructor() {
     super({
       template: `
@@ -34,3 +34,12 @@ export default class Alert extends TemplateElement {
 highway.newAlert = (content) => {
   Alert.newInstance(content);
 };
+
+window.addEventListener("DOMContentLoaded", () => {
+  // alertWrap DOM에 등록
+  document.body.appendChild(highway._alertWrap);
+});
+
+highway.define("alert-", Alert);
+
+export default Alert;

@@ -1,6 +1,6 @@
 import TemplateElement from "../util/Highway.js";
 
-export default class Modal extends TemplateElement {
+class Modal extends TemplateElement {
   constructor() {
     super({
       template: `
@@ -27,11 +27,11 @@ export default class Modal extends TemplateElement {
         this.cancleBtn.addEventListener("click", () => {
           let parent = this.body.parentElement;
           parent.removeChild(this.body);
-        })
-      
+        });
+
         this.body.removeSubmitAction = (callback) => {
           this.submitBtn.removeEventListener(callback);
-        }
+        };
 
         this.body.onSubmit = this.onSubmit;
         document.body.appendChild(this.body);
@@ -49,7 +49,7 @@ export default class Modal extends TemplateElement {
     });
   }
 
-  onSubmit (callback) {
+  onSubmit(callback) {
     this.submitBtn.addEventListener("click", callback);
   }
 
@@ -61,7 +61,7 @@ export default class Modal extends TemplateElement {
 
     document.body.appendChild(a);
 
-    if(callback != null) {
+    if (callback != null) {
       a.onSubmit(callback);
     }
 
@@ -69,14 +69,18 @@ export default class Modal extends TemplateElement {
   }
 }
 
-highway.newModal = ({id, title, content}) => {
+highway.newModal = ({ id, title, content }) => {
   let m = Modal.newInstance(id, title, content, null);
-  
-  return m;
-}
 
-highway.newModal = ({id, title, content, callback}) => {
-  let m = Modal.newInstance(id, title, content, callback);
-  
   return m;
-}
+};
+
+highway.newModal = ({ id, title, content, callback }) => {
+  let m = Modal.newInstance(id, title, content, callback);
+
+  return m;
+};
+
+highway.define("modal-", Modal);
+
+export default Modal;

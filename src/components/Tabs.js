@@ -1,6 +1,6 @@
 import TemplateElement from "../util/Highway.js";
 
-export default class Tabs extends TemplateElement {
+class Tabs extends TemplateElement {
   constructor() {
     super({
       template: `
@@ -42,3 +42,7 @@ export default class Tabs extends TemplateElement {
     });
   }
 }
+
+highway.define("tabs-", Tabs);
+
+export default Tabs;

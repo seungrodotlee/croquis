@@ -1,6 +1,6 @@
 import TemplateElement from "../util/Highway.js";
 
-export default class TopButton extends TemplateElement {
+class TopButton extends TemplateElement {
   constructor() {
     super({
       template: `
@@ -17,3 +17,7 @@ export default class TopButton extends TemplateElement {
     });
   }
 }
+
+highway.define("top-button", TopButton);
+
+export default TopButton;

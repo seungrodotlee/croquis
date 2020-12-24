@@ -1,6 +1,7 @@
 import TemplateElement from "../util/Highway.js";
+import { Col } from "./Grid.js";
 
-export default class Collapse extends TemplateElement {
+class Collapse extends TemplateElement {
   constructor() {
     super({
       template: `
@@ -19,10 +20,10 @@ export default class Collapse extends TemplateElement {
 
         this.head.addEventListener("click", () => {
           this.body.classList.toggle("closed");
-          
+
           this.getSizes();
 
-          if(this._closed) {
+          if (this._closed) {
             this.body.setAttribute("style", `height: ${this._height}px`);
           } else {
             this.body.setAttribute("style", `height: ${this._headHeight}px`);
@@ -33,17 +34,16 @@ export default class Collapse extends TemplateElement {
       },
       childHandler: (addedNode) => {
         this.content.appendChild(addedNode);
-        
+
         setTimeout(() => {
           this.getSizes();
 
-          if(this._closed) {
+          if (this._closed) {
             this.body.setAttribute("style", `height: ${this._headHeight}px`);
           } else {
             this.body.setAttribute("style", `height: ${this._height}px`);
           }
         }, 1);
-        
       },
       dataHandler: {
         closed: (newValue) => {
@@ -53,18 +53,26 @@ export default class Collapse extends TemplateElement {
           this._title = newValue;
           this.head.textContent = newValue;
           this._height = this._headHeight + this._contentHeight;
-        }
-      }
-    })
+        },
+      },
+    });
   }
 
   getSizes() {
     let contentStyles = window.getComputedStyle(this.content);
-    this._contentHeight = Number(contentStyles.getPropertyValue("height").replace("px", ""));
+    this._contentHeight = Number(
+      contentStyles.getPropertyValue("height").replace("px", "")
+    );
 
     contentStyles = window.getComputedStyle(this.head);
-    this._headHeight = Number(contentStyles.getPropertyValue("height").replace("px", ""));
+    this._headHeight = Number(
+      contentStyles.getPropertyValue("height").replace("px", "")
+    );
 
     this._height = this._headHeight + this._contentHeight;
   }
-};
+}
+
+highway.define("collapse-", Collapse);
+
+export default Collapse;
