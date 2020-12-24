@@ -2,10 +2,39 @@ $black: rgb(34, 34, 34);
 $white: rgb(245, 245, 245);
 
 $theme-color: (
-  "primary": #d41919,
-  "secondary": #df5827,
-  "accent": #0232c4,
-  "invert": #00e04b,
+  "primary": #0d3cca,
+  "secondary": #0f7de4,
+  "accent": #48c774,
+  "invert": #c72222,
+  "invert-secondary": #f2cb05,
+  "grey": #afafaf,
+);
+
+$color-steps: (
+  "darkest": (
+    "d",
+    30%,
+  ),
+  "darker": (
+    "d",
+    20%,
+  ),
+  "dark": (
+    "d",
+    10%,
+  ),
+  "light": (
+    "l",
+    10%,
+  ),
+  "lighter": (
+    "l",
+    20%,
+  ),
+  "lightest": (
+    "l",
+    30%,
+  ),
 );
 
 $screen-size: (

@@ -1,8 +1,10 @@
 @import "_variable.scss";
 @import "_mixin.scss";
-
+@import "_function.scss";
 
 :root {
+  --white: #{$white};
+  --black: #{$black};
   @each $color-name, $color in $theme-color {
     --#{$color-name}-darkest: #{darken($color, 30%)};
     --#{$color-name}-darker: #{darken($color, 20%)};
@@ -18,36 +20,57 @@ $color-slot: (
   text: color,
   bg: background,
 );
-$color-list: ("primary", "secondary", "accent", "invert");
+
+.white-color {
+  color: $white;
+}
+
+.white-bg {
+  color: $white;
+  background: $black;
+}
+
+.black-color {
+  color: $black;
+}
+
+.black-bg {
+  color: $white;
+  background: $black;
+}
 
 @each $slot-title, $slot in $color-slot {
-  @each $color in $color-list {
-    .#{$color}-darkest-#{$slot-title} {
-      #{$slot}: darken(map-get($theme-color, $color), 30%);
+  @each $color-title, $color in $theme-color {
+    html body .#{$color-title}-#{$slot-title} {
+      #{$slot}: $color;
+      @if $slot == background {
+        @if abs(brightness(#9e9e9e)) <= abs(brightness($color)) {
+          color: $black;
+        } @else {
+          color: $white;
+        }
+      }
     }
 
-    .#{$color}-darker-#{$slot-title} {
-      #{$slot}: darken(map-get($theme-color, $color), 20%);
-    }
+    @each $step, $weight in $color-steps {
+      $c: white;
 
-    .#{$color}-dark-#{$slot-title} {
-      #{$slot}: darken(map-get($theme-color, $color), 10%);
-    }
+      @if nth($weight, 1) == "d" {
+        $c: darken($color, nth($weight, 2));
+      } @else if nth($weight, 1) == "l" {
+        $c: lighten($color, nth($weight, 2));
+      }
 
-    .#{$color}-#{$slot-title} {
-      #{$slot}: map-get($theme-color, $color);
-    }
-
-    .#{$color}-light-#{$slot-title} {
-      #{$slot}: lighten(map-get($theme-color, $color), 10%);
-    }
-
-    .#{$color}-lighter-#{$slot-title} {
-      #{$slot}: lighten(map-get($theme-color, $color), 20%);
-    }
-
-    .#{$color}-lightest-#{$slot-title} {
-      #{$slot}: lighten(map-get($theme-color, $color), 30%);
+      html body .#{$color-title}-#{$step}-#{$slot-title} {
+        #{$slot}: $c;
+        @if $slot == background {
+          @if abs(brightness(#9e9e9e)) <= abs(brightness($c)) {
+            color: $black;
+          } @else {
+            color: $white;
+          }
+        }
+      }
     }
   }
 }

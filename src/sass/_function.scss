@@ -1,0 +1,5 @@
+@function brightness($color) {
+  @return (
+      (red($color) * 0.299) + (green($color) * 0.582) + (blue($color) * 0.114)
+    ) / 255 * 100%;
+}

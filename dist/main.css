@@ -1,256 +1,444 @@
 :root {
-  --primary-darkest: #4b0909;
-  --primary-darker: #790e0e;
-  --primary-dark: #a61414;
-  --primary: #d41919;
-  --primary-light: #e83838;
-  --primary-lighter: #ed6666;
-  --primary-lightest: #f29494;
-  --secondary-darkest: #5f240e;
-  --secondary-darker: #8b3415;
-  --secondary-dark: #b8451b;
-  --secondary: #df5827;
-  --secondary-light: #e67a53;
-  --secondary-lighter: #ec9d80;
-  --secondary-lightest: #f3bfac;
-  --accent-darkest: #000b2d;
-  --accent-darker: #01185f;
-  --accent-dark: #012592;
-  --accent: #0232c4;
-  --accent-light: #033ff6;
-  --accent-lighter: #2f62fd;
-  --accent-lightest: #6288fd;
-  --invert-darkest: #004718;
-  --invert-darker: #007a29;
-  --invert-dark: #00ad3a;
-  --invert: #00e04b;
-  --invert-light: #14ff63;
-  --invert-lighter: #47ff85;
-  --invert-lightest: #7affa7;
+  --white: whitesmoke;
+  --black: #222222;
+  --primary-darkest: #04113a;
+  --primary-darker: #07206a;
+  --primary-dark: #0a2e9a;
+  --primary: #0d3cca;
+  --primary-light: #1a4ff0;
+  --primary-lighter: #4a74f3;
+  --primary-lightest: #7a99f6;
+  --secondary-darkest: #062e54;
+  --secondary-darker: #094984;
+  --secondary-dark: #0c63b4;
+  --secondary: #0f7de4;
+  --secondary-light: #3496f2;
+  --secondary-lighter: #64aff5;
+  --secondary-lightest: #94c8f8;
+  --accent-darkest: #1c5a31;
+  --accent-darker: #288147;
+  --accent-dark: #34a85c;
+  --accent: #48c774;
+  --accent-light: #6fd392;
+  --accent-lighter: #96dfaf;
+  --accent-lightest: #bdebcd;
+  --invert-darkest: #440c0c;
+  --invert-darker: #701313;
+  --invert-dark: #9b1b1b;
+  --invert: #c72222;
+  --invert-light: #de3e3e;
+  --invert-lighter: #e56a6a;
+  --invert-lightest: #ed9595;
+  --invert-secondary-darkest: #5c4d02;
+  --invert-secondary-darker: #8e7703;
+  --invert-secondary-dark: #c0a104;
+  --invert-secondary: #f2cb05;
+  --invert-secondary-light: #fbd92f;
+  --invert-secondary-lighter: #fce261;
+  --invert-secondary-lightest: #fdeb93;
+  --grey-darkest: #636363;
+  --grey-darker: #7c7c7c;
+  --grey-dark: #969696;
+  --grey: #afafaf;
+  --grey-light: #c9c9c9;
+  --grey-lighter: #e2e2e2;
+  --grey-lightest: #fcfcfc;
 }
 
-.primary-darkest-text {
-  color: #4b0909;
+.white-color {
+  color: whitesmoke;
 }
 
-.primary-darker-text {
-  color: #790e0e;
+.white-bg {
+  color: whitesmoke;
+  background: #222222;
 }
 
-.primary-dark-text {
-  color: #a61414;
+.black-color {
+  color: #222222;
 }
 
-.primary-text {
-  color: #d41919;
+.black-bg {
+  color: whitesmoke;
+  background: #222222;
 }
 
-.primary-light-text {
-  color: #e83838;
+html body .primary-text {
+  color: #0d3cca;
 }
 
-.primary-lighter-text {
-  color: #ed6666;
+html body .primary-darkest-text {
+  color: #04113a;
 }
 
-.primary-lightest-text {
-  color: #f29494;
+html body .primary-darker-text {
+  color: #07206a;
 }
 
-.secondary-darkest-text {
-  color: #5f240e;
+html body .primary-dark-text {
+  color: #0a2e9a;
 }
 
-.secondary-darker-text {
-  color: #8b3415;
+html body .primary-light-text {
+  color: #1a4ff0;
 }
 
-.secondary-dark-text {
-  color: #b8451b;
+html body .primary-lighter-text {
+  color: #4a74f3;
 }
 
-.secondary-text {
-  color: #df5827;
+html body .primary-lightest-text {
+  color: #7a99f6;
 }
 
-.secondary-light-text {
-  color: #e67a53;
+html body .secondary-text {
+  color: #0f7de4;
 }
 
-.secondary-lighter-text {
-  color: #ec9d80;
+html body .secondary-darkest-text {
+  color: #062e54;
 }
 
-.secondary-lightest-text {
-  color: #f3bfac;
+html body .secondary-darker-text {
+  color: #094984;
 }
 
-.accent-darkest-text {
-  color: #000b2d;
+html body .secondary-dark-text {
+  color: #0c63b4;
 }
 
-.accent-darker-text {
-  color: #01185f;
+html body .secondary-light-text {
+  color: #3496f2;
 }
 
-.accent-dark-text {
-  color: #012592;
+html body .secondary-lighter-text {
+  color: #64aff5;
 }
 
-.accent-text {
-  color: #0232c4;
+html body .secondary-lightest-text {
+  color: #94c8f8;
 }
 
-.accent-light-text {
-  color: #033ff6;
+html body .accent-text {
+  color: #48c774;
 }
 
-.accent-lighter-text {
-  color: #2f62fd;
+html body .accent-darkest-text {
+  color: #1c5a31;
 }
 
-.accent-lightest-text {
-  color: #6288fd;
+html body .accent-darker-text {
+  color: #288147;
 }
 
-.invert-darkest-text {
-  color: #004718;
+html body .accent-dark-text {
+  color: #34a85c;
 }
 
-.invert-darker-text {
-  color: #007a29;
+html body .accent-light-text {
+  color: #6fd392;
 }
 
-.invert-dark-text {
-  color: #00ad3a;
+html body .accent-lighter-text {
+  color: #96dfaf;
 }
 
-.invert-text {
-  color: #00e04b;
+html body .accent-lightest-text {
+  color: #bdebcd;
 }
 
-.invert-light-text {
-  color: #14ff63;
+html body .invert-text {
+  color: #c72222;
 }
 
-.invert-lighter-text {
-  color: #47ff85;
+html body .invert-darkest-text {
+  color: #440c0c;
 }
 
-.invert-lightest-text {
-  color: #7affa7;
+html body .invert-darker-text {
+  color: #701313;
 }
 
-.primary-darkest-bg {
-  background: #4b0909;
+html body .invert-dark-text {
+  color: #9b1b1b;
 }
 
-.primary-darker-bg {
-  background: #790e0e;
+html body .invert-light-text {
+  color: #de3e3e;
 }
 
-.primary-dark-bg {
-  background: #a61414;
+html body .invert-lighter-text {
+  color: #e56a6a;
 }
 
-.primary-bg {
-  background: #d41919;
+html body .invert-lightest-text {
+  color: #ed9595;
 }
 
-.primary-light-bg {
-  background: #e83838;
+html body .invert-secondary-text {
+  color: #f2cb05;
 }
 
-.primary-lighter-bg {
-  background: #ed6666;
+html body .invert-secondary-darkest-text {
+  color: #5c4d02;
 }
 
-.primary-lightest-bg {
-  background: #f29494;
+html body .invert-secondary-darker-text {
+  color: #8e7703;
 }
 
-.secondary-darkest-bg {
-  background: #5f240e;
+html body .invert-secondary-dark-text {
+  color: #c0a104;
 }
 
-.secondary-darker-bg {
-  background: #8b3415;
+html body .invert-secondary-light-text {
+  color: #fbd92f;
 }
 
-.secondary-dark-bg {
-  background: #b8451b;
+html body .invert-secondary-lighter-text {
+  color: #fce261;
 }
 
-.secondary-bg {
-  background: #df5827;
+html body .invert-secondary-lightest-text {
+  color: #fdeb93;
 }
 
-.secondary-light-bg {
-  background: #e67a53;
+html body .grey-text {
+  color: #afafaf;
 }
 
-.secondary-lighter-bg {
-  background: #ec9d80;
+html body .grey-darkest-text {
+  color: #636363;
 }
 
-.secondary-lightest-bg {
-  background: #f3bfac;
+html body .grey-darker-text {
+  color: #7c7c7c;
 }
 
-.accent-darkest-bg {
-  background: #000b2d;
+html body .grey-dark-text {
+  color: #969696;
 }
 
-.accent-darker-bg {
-  background: #01185f;
+html body .grey-light-text {
+  color: #c9c9c9;
 }
 
-.accent-dark-bg {
-  background: #012592;
+html body .grey-lighter-text {
+  color: #e2e2e2;
 }
 
-.accent-bg {
-  background: #0232c4;
+html body .grey-lightest-text {
+  color: #fcfcfc;
 }
 
-.accent-light-bg {
-  background: #033ff6;
+html body .primary-bg {
+  background: #0d3cca;
+  color: whitesmoke;
 }
 
-.accent-lighter-bg {
-  background: #2f62fd;
+html body .primary-darkest-bg {
+  background: #04113a;
+  color: whitesmoke;
 }
 
-.accent-lightest-bg {
-  background: #6288fd;
+html body .primary-darker-bg {
+  background: #07206a;
+  color: whitesmoke;
 }
 
-.invert-darkest-bg {
-  background: #004718;
+html body .primary-dark-bg {
+  background: #0a2e9a;
+  color: whitesmoke;
 }
 
-.invert-darker-bg {
-  background: #007a29;
+html body .primary-light-bg {
+  background: #1a4ff0;
+  color: whitesmoke;
 }
 
-.invert-dark-bg {
-  background: #00ad3a;
+html body .primary-lighter-bg {
+  background: #4a74f3;
+  color: whitesmoke;
 }
 
-.invert-bg {
-  background: #00e04b;
+html body .primary-lightest-bg {
+  background: #7a99f6;
+  color: whitesmoke;
 }
 
-.invert-light-bg {
-  background: #14ff63;
+html body .secondary-bg {
+  background: #0f7de4;
+  color: whitesmoke;
 }
 
-.invert-lighter-bg {
-  background: #47ff85;
+html body .secondary-darkest-bg {
+  background: #062e54;
+  color: whitesmoke;
 }
 
-.invert-lightest-bg {
-  background: #7affa7;
+html body .secondary-darker-bg {
+  background: #094984;
+  color: whitesmoke;
+}
+
+html body .secondary-dark-bg {
+  background: #0c63b4;
+  color: whitesmoke;
+}
+
+html body .secondary-light-bg {
+  background: #3496f2;
+  color: whitesmoke;
+}
+
+html body .secondary-lighter-bg {
+  background: #64aff5;
+  color: #222222;
+}
+
+html body .secondary-lightest-bg {
+  background: #94c8f8;
+  color: #222222;
+}
+
+html body .accent-bg {
+  background: #48c774;
+  color: whitesmoke;
+}
+
+html body .accent-darkest-bg {
+  background: #1c5a31;
+  color: whitesmoke;
+}
+
+html body .accent-darker-bg {
+  background: #288147;
+  color: whitesmoke;
+}
+
+html body .accent-dark-bg {
+  background: #34a85c;
+  color: whitesmoke;
+}
+
+html body .accent-light-bg {
+  background: #6fd392;
+  color: #222222;
+}
+
+html body .accent-lighter-bg {
+  background: #96dfaf;
+  color: #222222;
+}
+
+html body .accent-lightest-bg {
+  background: #bdebcd;
+  color: #222222;
+}
+
+html body .invert-bg {
+  background: #c72222;
+  color: whitesmoke;
+}
+
+html body .invert-darkest-bg {
+  background: #440c0c;
+  color: whitesmoke;
+}
+
+html body .invert-darker-bg {
+  background: #701313;
+  color: whitesmoke;
+}
+
+html body .invert-dark-bg {
+  background: #9b1b1b;
+  color: whitesmoke;
+}
+
+html body .invert-light-bg {
+  background: #de3e3e;
+  color: whitesmoke;
+}
+
+html body .invert-lighter-bg {
+  background: #e56a6a;
+  color: whitesmoke;
+}
+
+html body .invert-lightest-bg {
+  background: #ed9595;
+  color: #222222;
+}
+
+html body .invert-secondary-bg {
+  background: #f2cb05;
+  color: #222222;
+}
+
+html body .invert-secondary-darkest-bg {
+  background: #5c4d02;
+  color: whitesmoke;
+}
+
+html body .invert-secondary-darker-bg {
+  background: #8e7703;
+  color: whitesmoke;
+}
+
+html body .invert-secondary-dark-bg {
+  background: #c0a104;
+  color: whitesmoke;
+}
+
+html body .invert-secondary-light-bg {
+  background: #fbd92f;
+  color: #222222;
+}
+
+html body .invert-secondary-lighter-bg {
+  background: #fce261;
+  color: #222222;
+}
+
+html body .invert-secondary-lightest-bg {
+  background: #fdeb93;
+  color: #222222;
+}
+
+html body .grey-bg {
+  background: #afafaf;
+  color: #222222;
+}
+
+html body .grey-darkest-bg {
+  background: #636363;
+  color: whitesmoke;
+}
+
+html body .grey-darker-bg {
+  background: #7c7c7c;
+  color: whitesmoke;
+}
+
+html body .grey-dark-bg {
+  background: #969696;
+  color: whitesmoke;
+}
+
+html body .grey-light-bg {
+  background: #c9c9c9;
+  color: #222222;
+}
+
+html body .grey-lighter-bg {
+  background: #e2e2e2;
+  color: #222222;
+}
+
+html body .grey-lightest-bg {
+  background: #fcfcfc;
+  color: #222222;
 }
 
 .row {
