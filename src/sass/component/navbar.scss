@@ -23,20 +23,28 @@
   flex-shrink: 0;
 }
 
-.nav-bar-left,
-.nav-bar-left-inner {
+.nav-bar-left {
   align-items: center;
-  justify-content: flex-start;
   margin-right: auto;
 }
+
+.nav-bar-left,
+.nav-bar-left-inner {
+  justify-content: flex-start;
+}
+
 .nav-bar-left > *,
 .nav-bar-left-inner > * {
   margin-right: 1rem;
 }
 
+.nav-bar-right {
+  align-items: center;
+  margin-left: auto;
+}
+
 .nav-bar-right,
 .nav-bar-right-inner {
-  align-items: center;
   justify-content: flex-end;
   margin-left: auto;
 }

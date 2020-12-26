@@ -1,12 +1,13 @@
 button {
   display: inline-flex;
   align-items: center;
-  background: white;
+  background: $background;
   padding: 0.25rem 0.75rem;
-  border: 1px solid #c9c9c9;
+  border: 1px solid $border-color;
   border-radius: 0.25rem;
   font-size: 1rem;
   cursor: pointer;
+  overflow: hidden;
 
   &.icon-btn {
     padding-right: 0.5rem;
@@ -19,6 +20,12 @@ button {
 
   .material-icons {
     margin-left: 0.5rem;
+  }
+
+  @each $color-title, $color in $color-map {
+    &.#{$color-title}-bg {
+      border: 1px solid $color;
+    }
   }
 }
 
