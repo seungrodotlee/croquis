@@ -1,3 +1,13 @@
+body {
+  background: whitesmoke;
+  color: #222222;
+}
+
+body.dark-mode {
+  background: #222222;
+  color: whitesmoke;
+}
+
 /* transitions */
 html body .ready-hidden-by-slide-right {
   transform: translateX(0);
@@ -296,14 +306,6 @@ table {
   border-spacing: 0;
 }
 
-html,
-button,
-input,
-select,
-textarea {
-  color: #222;
-}
-
 ::-moz-selection {
   background: #b3d4fc;
   text-shadow: none;
@@ -453,6 +455,903 @@ body {
   display: none;
 }
 
+:root {
+  --white: whitesmoke;
+  --black: #222222;
+  --primary-darkest: #04113a;
+  --primary-darker: #07206a;
+  --primary-dark: #0a2e9a;
+  --primary: #0d3cca;
+  --primary-light: #1a4ff0;
+  --primary-lighter: #4a74f3;
+  --primary-lightest: #7a99f6;
+  --secondary-darkest: #062e54;
+  --secondary-darker: #094984;
+  --secondary-dark: #0c63b4;
+  --secondary: #0f7de4;
+  --secondary-light: #3496f2;
+  --secondary-lighter: #64aff5;
+  --secondary-lightest: #94c8f8;
+  --accent-darkest: #1c5a31;
+  --accent-darker: #288147;
+  --accent-dark: #34a85c;
+  --accent: #48c774;
+  --accent-light: #6fd392;
+  --accent-lighter: #96dfaf;
+  --accent-lightest: #bdebcd;
+  --invert-darkest: #440c0c;
+  --invert-darker: #701313;
+  --invert-dark: #9b1b1b;
+  --invert: #c72222;
+  --invert-light: #de3e3e;
+  --invert-lighter: #e56a6a;
+  --invert-lightest: #ed9595;
+  --invert-secondary-darkest: #5c4d02;
+  --invert-secondary-darker: #8e7703;
+  --invert-secondary-dark: #c0a104;
+  --invert-secondary: #f2cb05;
+  --invert-secondary-light: #fbd92f;
+  --invert-secondary-lighter: #fce261;
+  --invert-secondary-lightest: #fdeb93;
+  --grey-darkest: #636363;
+  --grey-darker: #7c7c7c;
+  --grey-dark: #969696;
+  --grey: #afafaf;
+  --grey-light: #c9c9c9;
+  --grey-lighter: #e2e2e2;
+  --grey-lightest: #fcfcfc;
+}
+
+.white-color {
+  color: whitesmoke;
+}
+
+.white-bg {
+  color: whitesmoke;
+  background: #222222;
+}
+
+.white-border {
+  border-color: whitesmoke !important;
+}
+
+.black-color {
+  color: #222222;
+}
+
+.black-bg {
+  color: whitesmoke;
+  background: #222222;
+}
+
+.white-border {
+  border-color: #222222 !important;
+}
+
+html body .white-text {
+  color: whitesmoke;
+}
+
+html body .black-text {
+  color: #222222;
+}
+
+html body .primary-text {
+  color: #0d3cca;
+}
+
+html body .secondary-text {
+  color: #0f7de4;
+}
+
+html body .accent-text {
+  color: #48c774;
+}
+
+html body .invert-text {
+  color: #c72222;
+}
+
+html body .invert-secondary-text {
+  color: #f2cb05;
+}
+
+html body .grey-text {
+  color: #afafaf;
+}
+
+html body .primary-darkest-text {
+  color: #04113a;
+}
+
+html body .primary-darker-text {
+  color: #07206a;
+}
+
+html body .primary-dark-text {
+  color: #0a2e9a;
+}
+
+html body .primary-light-text {
+  color: #1a4ff0;
+}
+
+html body .primary-lighter-text {
+  color: #4a74f3;
+}
+
+html body .primary-lightest-text {
+  color: #7a99f6;
+}
+
+html body .secondary-darkest-text {
+  color: #062e54;
+}
+
+html body .secondary-darker-text {
+  color: #094984;
+}
+
+html body .secondary-dark-text {
+  color: #0c63b4;
+}
+
+html body .secondary-light-text {
+  color: #3496f2;
+}
+
+html body .secondary-lighter-text {
+  color: #64aff5;
+}
+
+html body .secondary-lightest-text {
+  color: #94c8f8;
+}
+
+html body .accent-darkest-text {
+  color: #1c5a31;
+}
+
+html body .accent-darker-text {
+  color: #288147;
+}
+
+html body .accent-dark-text {
+  color: #34a85c;
+}
+
+html body .accent-light-text {
+  color: #6fd392;
+}
+
+html body .accent-lighter-text {
+  color: #96dfaf;
+}
+
+html body .accent-lightest-text {
+  color: #bdebcd;
+}
+
+html body .invert-darkest-text {
+  color: #440c0c;
+}
+
+html body .invert-darker-text {
+  color: #701313;
+}
+
+html body .invert-dark-text {
+  color: #9b1b1b;
+}
+
+html body .invert-light-text {
+  color: #de3e3e;
+}
+
+html body .invert-lighter-text {
+  color: #e56a6a;
+}
+
+html body .invert-lightest-text {
+  color: #ed9595;
+}
+
+html body .invert-secondary-darkest-text {
+  color: #5c4d02;
+}
+
+html body .invert-secondary-darker-text {
+  color: #8e7703;
+}
+
+html body .invert-secondary-dark-text {
+  color: #c0a104;
+}
+
+html body .invert-secondary-light-text {
+  color: #fbd92f;
+}
+
+html body .invert-secondary-lighter-text {
+  color: #fce261;
+}
+
+html body .invert-secondary-lightest-text {
+  color: #fdeb93;
+}
+
+html body .grey-darkest-text {
+  color: #636363;
+}
+
+html body .grey-darker-text {
+  color: #7c7c7c;
+}
+
+html body .grey-dark-text {
+  color: #969696;
+}
+
+html body .grey-light-text {
+  color: #c9c9c9;
+}
+
+html body .grey-lighter-text {
+  color: #e2e2e2;
+}
+
+html body .grey-lightest-text {
+  color: #fcfcfc;
+}
+
+html body .white-bg {
+  background: whitesmoke;
+  color: #222222;
+}
+
+html body .black-bg {
+  background: #222222;
+  color: whitesmoke;
+}
+
+html body .primary-bg {
+  background: #0d3cca;
+  color: whitesmoke;
+}
+
+html body .secondary-bg {
+  background: #0f7de4;
+  color: whitesmoke;
+}
+
+html body .accent-bg {
+  background: #48c774;
+  color: whitesmoke;
+}
+
+html body .invert-bg {
+  background: #c72222;
+  color: whitesmoke;
+}
+
+html body .invert-secondary-bg {
+  background: #f2cb05;
+  color: #222222;
+}
+
+html body .grey-bg {
+  background: #afafaf;
+  color: #222222;
+}
+
+html body .primary-darkest-bg {
+  background: #04113a;
+  color: whitesmoke;
+}
+
+html body .primary-darker-bg {
+  background: #07206a;
+  color: whitesmoke;
+}
+
+html body .primary-dark-bg {
+  background: #0a2e9a;
+  color: whitesmoke;
+}
+
+html body .primary-light-bg {
+  background: #1a4ff0;
+  color: whitesmoke;
+}
+
+html body .primary-lighter-bg {
+  background: #4a74f3;
+  color: whitesmoke;
+}
+
+html body .primary-lightest-bg {
+  background: #7a99f6;
+  color: whitesmoke;
+}
+
+html body .secondary-darkest-bg {
+  background: #062e54;
+  color: whitesmoke;
+}
+
+html body .secondary-darker-bg {
+  background: #094984;
+  color: whitesmoke;
+}
+
+html body .secondary-dark-bg {
+  background: #0c63b4;
+  color: whitesmoke;
+}
+
+html body .secondary-light-bg {
+  background: #3496f2;
+  color: whitesmoke;
+}
+
+html body .secondary-lighter-bg {
+  background: #64aff5;
+  color: whitesmoke;
+}
+
+html body .secondary-lightest-bg {
+  background: #94c8f8;
+  color: #222222;
+}
+
+html body .accent-darkest-bg {
+  background: #1c5a31;
+  color: whitesmoke;
+}
+
+html body .accent-darker-bg {
+  background: #288147;
+  color: whitesmoke;
+}
+
+html body .accent-dark-bg {
+  background: #34a85c;
+  color: whitesmoke;
+}
+
+html body .accent-light-bg {
+  background: #6fd392;
+  color: #222222;
+}
+
+html body .accent-lighter-bg {
+  background: #96dfaf;
+  color: #222222;
+}
+
+html body .accent-lightest-bg {
+  background: #bdebcd;
+  color: #222222;
+}
+
+html body .invert-darkest-bg {
+  background: #440c0c;
+  color: whitesmoke;
+}
+
+html body .invert-darker-bg {
+  background: #701313;
+  color: whitesmoke;
+}
+
+html body .invert-dark-bg {
+  background: #9b1b1b;
+  color: whitesmoke;
+}
+
+html body .invert-light-bg {
+  background: #de3e3e;
+  color: whitesmoke;
+}
+
+html body .invert-lighter-bg {
+  background: #e56a6a;
+  color: whitesmoke;
+}
+
+html body .invert-lightest-bg {
+  background: #ed9595;
+  color: #222222;
+}
+
+html body .invert-secondary-darkest-bg {
+  background: #5c4d02;
+  color: whitesmoke;
+}
+
+html body .invert-secondary-darker-bg {
+  background: #8e7703;
+  color: whitesmoke;
+}
+
+html body .invert-secondary-dark-bg {
+  background: #c0a104;
+  color: whitesmoke;
+}
+
+html body .invert-secondary-light-bg {
+  background: #fbd92f;
+  color: #222222;
+}
+
+html body .invert-secondary-lighter-bg {
+  background: #fce261;
+  color: #222222;
+}
+
+html body .invert-secondary-lightest-bg {
+  background: #fdeb93;
+  color: #222222;
+}
+
+html body .grey-darkest-bg {
+  background: #636363;
+  color: whitesmoke;
+}
+
+html body .grey-darker-bg {
+  background: #7c7c7c;
+  color: whitesmoke;
+}
+
+html body .grey-dark-bg {
+  background: #969696;
+  color: whitesmoke;
+}
+
+html body .grey-light-bg {
+  background: #c9c9c9;
+  color: #222222;
+}
+
+html body .grey-lighter-bg {
+  background: #e2e2e2;
+  color: #222222;
+}
+
+html body .grey-lightest-bg {
+  background: #fcfcfc;
+  color: #222222;
+}
+
+html body .white-border {
+  border-color: whitesmoke;
+}
+
+html body .black-border {
+  border-color: #222222;
+}
+
+html body .primary-border {
+  border-color: #0d3cca;
+}
+
+html body .secondary-border {
+  border-color: #0f7de4;
+}
+
+html body .accent-border {
+  border-color: #48c774;
+}
+
+html body .invert-border {
+  border-color: #c72222;
+}
+
+html body .invert-secondary-border {
+  border-color: #f2cb05;
+}
+
+html body .grey-border {
+  border-color: #afafaf;
+}
+
+html body .primary-darkest-border {
+  border-color: #04113a;
+}
+
+html body .primary-darker-border {
+  border-color: #07206a;
+}
+
+html body .primary-dark-border {
+  border-color: #0a2e9a;
+}
+
+html body .primary-light-border {
+  border-color: #1a4ff0;
+}
+
+html body .primary-lighter-border {
+  border-color: #4a74f3;
+}
+
+html body .primary-lightest-border {
+  border-color: #7a99f6;
+}
+
+html body .secondary-darkest-border {
+  border-color: #062e54;
+}
+
+html body .secondary-darker-border {
+  border-color: #094984;
+}
+
+html body .secondary-dark-border {
+  border-color: #0c63b4;
+}
+
+html body .secondary-light-border {
+  border-color: #3496f2;
+}
+
+html body .secondary-lighter-border {
+  border-color: #64aff5;
+}
+
+html body .secondary-lightest-border {
+  border-color: #94c8f8;
+}
+
+html body .accent-darkest-border {
+  border-color: #1c5a31;
+}
+
+html body .accent-darker-border {
+  border-color: #288147;
+}
+
+html body .accent-dark-border {
+  border-color: #34a85c;
+}
+
+html body .accent-light-border {
+  border-color: #6fd392;
+}
+
+html body .accent-lighter-border {
+  border-color: #96dfaf;
+}
+
+html body .accent-lightest-border {
+  border-color: #bdebcd;
+}
+
+html body .invert-darkest-border {
+  border-color: #440c0c;
+}
+
+html body .invert-darker-border {
+  border-color: #701313;
+}
+
+html body .invert-dark-border {
+  border-color: #9b1b1b;
+}
+
+html body .invert-light-border {
+  border-color: #de3e3e;
+}
+
+html body .invert-lighter-border {
+  border-color: #e56a6a;
+}
+
+html body .invert-lightest-border {
+  border-color: #ed9595;
+}
+
+html body .invert-secondary-darkest-border {
+  border-color: #5c4d02;
+}
+
+html body .invert-secondary-darker-border {
+  border-color: #8e7703;
+}
+
+html body .invert-secondary-dark-border {
+  border-color: #c0a104;
+}
+
+html body .invert-secondary-light-border {
+  border-color: #fbd92f;
+}
+
+html body .invert-secondary-lighter-border {
+  border-color: #fce261;
+}
+
+html body .invert-secondary-lightest-border {
+  border-color: #fdeb93;
+}
+
+html body .grey-darkest-border {
+  border-color: #636363;
+}
+
+html body .grey-darker-border {
+  border-color: #7c7c7c;
+}
+
+html body .grey-dark-border {
+  border-color: #969696;
+}
+
+html body .grey-light-border {
+  border-color: #c9c9c9;
+}
+
+html body .grey-lighter-border {
+  border-color: #e2e2e2;
+}
+
+html body .grey-lightest-border {
+  border-color: #fcfcfc;
+}
+
+.row {
+  display: flex;
+}
+
+.col {
+  width: 100%;
+}
+
+.col.take-1 {
+  width: 8.3333333333%;
+}
+
+.col.take-2 {
+  width: 16.6666666667%;
+}
+
+.col.take-3 {
+  width: 25%;
+}
+
+.col.take-4 {
+  width: 33.3333333333%;
+}
+
+.col.take-5 {
+  width: 41.6666666667%;
+}
+
+.col.take-6 {
+  width: 50%;
+}
+
+.col.take-7 {
+  width: 58.3333333333%;
+}
+
+.col.take-8 {
+  width: 66.6666666667%;
+}
+
+.col.take-9 {
+  width: 75%;
+}
+
+.col.take-10 {
+  width: 83.3333333333%;
+}
+
+.col.take-11 {
+  width: 91.6666666667%;
+}
+
+.col.take-12 {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .col.take-1-s {
+    width: 8.3333333333%;
+  }
+
+  .col.take-2-s {
+    width: 16.6666666667%;
+  }
+
+  .col.take-3-s {
+    width: 25%;
+  }
+
+  .col.take-4-s {
+    width: 33.3333333333%;
+  }
+
+  .col.take-5-s {
+    width: 41.6666666667%;
+  }
+
+  .col.take-6-s {
+    width: 50%;
+  }
+
+  .col.take-7-s {
+    width: 58.3333333333%;
+  }
+
+  .col.take-8-s {
+    width: 66.6666666667%;
+  }
+
+  .col.take-9-s {
+    width: 75%;
+  }
+
+  .col.take-10-s {
+    width: 83.3333333333%;
+  }
+
+  .col.take-11-s {
+    width: 91.6666666667%;
+  }
+
+  .col.take-12-s {
+    width: 100%;
+  }
+}
+@media (min-width: 992px) {
+  .col.take-1-m {
+    width: 8.3333333333%;
+  }
+
+  .col.take-2-m {
+    width: 16.6666666667%;
+  }
+
+  .col.take-3-m {
+    width: 25%;
+  }
+
+  .col.take-4-m {
+    width: 33.3333333333%;
+  }
+
+  .col.take-5-m {
+    width: 41.6666666667%;
+  }
+
+  .col.take-6-m {
+    width: 50%;
+  }
+
+  .col.take-7-m {
+    width: 58.3333333333%;
+  }
+
+  .col.take-8-m {
+    width: 66.6666666667%;
+  }
+
+  .col.take-9-m {
+    width: 75%;
+  }
+
+  .col.take-10-m {
+    width: 83.3333333333%;
+  }
+
+  .col.take-11-m {
+    width: 91.6666666667%;
+  }
+
+  .col.take-12-m {
+    width: 100%;
+  }
+}
+@media (min-width: 1200px) {
+  .col.take-1-l {
+    width: 8.3333333333%;
+  }
+
+  .col.take-2-l {
+    width: 16.6666666667%;
+  }
+
+  .col.take-3-l {
+    width: 25%;
+  }
+
+  .col.take-4-l {
+    width: 33.3333333333%;
+  }
+
+  .col.take-5-l {
+    width: 41.6666666667%;
+  }
+
+  .col.take-6-l {
+    width: 50%;
+  }
+
+  .col.take-7-l {
+    width: 58.3333333333%;
+  }
+
+  .col.take-8-l {
+    width: 66.6666666667%;
+  }
+
+  .col.take-9-l {
+    width: 75%;
+  }
+
+  .col.take-10-l {
+    width: 83.3333333333%;
+  }
+
+  .col.take-11-l {
+    width: 91.6666666667%;
+  }
+
+  .col.take-12-l {
+    width: 100%;
+  }
+}
+@media (min-width: 1408px) {
+  .col.take-1-xl {
+    width: 8.3333333333%;
+  }
+
+  .col.take-2-xl {
+    width: 16.6666666667%;
+  }
+
+  .col.take-3-xl {
+    width: 25%;
+  }
+
+  .col.take-4-xl {
+    width: 33.3333333333%;
+  }
+
+  .col.take-5-xl {
+    width: 41.6666666667%;
+  }
+
+  .col.take-6-xl {
+    width: 50%;
+  }
+
+  .col.take-7-xl {
+    width: 58.3333333333%;
+  }
+
+  .col.take-8-xl {
+    width: 66.6666666667%;
+  }
+
+  .col.take-9-xl {
+    width: 75%;
+  }
+
+  .col.take-10-xl {
+    width: 83.3333333333%;
+  }
+
+  .col.take-11-xl {
+    width: 91.6666666667%;
+  }
+
+  .col.take-12-xl {
+    width: 100%;
+  }
+}
 .container {
   position: relative;
   width: 100%;
@@ -482,12 +1381,13 @@ body {
 button {
   display: inline-flex;
   align-items: center;
-  background: white;
+  background: whitesmoke;
   padding: 0.25rem 0.75rem;
   border: 1px solid #c9c9c9;
   border-radius: 0.25rem;
   font-size: 1rem;
   cursor: pointer;
+  overflow: hidden;
 }
 button.icon-btn {
   padding-right: 0.5rem;
@@ -498,6 +1398,138 @@ button.no-border {
 }
 button .material-icons {
   margin-left: 0.5rem;
+}
+button.white-bg {
+  border: 1px solid whitesmoke;
+}
+button.black-bg {
+  border: 1px solid #222222;
+}
+button.primary-bg {
+  border: 1px solid #0d3cca;
+}
+button.secondary-bg {
+  border: 1px solid #0f7de4;
+}
+button.accent-bg {
+  border: 1px solid #48c774;
+}
+button.invert-bg {
+  border: 1px solid #c72222;
+}
+button.invert-secondary-bg {
+  border: 1px solid #f2cb05;
+}
+button.grey-bg {
+  border: 1px solid #afafaf;
+}
+button.primary-darkest-bg {
+  border: 1px solid #04113a;
+}
+button.primary-darker-bg {
+  border: 1px solid #07206a;
+}
+button.primary-dark-bg {
+  border: 1px solid #0a2e9a;
+}
+button.primary-light-bg {
+  border: 1px solid #1a4ff0;
+}
+button.primary-lighter-bg {
+  border: 1px solid #4a74f3;
+}
+button.primary-lightest-bg {
+  border: 1px solid #7a99f6;
+}
+button.secondary-darkest-bg {
+  border: 1px solid #062e54;
+}
+button.secondary-darker-bg {
+  border: 1px solid #094984;
+}
+button.secondary-dark-bg {
+  border: 1px solid #0c63b4;
+}
+button.secondary-light-bg {
+  border: 1px solid #3496f2;
+}
+button.secondary-lighter-bg {
+  border: 1px solid #64aff5;
+}
+button.secondary-lightest-bg {
+  border: 1px solid #94c8f8;
+}
+button.accent-darkest-bg {
+  border: 1px solid #1c5a31;
+}
+button.accent-darker-bg {
+  border: 1px solid #288147;
+}
+button.accent-dark-bg {
+  border: 1px solid #34a85c;
+}
+button.accent-light-bg {
+  border: 1px solid #6fd392;
+}
+button.accent-lighter-bg {
+  border: 1px solid #96dfaf;
+}
+button.accent-lightest-bg {
+  border: 1px solid #bdebcd;
+}
+button.invert-darkest-bg {
+  border: 1px solid #440c0c;
+}
+button.invert-darker-bg {
+  border: 1px solid #701313;
+}
+button.invert-dark-bg {
+  border: 1px solid #9b1b1b;
+}
+button.invert-light-bg {
+  border: 1px solid #de3e3e;
+}
+button.invert-lighter-bg {
+  border: 1px solid #e56a6a;
+}
+button.invert-lightest-bg {
+  border: 1px solid #ed9595;
+}
+button.invert-secondary-darkest-bg {
+  border: 1px solid #5c4d02;
+}
+button.invert-secondary-darker-bg {
+  border: 1px solid #8e7703;
+}
+button.invert-secondary-dark-bg {
+  border: 1px solid #c0a104;
+}
+button.invert-secondary-light-bg {
+  border: 1px solid #fbd92f;
+}
+button.invert-secondary-lighter-bg {
+  border: 1px solid #fce261;
+}
+button.invert-secondary-lightest-bg {
+  border: 1px solid #fdeb93;
+}
+button.grey-darkest-bg {
+  border: 1px solid #636363;
+}
+button.grey-darker-bg {
+  border: 1px solid #7c7c7c;
+}
+button.grey-dark-bg {
+  border: 1px solid #969696;
+}
+button.grey-light-bg {
+  border: 1px solid #c9c9c9;
+}
+button.grey-lighter-bg {
+  border: 1px solid #e2e2e2;
+}
+button.grey-lightest-bg {
+  border: 1px solid #fcfcfc;
 }
 
 .button-wrap button {
@@ -513,6 +1545,588 @@ ul {
 
 ul ul {
   margin-left: 1rem;
+}
+
+.hover-line-bottom, .hover-back {
+  position: relative;
+}
+.hover-line-bottom::after, .hover-back::after {
+  content: "";
+  position: absolute;
+  transform-origin: left;
+  transition: transform 1s;
+  transition-timing-function: cubic-bezier(0.5, 0, 0.3, 1);
+  background: #222222;
+  transform: scaleX(0);
+}
+.hover-line-bottom::after {
+  top: 100%;
+  left: 0;
+  height: 2px;
+  width: 100%;
+}
+.hover-back::after {
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+.hover-back {
+  background: transparent;
+  transition: color 0.5s;
+  z-index: 0;
+}
+.hover-back:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.from-center::after {
+  transform-origin: center;
+}
+.hover-line-bottom.from-right::after, .hover-back.from-right::after {
+  transform-origin: right;
+}
+.hover-back.from-top::after {
+  transform-origin: top;
+  transform: scaleY(0);
+}
+.hover-back.from-bottom::after {
+  transform-origin: bottom;
+  transform: scaleY(0);
+}
+.hover-line-bottom:hover::after, .hover-back:hover::after {
+  transform: scaleX(1);
+}
+.hover-back.from-top:hover::after, .hover-back.from-bottom:hover::after {
+  transform: scaleY(1);
+}
+.hover-line-bottom.white-text::after, .hover-back.white-text::after {
+  background: whitesmoke;
+}
+.hover-back.white-bg:hover {
+  color: whitesmoke;
+}
+.hover-back.white-bg::after {
+  background: #222222;
+}
+.hover-back.white-text:hover {
+  color: #222222;
+}
+.hover-line-bottom.black-text::after, .hover-back.black-text::after {
+  background: #222222;
+}
+.hover-back.black-bg:hover {
+  color: #222222;
+}
+.hover-back.black-bg::after {
+  background: whitesmoke;
+}
+.hover-back.black-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.primary-text::after, .hover-back.primary-text::after {
+  background: #0d3cca;
+}
+.hover-back.primary-bg:hover {
+  color: #0d3cca;
+}
+.hover-back.primary-bg::after {
+  background: whitesmoke;
+}
+.hover-back.primary-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.secondary-text::after, .hover-back.secondary-text::after {
+  background: #0f7de4;
+}
+.hover-back.secondary-bg:hover {
+  color: #0f7de4;
+}
+.hover-back.secondary-bg::after {
+  background: whitesmoke;
+}
+.hover-back.secondary-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.accent-text::after, .hover-back.accent-text::after {
+  background: #48c774;
+}
+.hover-back.accent-bg:hover {
+  color: #48c774;
+}
+.hover-back.accent-bg::after {
+  background: whitesmoke;
+}
+.hover-back.accent-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.invert-text::after, .hover-back.invert-text::after {
+  background: #c72222;
+}
+.hover-back.invert-bg:hover {
+  color: #c72222;
+}
+.hover-back.invert-bg::after {
+  background: whitesmoke;
+}
+.hover-back.invert-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.invert-secondary-text::after, .hover-back.invert-secondary-text::after {
+  background: #f2cb05;
+}
+.hover-back.invert-secondary-bg:hover {
+  color: #f2cb05;
+}
+.hover-back.invert-secondary-bg::after {
+  background: #222222;
+}
+.hover-back.invert-secondary-text:hover {
+  color: #222222;
+}
+.hover-line-bottom.grey-text::after, .hover-back.grey-text::after {
+  background: #afafaf;
+}
+.hover-back.grey-bg:hover {
+  color: #afafaf;
+}
+.hover-back.grey-bg::after {
+  background: #222222;
+}
+.hover-back.grey-text:hover {
+  color: #222222;
+}
+.hover-line-bottom.primary-darkest-text::after, .hover-back.primary-darkest-text::after {
+  background: #04113a;
+}
+.hover-back.primary-darkest-bg:hover {
+  color: #04113a;
+}
+.hover-back.primary-darkest-bg::after {
+  background: whitesmoke;
+}
+.hover-back.primary-darkest-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.primary-darker-text::after, .hover-back.primary-darker-text::after {
+  background: #07206a;
+}
+.hover-back.primary-darker-bg:hover {
+  color: #07206a;
+}
+.hover-back.primary-darker-bg::after {
+  background: whitesmoke;
+}
+.hover-back.primary-darker-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.primary-dark-text::after, .hover-back.primary-dark-text::after {
+  background: #0a2e9a;
+}
+.hover-back.primary-dark-bg:hover {
+  color: #0a2e9a;
+}
+.hover-back.primary-dark-bg::after {
+  background: whitesmoke;
+}
+.hover-back.primary-dark-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.primary-light-text::after, .hover-back.primary-light-text::after {
+  background: #1a4ff0;
+}
+.hover-back.primary-light-bg:hover {
+  color: #1a4ff0;
+}
+.hover-back.primary-light-bg::after {
+  background: whitesmoke;
+}
+.hover-back.primary-light-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.primary-lighter-text::after, .hover-back.primary-lighter-text::after {
+  background: #4a74f3;
+}
+.hover-back.primary-lighter-bg:hover {
+  color: #4a74f3;
+}
+.hover-back.primary-lighter-bg::after {
+  background: whitesmoke;
+}
+.hover-back.primary-lighter-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.primary-lightest-text::after, .hover-back.primary-lightest-text::after {
+  background: #7a99f6;
+}
+.hover-back.primary-lightest-bg:hover {
+  color: #7a99f6;
+}
+.hover-back.primary-lightest-bg::after {
+  background: whitesmoke;
+}
+.hover-back.primary-lightest-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.secondary-darkest-text::after, .hover-back.secondary-darkest-text::after {
+  background: #062e54;
+}
+.hover-back.secondary-darkest-bg:hover {
+  color: #062e54;
+}
+.hover-back.secondary-darkest-bg::after {
+  background: whitesmoke;
+}
+.hover-back.secondary-darkest-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.secondary-darker-text::after, .hover-back.secondary-darker-text::after {
+  background: #094984;
+}
+.hover-back.secondary-darker-bg:hover {
+  color: #094984;
+}
+.hover-back.secondary-darker-bg::after {
+  background: whitesmoke;
+}
+.hover-back.secondary-darker-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.secondary-dark-text::after, .hover-back.secondary-dark-text::after {
+  background: #0c63b4;
+}
+.hover-back.secondary-dark-bg:hover {
+  color: #0c63b4;
+}
+.hover-back.secondary-dark-bg::after {
+  background: whitesmoke;
+}
+.hover-back.secondary-dark-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.secondary-light-text::after, .hover-back.secondary-light-text::after {
+  background: #3496f2;
+}
+.hover-back.secondary-light-bg:hover {
+  color: #3496f2;
+}
+.hover-back.secondary-light-bg::after {
+  background: whitesmoke;
+}
+.hover-back.secondary-light-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.secondary-lighter-text::after, .hover-back.secondary-lighter-text::after {
+  background: #64aff5;
+}
+.hover-back.secondary-lighter-bg:hover {
+  color: #64aff5;
+}
+.hover-back.secondary-lighter-bg::after {
+  background: whitesmoke;
+}
+.hover-back.secondary-lighter-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.secondary-lightest-text::after, .hover-back.secondary-lightest-text::after {
+  background: #94c8f8;
+}
+.hover-back.secondary-lightest-bg:hover {
+  color: #94c8f8;
+}
+.hover-back.secondary-lightest-bg::after {
+  background: #222222;
+}
+.hover-back.secondary-lightest-text:hover {
+  color: #222222;
+}
+.hover-line-bottom.accent-darkest-text::after, .hover-back.accent-darkest-text::after {
+  background: #1c5a31;
+}
+.hover-back.accent-darkest-bg:hover {
+  color: #1c5a31;
+}
+.hover-back.accent-darkest-bg::after {
+  background: whitesmoke;
+}
+.hover-back.accent-darkest-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.accent-darker-text::after, .hover-back.accent-darker-text::after {
+  background: #288147;
+}
+.hover-back.accent-darker-bg:hover {
+  color: #288147;
+}
+.hover-back.accent-darker-bg::after {
+  background: whitesmoke;
+}
+.hover-back.accent-darker-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.accent-dark-text::after, .hover-back.accent-dark-text::after {
+  background: #34a85c;
+}
+.hover-back.accent-dark-bg:hover {
+  color: #34a85c;
+}
+.hover-back.accent-dark-bg::after {
+  background: whitesmoke;
+}
+.hover-back.accent-dark-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.accent-light-text::after, .hover-back.accent-light-text::after {
+  background: #6fd392;
+}
+.hover-back.accent-light-bg:hover {
+  color: #6fd392;
+}
+.hover-back.accent-light-bg::after {
+  background: #222222;
+}
+.hover-back.accent-light-text:hover {
+  color: #222222;
+}
+.hover-line-bottom.accent-lighter-text::after, .hover-back.accent-lighter-text::after {
+  background: #96dfaf;
+}
+.hover-back.accent-lighter-bg:hover {
+  color: #96dfaf;
+}
+.hover-back.accent-lighter-bg::after {
+  background: #222222;
+}
+.hover-back.accent-lighter-text:hover {
+  color: #222222;
+}
+.hover-line-bottom.accent-lightest-text::after, .hover-back.accent-lightest-text::after {
+  background: #bdebcd;
+}
+.hover-back.accent-lightest-bg:hover {
+  color: #bdebcd;
+}
+.hover-back.accent-lightest-bg::after {
+  background: #222222;
+}
+.hover-back.accent-lightest-text:hover {
+  color: #222222;
+}
+.hover-line-bottom.invert-darkest-text::after, .hover-back.invert-darkest-text::after {
+  background: #440c0c;
+}
+.hover-back.invert-darkest-bg:hover {
+  color: #440c0c;
+}
+.hover-back.invert-darkest-bg::after {
+  background: whitesmoke;
+}
+.hover-back.invert-darkest-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.invert-darker-text::after, .hover-back.invert-darker-text::after {
+  background: #701313;
+}
+.hover-back.invert-darker-bg:hover {
+  color: #701313;
+}
+.hover-back.invert-darker-bg::after {
+  background: whitesmoke;
+}
+.hover-back.invert-darker-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.invert-dark-text::after, .hover-back.invert-dark-text::after {
+  background: #9b1b1b;
+}
+.hover-back.invert-dark-bg:hover {
+  color: #9b1b1b;
+}
+.hover-back.invert-dark-bg::after {
+  background: whitesmoke;
+}
+.hover-back.invert-dark-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.invert-light-text::after, .hover-back.invert-light-text::after {
+  background: #de3e3e;
+}
+.hover-back.invert-light-bg:hover {
+  color: #de3e3e;
+}
+.hover-back.invert-light-bg::after {
+  background: whitesmoke;
+}
+.hover-back.invert-light-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.invert-lighter-text::after, .hover-back.invert-lighter-text::after {
+  background: #e56a6a;
+}
+.hover-back.invert-lighter-bg:hover {
+  color: #e56a6a;
+}
+.hover-back.invert-lighter-bg::after {
+  background: whitesmoke;
+}
+.hover-back.invert-lighter-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.invert-lightest-text::after, .hover-back.invert-lightest-text::after {
+  background: #ed9595;
+}
+.hover-back.invert-lightest-bg:hover {
+  color: #ed9595;
+}
+.hover-back.invert-lightest-bg::after {
+  background: #222222;
+}
+.hover-back.invert-lightest-text:hover {
+  color: #222222;
+}
+.hover-line-bottom.invert-secondary-darkest-text::after, .hover-back.invert-secondary-darkest-text::after {
+  background: #5c4d02;
+}
+.hover-back.invert-secondary-darkest-bg:hover {
+  color: #5c4d02;
+}
+.hover-back.invert-secondary-darkest-bg::after {
+  background: whitesmoke;
+}
+.hover-back.invert-secondary-darkest-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.invert-secondary-darker-text::after, .hover-back.invert-secondary-darker-text::after {
+  background: #8e7703;
+}
+.hover-back.invert-secondary-darker-bg:hover {
+  color: #8e7703;
+}
+.hover-back.invert-secondary-darker-bg::after {
+  background: whitesmoke;
+}
+.hover-back.invert-secondary-darker-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.invert-secondary-dark-text::after, .hover-back.invert-secondary-dark-text::after {
+  background: #c0a104;
+}
+.hover-back.invert-secondary-dark-bg:hover {
+  color: #c0a104;
+}
+.hover-back.invert-secondary-dark-bg::after {
+  background: whitesmoke;
+}
+.hover-back.invert-secondary-dark-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.invert-secondary-light-text::after, .hover-back.invert-secondary-light-text::after {
+  background: #fbd92f;
+}
+.hover-back.invert-secondary-light-bg:hover {
+  color: #fbd92f;
+}
+.hover-back.invert-secondary-light-bg::after {
+  background: #222222;
+}
+.hover-back.invert-secondary-light-text:hover {
+  color: #222222;
+}
+.hover-line-bottom.invert-secondary-lighter-text::after, .hover-back.invert-secondary-lighter-text::after {
+  background: #fce261;
+}
+.hover-back.invert-secondary-lighter-bg:hover {
+  color: #fce261;
+}
+.hover-back.invert-secondary-lighter-bg::after {
+  background: #222222;
+}
+.hover-back.invert-secondary-lighter-text:hover {
+  color: #222222;
+}
+.hover-line-bottom.invert-secondary-lightest-text::after, .hover-back.invert-secondary-lightest-text::after {
+  background: #fdeb93;
+}
+.hover-back.invert-secondary-lightest-bg:hover {
+  color: #fdeb93;
+}
+.hover-back.invert-secondary-lightest-bg::after {
+  background: #222222;
+}
+.hover-back.invert-secondary-lightest-text:hover {
+  color: #222222;
+}
+.hover-line-bottom.grey-darkest-text::after, .hover-back.grey-darkest-text::after {
+  background: #636363;
+}
+.hover-back.grey-darkest-bg:hover {
+  color: #636363;
+}
+.hover-back.grey-darkest-bg::after {
+  background: whitesmoke;
+}
+.hover-back.grey-darkest-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.grey-darker-text::after, .hover-back.grey-darker-text::after {
+  background: #7c7c7c;
+}
+.hover-back.grey-darker-bg:hover {
+  color: #7c7c7c;
+}
+.hover-back.grey-darker-bg::after {
+  background: whitesmoke;
+}
+.hover-back.grey-darker-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.grey-dark-text::after, .hover-back.grey-dark-text::after {
+  background: #969696;
+}
+.hover-back.grey-dark-bg:hover {
+  color: #969696;
+}
+.hover-back.grey-dark-bg::after {
+  background: whitesmoke;
+}
+.hover-back.grey-dark-text:hover {
+  color: whitesmoke;
+}
+.hover-line-bottom.grey-light-text::after, .hover-back.grey-light-text::after {
+  background: #c9c9c9;
+}
+.hover-back.grey-light-bg:hover {
+  color: #c9c9c9;
+}
+.hover-back.grey-light-bg::after {
+  background: #222222;
+}
+.hover-back.grey-light-text:hover {
+  color: #222222;
+}
+.hover-line-bottom.grey-lighter-text::after, .hover-back.grey-lighter-text::after {
+  background: #e2e2e2;
+}
+.hover-back.grey-lighter-bg:hover {
+  color: #e2e2e2;
+}
+.hover-back.grey-lighter-bg::after {
+  background: #222222;
+}
+.hover-back.grey-lighter-text:hover {
+  color: #222222;
+}
+.hover-line-bottom.grey-lightest-text::after, .hover-back.grey-lightest-text::after {
+  background: #fcfcfc;
+}
+.hover-back.grey-lightest-bg:hover {
+  color: #fcfcfc;
+}
+.hover-back.grey-lightest-bg::after {
+  background: #222222;
+}
+.hover-back.grey-lightest-text:hover {
+  color: #222222;
 }
 
 .article-map.always-opened ul ul {
@@ -876,11 +2490,14 @@ td {
   flex-shrink: 0;
 }
 
+.nav-bar-left {
+  align-items: center;
+  margin-right: auto;
+}
+
 .nav-bar-left,
 .nav-bar-left-inner {
-  align-items: center;
   justify-content: flex-start;
-  margin-right: auto;
 }
 
 .nav-bar-left > *,
@@ -888,9 +2505,13 @@ td {
   margin-right: 1rem;
 }
 
+.nav-bar-right {
+  align-items: center;
+  margin-left: auto;
+}
+
 .nav-bar-right,
 .nav-bar-right-inner {
-  align-items: center;
   justify-content: flex-end;
   margin-left: auto;
 }
@@ -907,878 +2528,6 @@ td {
 .nav-bar-left-inner > *,
 .nav-bar-right-inner > * {
   white-space: nowrap;
-}
-
-:root {
-  --white: whitesmoke;
-  --black: #222222;
-  --primary-darkest: #04113a;
-  --primary-darker: #07206a;
-  --primary-dark: #0a2e9a;
-  --primary: #0d3cca;
-  --primary-light: #1a4ff0;
-  --primary-lighter: #4a74f3;
-  --primary-lightest: #7a99f6;
-  --secondary-darkest: #062e54;
-  --secondary-darker: #094984;
-  --secondary-dark: #0c63b4;
-  --secondary: #0f7de4;
-  --secondary-light: #3496f2;
-  --secondary-lighter: #64aff5;
-  --secondary-lightest: #94c8f8;
-  --accent-darkest: #1c5a31;
-  --accent-darker: #288147;
-  --accent-dark: #34a85c;
-  --accent: #48c774;
-  --accent-light: #6fd392;
-  --accent-lighter: #96dfaf;
-  --accent-lightest: #bdebcd;
-  --invert-darkest: #440c0c;
-  --invert-darker: #701313;
-  --invert-dark: #9b1b1b;
-  --invert: #c72222;
-  --invert-light: #de3e3e;
-  --invert-lighter: #e56a6a;
-  --invert-lightest: #ed9595;
-  --invert-secondary-darkest: #5c4d02;
-  --invert-secondary-darker: #8e7703;
-  --invert-secondary-dark: #c0a104;
-  --invert-secondary: #f2cb05;
-  --invert-secondary-light: #fbd92f;
-  --invert-secondary-lighter: #fce261;
-  --invert-secondary-lightest: #fdeb93;
-  --grey-darkest: #636363;
-  --grey-darker: #7c7c7c;
-  --grey-dark: #969696;
-  --grey: #afafaf;
-  --grey-light: #c9c9c9;
-  --grey-lighter: #e2e2e2;
-  --grey-lightest: #fcfcfc;
-}
-
-.white-color {
-  color: whitesmoke;
-}
-
-.white-bg {
-  color: whitesmoke;
-  background: #222222;
-}
-
-.white-border {
-  border-color: whitesmoke !important;
-}
-
-.black-color {
-  color: #222222;
-}
-
-.black-bg {
-  color: whitesmoke;
-  background: #222222;
-}
-
-.white-border {
-  border-color: #222222 !important;
-}
-
-html body .primary-text {
-  color: #0d3cca;
-}
-
-html body .primary-darkest-text {
-  color: #04113a;
-}
-
-html body .primary-darker-text {
-  color: #07206a;
-}
-
-html body .primary-dark-text {
-  color: #0a2e9a;
-}
-
-html body .primary-light-text {
-  color: #1a4ff0;
-}
-
-html body .primary-lighter-text {
-  color: #4a74f3;
-}
-
-html body .primary-lightest-text {
-  color: #7a99f6;
-}
-
-html body .secondary-text {
-  color: #0f7de4;
-}
-
-html body .secondary-darkest-text {
-  color: #062e54;
-}
-
-html body .secondary-darker-text {
-  color: #094984;
-}
-
-html body .secondary-dark-text {
-  color: #0c63b4;
-}
-
-html body .secondary-light-text {
-  color: #3496f2;
-}
-
-html body .secondary-lighter-text {
-  color: #64aff5;
-}
-
-html body .secondary-lightest-text {
-  color: #94c8f8;
-}
-
-html body .accent-text {
-  color: #48c774;
-}
-
-html body .accent-darkest-text {
-  color: #1c5a31;
-}
-
-html body .accent-darker-text {
-  color: #288147;
-}
-
-html body .accent-dark-text {
-  color: #34a85c;
-}
-
-html body .accent-light-text {
-  color: #6fd392;
-}
-
-html body .accent-lighter-text {
-  color: #96dfaf;
-}
-
-html body .accent-lightest-text {
-  color: #bdebcd;
-}
-
-html body .invert-text {
-  color: #c72222;
-}
-
-html body .invert-darkest-text {
-  color: #440c0c;
-}
-
-html body .invert-darker-text {
-  color: #701313;
-}
-
-html body .invert-dark-text {
-  color: #9b1b1b;
-}
-
-html body .invert-light-text {
-  color: #de3e3e;
-}
-
-html body .invert-lighter-text {
-  color: #e56a6a;
-}
-
-html body .invert-lightest-text {
-  color: #ed9595;
-}
-
-html body .invert-secondary-text {
-  color: #f2cb05;
-}
-
-html body .invert-secondary-darkest-text {
-  color: #5c4d02;
-}
-
-html body .invert-secondary-darker-text {
-  color: #8e7703;
-}
-
-html body .invert-secondary-dark-text {
-  color: #c0a104;
-}
-
-html body .invert-secondary-light-text {
-  color: #fbd92f;
-}
-
-html body .invert-secondary-lighter-text {
-  color: #fce261;
-}
-
-html body .invert-secondary-lightest-text {
-  color: #fdeb93;
-}
-
-html body .grey-text {
-  color: #afafaf;
-}
-
-html body .grey-darkest-text {
-  color: #636363;
-}
-
-html body .grey-darker-text {
-  color: #7c7c7c;
-}
-
-html body .grey-dark-text {
-  color: #969696;
-}
-
-html body .grey-light-text {
-  color: #c9c9c9;
-}
-
-html body .grey-lighter-text {
-  color: #e2e2e2;
-}
-
-html body .grey-lightest-text {
-  color: #fcfcfc;
-}
-
-html body .primary-bg {
-  background: #0d3cca;
-  color: whitesmoke;
-}
-
-html body .primary-darkest-bg {
-  background: #04113a;
-  color: whitesmoke;
-}
-
-html body .primary-darker-bg {
-  background: #07206a;
-  color: whitesmoke;
-}
-
-html body .primary-dark-bg {
-  background: #0a2e9a;
-  color: whitesmoke;
-}
-
-html body .primary-light-bg {
-  background: #1a4ff0;
-  color: whitesmoke;
-}
-
-html body .primary-lighter-bg {
-  background: #4a74f3;
-  color: whitesmoke;
-}
-
-html body .primary-lightest-bg {
-  background: #7a99f6;
-  color: whitesmoke;
-}
-
-html body .secondary-bg {
-  background: #0f7de4;
-  color: whitesmoke;
-}
-
-html body .secondary-darkest-bg {
-  background: #062e54;
-  color: whitesmoke;
-}
-
-html body .secondary-darker-bg {
-  background: #094984;
-  color: whitesmoke;
-}
-
-html body .secondary-dark-bg {
-  background: #0c63b4;
-  color: whitesmoke;
-}
-
-html body .secondary-light-bg {
-  background: #3496f2;
-  color: whitesmoke;
-}
-
-html body .secondary-lighter-bg {
-  background: #64aff5;
-  color: #222222;
-}
-
-html body .secondary-lightest-bg {
-  background: #94c8f8;
-  color: #222222;
-}
-
-html body .accent-bg {
-  background: #48c774;
-  color: whitesmoke;
-}
-
-html body .accent-darkest-bg {
-  background: #1c5a31;
-  color: whitesmoke;
-}
-
-html body .accent-darker-bg {
-  background: #288147;
-  color: whitesmoke;
-}
-
-html body .accent-dark-bg {
-  background: #34a85c;
-  color: whitesmoke;
-}
-
-html body .accent-light-bg {
-  background: #6fd392;
-  color: #222222;
-}
-
-html body .accent-lighter-bg {
-  background: #96dfaf;
-  color: #222222;
-}
-
-html body .accent-lightest-bg {
-  background: #bdebcd;
-  color: #222222;
-}
-
-html body .invert-bg {
-  background: #c72222;
-  color: whitesmoke;
-}
-
-html body .invert-darkest-bg {
-  background: #440c0c;
-  color: whitesmoke;
-}
-
-html body .invert-darker-bg {
-  background: #701313;
-  color: whitesmoke;
-}
-
-html body .invert-dark-bg {
-  background: #9b1b1b;
-  color: whitesmoke;
-}
-
-html body .invert-light-bg {
-  background: #de3e3e;
-  color: whitesmoke;
-}
-
-html body .invert-lighter-bg {
-  background: #e56a6a;
-  color: whitesmoke;
-}
-
-html body .invert-lightest-bg {
-  background: #ed9595;
-  color: #222222;
-}
-
-html body .invert-secondary-bg {
-  background: #f2cb05;
-  color: #222222;
-}
-
-html body .invert-secondary-darkest-bg {
-  background: #5c4d02;
-  color: whitesmoke;
-}
-
-html body .invert-secondary-darker-bg {
-  background: #8e7703;
-  color: whitesmoke;
-}
-
-html body .invert-secondary-dark-bg {
-  background: #c0a104;
-  color: whitesmoke;
-}
-
-html body .invert-secondary-light-bg {
-  background: #fbd92f;
-  color: #222222;
-}
-
-html body .invert-secondary-lighter-bg {
-  background: #fce261;
-  color: #222222;
-}
-
-html body .invert-secondary-lightest-bg {
-  background: #fdeb93;
-  color: #222222;
-}
-
-html body .grey-bg {
-  background: #afafaf;
-  color: #222222;
-}
-
-html body .grey-darkest-bg {
-  background: #636363;
-  color: whitesmoke;
-}
-
-html body .grey-darker-bg {
-  background: #7c7c7c;
-  color: whitesmoke;
-}
-
-html body .grey-dark-bg {
-  background: #969696;
-  color: whitesmoke;
-}
-
-html body .grey-light-bg {
-  background: #c9c9c9;
-  color: #222222;
-}
-
-html body .grey-lighter-bg {
-  background: #e2e2e2;
-  color: #222222;
-}
-
-html body .grey-lightest-bg {
-  background: #fcfcfc;
-  color: #222222;
-}
-
-html body .primary-border {
-  border-color: #0d3cca;
-}
-
-html body .primary-darkest-border {
-  border-color: #04113a;
-}
-
-html body .primary-darker-border {
-  border-color: #07206a;
-}
-
-html body .primary-dark-border {
-  border-color: #0a2e9a;
-}
-
-html body .primary-light-border {
-  border-color: #1a4ff0;
-}
-
-html body .primary-lighter-border {
-  border-color: #4a74f3;
-}
-
-html body .primary-lightest-border {
-  border-color: #7a99f6;
-}
-
-html body .secondary-border {
-  border-color: #0f7de4;
-}
-
-html body .secondary-darkest-border {
-  border-color: #062e54;
-}
-
-html body .secondary-darker-border {
-  border-color: #094984;
-}
-
-html body .secondary-dark-border {
-  border-color: #0c63b4;
-}
-
-html body .secondary-light-border {
-  border-color: #3496f2;
-}
-
-html body .secondary-lighter-border {
-  border-color: #64aff5;
-}
-
-html body .secondary-lightest-border {
-  border-color: #94c8f8;
-}
-
-html body .accent-border {
-  border-color: #48c774;
-}
-
-html body .accent-darkest-border {
-  border-color: #1c5a31;
-}
-
-html body .accent-darker-border {
-  border-color: #288147;
-}
-
-html body .accent-dark-border {
-  border-color: #34a85c;
-}
-
-html body .accent-light-border {
-  border-color: #6fd392;
-}
-
-html body .accent-lighter-border {
-  border-color: #96dfaf;
-}
-
-html body .accent-lightest-border {
-  border-color: #bdebcd;
-}
-
-html body .invert-border {
-  border-color: #c72222;
-}
-
-html body .invert-darkest-border {
-  border-color: #440c0c;
-}
-
-html body .invert-darker-border {
-  border-color: #701313;
-}
-
-html body .invert-dark-border {
-  border-color: #9b1b1b;
-}
-
-html body .invert-light-border {
-  border-color: #de3e3e;
-}
-
-html body .invert-lighter-border {
-  border-color: #e56a6a;
-}
-
-html body .invert-lightest-border {
-  border-color: #ed9595;
-}
-
-html body .invert-secondary-border {
-  border-color: #f2cb05;
-}
-
-html body .invert-secondary-darkest-border {
-  border-color: #5c4d02;
-}
-
-html body .invert-secondary-darker-border {
-  border-color: #8e7703;
-}
-
-html body .invert-secondary-dark-border {
-  border-color: #c0a104;
-}
-
-html body .invert-secondary-light-border {
-  border-color: #fbd92f;
-}
-
-html body .invert-secondary-lighter-border {
-  border-color: #fce261;
-}
-
-html body .invert-secondary-lightest-border {
-  border-color: #fdeb93;
-}
-
-html body .grey-border {
-  border-color: #afafaf;
-}
-
-html body .grey-darkest-border {
-  border-color: #636363;
-}
-
-html body .grey-darker-border {
-  border-color: #7c7c7c;
-}
-
-html body .grey-dark-border {
-  border-color: #969696;
-}
-
-html body .grey-light-border {
-  border-color: #c9c9c9;
-}
-
-html body .grey-lighter-border {
-  border-color: #e2e2e2;
-}
-
-html body .grey-lightest-border {
-  border-color: #fcfcfc;
-}
-
-.row {
-  display: flex;
-}
-
-.col {
-  width: 100%;
-}
-
-.col.take-1 {
-  width: 8.3333333333%;
-}
-
-.col.take-2 {
-  width: 16.6666666667%;
-}
-
-.col.take-3 {
-  width: 25%;
-}
-
-.col.take-4 {
-  width: 33.3333333333%;
-}
-
-.col.take-5 {
-  width: 41.6666666667%;
-}
-
-.col.take-6 {
-  width: 50%;
-}
-
-.col.take-7 {
-  width: 58.3333333333%;
-}
-
-.col.take-8 {
-  width: 66.6666666667%;
-}
-
-.col.take-9 {
-  width: 75%;
-}
-
-.col.take-10 {
-  width: 83.3333333333%;
-}
-
-.col.take-11 {
-  width: 91.6666666667%;
-}
-
-.col.take-12 {
-  width: 100%;
-}
-
-@media (min-width: 768px) {
-  .col.take-1-s {
-    width: 8.3333333333%;
-  }
-
-  .col.take-2-s {
-    width: 16.6666666667%;
-  }
-
-  .col.take-3-s {
-    width: 25%;
-  }
-
-  .col.take-4-s {
-    width: 33.3333333333%;
-  }
-
-  .col.take-5-s {
-    width: 41.6666666667%;
-  }
-
-  .col.take-6-s {
-    width: 50%;
-  }
-
-  .col.take-7-s {
-    width: 58.3333333333%;
-  }
-
-  .col.take-8-s {
-    width: 66.6666666667%;
-  }
-
-  .col.take-9-s {
-    width: 75%;
-  }
-
-  .col.take-10-s {
-    width: 83.3333333333%;
-  }
-
-  .col.take-11-s {
-    width: 91.6666666667%;
-  }
-
-  .col.take-12-s {
-    width: 100%;
-  }
-}
-@media (min-width: 992px) {
-  .col.take-1-m {
-    width: 8.3333333333%;
-  }
-
-  .col.take-2-m {
-    width: 16.6666666667%;
-  }
-
-  .col.take-3-m {
-    width: 25%;
-  }
-
-  .col.take-4-m {
-    width: 33.3333333333%;
-  }
-
-  .col.take-5-m {
-    width: 41.6666666667%;
-  }
-
-  .col.take-6-m {
-    width: 50%;
-  }
-
-  .col.take-7-m {
-    width: 58.3333333333%;
-  }
-
-  .col.take-8-m {
-    width: 66.6666666667%;
-  }
-
-  .col.take-9-m {
-    width: 75%;
-  }
-
-  .col.take-10-m {
-    width: 83.3333333333%;
-  }
-
-  .col.take-11-m {
-    width: 91.6666666667%;
-  }
-
-  .col.take-12-m {
-    width: 100%;
-  }
-}
-@media (min-width: 1200px) {
-  .col.take-1-l {
-    width: 8.3333333333%;
-  }
-
-  .col.take-2-l {
-    width: 16.6666666667%;
-  }
-
-  .col.take-3-l {
-    width: 25%;
-  }
-
-  .col.take-4-l {
-    width: 33.3333333333%;
-  }
-
-  .col.take-5-l {
-    width: 41.6666666667%;
-  }
-
-  .col.take-6-l {
-    width: 50%;
-  }
-
-  .col.take-7-l {
-    width: 58.3333333333%;
-  }
-
-  .col.take-8-l {
-    width: 66.6666666667%;
-  }
-
-  .col.take-9-l {
-    width: 75%;
-  }
-
-  .col.take-10-l {
-    width: 83.3333333333%;
-  }
-
-  .col.take-11-l {
-    width: 91.6666666667%;
-  }
-
-  .col.take-12-l {
-    width: 100%;
-  }
-}
-@media (min-width: 1408px) {
-  .col.take-1-xl {
-    width: 8.3333333333%;
-  }
-
-  .col.take-2-xl {
-    width: 16.6666666667%;
-  }
-
-  .col.take-3-xl {
-    width: 25%;
-  }
-
-  .col.take-4-xl {
-    width: 33.3333333333%;
-  }
-
-  .col.take-5-xl {
-    width: 41.6666666667%;
-  }
-
-  .col.take-6-xl {
-    width: 50%;
-  }
-
-  .col.take-7-xl {
-    width: 58.3333333333%;
-  }
-
-  .col.take-8-xl {
-    width: 66.6666666667%;
-  }
-
-  .col.take-9-xl {
-    width: 75%;
-  }
-
-  .col.take-10-xl {
-    width: 83.3333333333%;
-  }
-
-  .col.take-11-xl {
-    width: 91.6666666667%;
-  }
-
-  .col.take-12-xl {
-    width: 100%;
-  }
 }
 
 /*# sourceMappingURL=main.css.map */
