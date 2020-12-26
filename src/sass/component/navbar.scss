@@ -1,0 +1,56 @@
+.nav-bar-left,
+.nav-bar-right {
+  max-height: 3.5rem;
+}
+
+.nav-bar,
+.nav-bar-content,
+.nav-bar-left,
+.nav-bar-right,
+.nav-bar-left-inner,
+.nav-bar-right-inner {
+  display: flex;
+  align-items: stretch;
+}
+
+.nav-bar {
+  padding: 1rem;
+  width: 100%;
+}
+
+.nav-bar-content {
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.nav-bar-left,
+.nav-bar-left-inner {
+  align-items: center;
+  justify-content: flex-start;
+  margin-right: auto;
+}
+.nav-bar-left > *,
+.nav-bar-left-inner > * {
+  margin-right: 1rem;
+}
+
+.nav-bar-right,
+.nav-bar-right-inner {
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+
+.nav-bar-right > *,
+.nav-bar-right-inner > * {
+  margin-left: 1rem;
+}
+
+.nav-bar-logo {
+  max-height: 1.5rem;
+}
+
+.nav-bar-left-inner > *,
+.nav-bar-right-inner > * {
+  white-space: nowrap;
+}

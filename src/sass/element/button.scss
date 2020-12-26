@@ -1,0 +1,33 @@
+button {
+  display: inline-flex;
+  align-items: center;
+  background: white;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid #c9c9c9;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  cursor: pointer;
+
+  &.icon-btn {
+    padding-right: 0.5rem;
+  }
+
+  &.no-border {
+    padding: 0.25em;
+    border: 0;
+  }
+
+  .material-icons {
+    margin-left: 0.5rem;
+  }
+}
+
+.button-wrap {
+  button {
+    margin-left: 8px;
+  }
+
+  button:first-child {
+    margin-left: 0;
+  }
+}

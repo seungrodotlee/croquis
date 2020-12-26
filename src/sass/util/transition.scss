@@ -1,0 +1,12 @@
+/* transitions */
+html body {
+  .ready-hidden-by-slide-right {
+    transform: translateX(0);
+    transition: transform 2s;
+    transition-timing-function: cubic-bezier(0.75, 0, 0, 1);
+  }
+
+  .hidden-by-slide-right {
+    transform: translateX(100%);
+  }
+}

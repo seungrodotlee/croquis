@@ -1,17 +1,17 @@
-import TemplateElement from "../util/Highway.js";
+import TemplateElement from "../Highway.js";
 
-class Alert extends TemplateElement {
+class Toast extends TemplateElement {
   constructor() {
     super({
       template: `
-      <div class="alert box-shadow-s">
-        <span class="alert-content"></span>
-        <button class="material-icons">close</button>
+      <div class="toast box-shadow-s">
+        <span class="toast-content"></span>
+        <button class="close-toast-btn material-icons">close</button>
       </div>
       `,
       templateHandler: () => {
-        this.content = this.fromTemplate(".alert-content");
-        this.closeBtn = this.fromTemplate(".alert > .material-icons");
+        this.content = this.fromTemplate(".toast-content");
+        this.closeBtn = this.fromTemplate(".close-toast-btn");
         this.closeBtn.addEventListener("click", () => {
           let parent = this.body.parentElement;
           parent.removeChild(this.body);
@@ -25,21 +25,21 @@ class Alert extends TemplateElement {
   }
 
   static newInstance(content) {
-    let a = new Alert();
+    let a = new Toast();
     document.body.appendChild(a);
     a.innerHTML = content;
   }
 }
 
-highway.newAlert = (content) => {
+highway.newToast = (content) => {
   Alert.newInstance(content);
 };
 
 window.addEventListener("DOMContentLoaded", () => {
   // alertWrap DOM에 등록
-  document.body.appendChild(highway._alertWrap);
+  document.body.appendChild(highway._toastWrap);
 });
 
-highway.define("alert-", Alert);
+highway.define("toast-", Toast);
 
-export default Alert;
+export default Toast;

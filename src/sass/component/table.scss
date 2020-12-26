@@ -1,0 +1,90 @@
+.table-wrap {
+  position: relative;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: 1fr auto;
+  gap: 0;
+  margin: 0 1rem;
+}
+
+.table-wrap table {
+  position: relative;
+  border-collapse: collapse;
+  border-spacing: 0;
+  z-index: 3;
+  width: 100%;
+  table-layout: fixed;
+}
+th,
+td {
+  position: relative;
+  border: 1px solid #c9c9c9;
+  padding: 0.5em 0.75em;
+  text-align: left;
+}
+
+.table-wrap button {
+  display: none;
+  min-height: 1.5em;
+  min-width: 1.5em;
+  padding: 0;
+  border-radius: 0;
+  border: 1px solid transparent;
+  justify-content: flex-start;
+  align-content: center;
+  z-index: 1;
+}
+
+.table-wrap .del-row-btn,
+.table-wrap .del-col-btn {
+  position: absolute;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  font-size: 1em;
+  top: 50%;
+  right: 0.75em;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.table-wrap .del-row-btn:hover,
+.table-wrap .del-col-btn:hover {
+  opacity: 1;
+}
+
+.table-wrap button.active {
+  display: flex;
+}
+
+.table-wrap .add-col-btn.active,
+.table-wrap .add-row-btn.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.3;
+  transition: opacity 1s;
+}
+
+.table-wrap .add-col-btn.active:hover,
+.table-wrap .add-row-btn.active:hover {
+  opacity: 1;
+}
+
+.table-wrap .add-row-btn {
+  position: relative;
+  grid-row: 2/3;
+  grid-column: 1/2;
+  padding-left: 0.75em;
+  border: 0;
+  z-index: 2;
+}
+
+.table-wrap .add-col-btn {
+  position: relative;
+  flex-direction: column;
+  grid-column: 2/3;
+  grid-row: 1/2;
+  transform: translateX(-2px);
+}

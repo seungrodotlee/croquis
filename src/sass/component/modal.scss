@@ -1,0 +1,34 @@
+.modal-backdrop {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: -1;
+}
+
+.modal-main {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  width: 600px;
+  border-radius: 8px;
+  background: white;
+}
+
+.modal-main > div {
+  padding: 12px;
+}
+
+.modal-title,
+.modal-body {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.modal-title {
+  font-size: 1.25rem;
+}
+
+.modal .submit-btn {
+  background: rgb(36, 42, 133);
+  color: white;
+  border: 0;
+}

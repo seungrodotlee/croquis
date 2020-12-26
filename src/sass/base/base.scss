@@ -1,0 +1,103 @@
+@each $size-key, $size in $screen-size {
+  @include screen-larger-than($size-key) {
+    html,
+    body {
+      font-size: map-get($font-size, $size-key);
+    }
+  }
+}
+
+.material-icons {
+  font-size: inherit;
+}
+
+/* position */
+.abs {
+  position: absolute;
+}
+
+.rel {
+  position: relative;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex.align-right {
+  justify-content: flex-end;
+}
+
+/* display */
+.blk {
+  display: block;
+}
+
+.inline-blk {
+  display: inline-block;
+}
+
+.circle {
+  border-radius: 50%;
+}
+
+/* sizing & centering */
+.full {
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+}
+
+.fit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.fit video,
+.fit img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: scale-down;
+}
+
+.centered-anchor {
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.centered-x {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.centered-y {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.centered {
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+/* shadow */
+.box-shadow-s {
+  box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(0, 0, 0, 0.02);
+}
+
+.box-shadow-l {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+._hidden {
+  display: none;
+}

@@ -1,6 +1,9 @@
-@import "_variable.scss";
-@import "_mixin.scss";
-@import "_function.scss";
+@charset "utf-8";
+@import "./variable/all";
+@import "./util/all";
+@import "./base/all";
+@import "./element/all";
+@import "./component/all";
 
 :root {
   --white: #{$white};
@@ -17,8 +20,9 @@
 }
 
 $color-slot: (
-  text: color,
-  bg: background,
+  text: "color",
+  bg: "background",
+  border: "border-color",
 );
 
 .white-color {
@@ -30,6 +34,10 @@ $color-slot: (
   background: $black;
 }
 
+.white-border {
+  border-color: $white !important;
+}
+
 .black-color {
   color: $black;
 }
@@ -39,11 +47,20 @@ $color-slot: (
   background: $black;
 }
 
+.white-border {
+  border-color: $black !important;
+}
+
 @each $slot-title, $slot in $color-slot {
   @each $color-title, $color in $theme-color {
     html body .#{$color-title}-#{$slot-title} {
-      #{$slot}: $color;
-      @if $slot == background {
+      @if $slot == "border" {
+        #{$slot}: $color !important;
+      } @else {
+        #{$slot}: $color;
+      }
+
+      @if $slot == "background" {
         @if abs(brightness(#9e9e9e)) <= abs(brightness($color)) {
           color: $black;
         } @else {
@@ -63,7 +80,7 @@ $color-slot: (
 
       html body .#{$color-title}-#{$step}-#{$slot-title} {
         #{$slot}: $c;
-        @if $slot == background {
+        @if $slot == "background" {
           @if abs(brightness(#9e9e9e)) <= abs(brightness($c)) {
             color: $black;
           } @else {

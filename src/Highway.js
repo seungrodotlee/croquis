@@ -1,79 +1,88 @@
-(function () {
-  window.highway = window.highway || {};
+import "@webcomponents/custom-elements";
 
-  highway.isElement = (obj) => {
-    try {
-      return obj instanceof HTMLElement;
-    } catch (e) {
-      return (
-        typeof obj === "object" &&
-        obj.nodeType === 1 &&
-        typeof obj.style === "object" &&
-        typeof obj.ownerDocument === "object"
-      );
-    }
-  };
+window.highway = window.highway || {};
 
-  highway.isEmpty = (value) => {
-    if (value == "" || value == null || value == undefined) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  highway.define = (name, constructor) => {
-    customElements.define(name, constructor);
-  }
-
-  highway._alertWrap = document.createElement("div");
-  highway._alertWrap.classList.add("alert-wrap");
-
-  HTMLElement.prototype.insertAfter = function (newNode) {
-    let inserted = this.parentNode.insertBefore(newNode, this.nextSibling);
-
-    return inserted;
-  };
-
-  String.prototype.toCamelCase = function () {
-    return this.replace(/-([a-z0-9+])/g, function (g) {
-      let reg = /^[a-z]/g;
-      if (reg.test(g[1])) {
-        return g[1].toUpperCase();
-      } else {
-        return g[1];
-      }
-    });
-  };
-
-  Array.prototype.remove = function (el) {
-    let index = this.indexOf(el);
-
-    if (index != -1) {
-      this.splice(index, 1);
-    }
-
-    return this;
-  };
-
-  let title = document.querySelector("title");
-
-  if (window.customElements) {
-    let script = document.createElement("script");
-    script.setAttribute(
-      "src",
-      "https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/custom-elements-es5-adapter.js"
+highway.isElement = (obj) => {
+  try {
+    return obj instanceof HTMLElement;
+  } catch (e) {
+    return (
+      typeof obj === "object" &&
+      obj.nodeType === 1 &&
+      typeof obj.style === "object" &&
+      typeof obj.ownerDocument === "object"
     );
-    title.insertAfter(script);
+  }
+};
+
+highway.isEmpty = (value) => {
+  if (value == "" || value == null || value == undefined) {
+    return true;
   } else {
-    let script = document.createElement("script");
-    script.setAttribute(
-      "src",
-      "https://unpkg.com/@webcomponents/webcomponentsjs@2.2.10/webcomponents-bundle.js"
-    );
-    title.insertAfter(script);
+    return false;
   }
-})();
+};
+
+highway.define = (name, constructor) => {
+  customElements.define(name, constructor);
+};
+
+highway._toastWrap = document.createElement("div");
+highway._toastWrap.classList.add("toast-wrap");
+
+HTMLElement.prototype.insertAfter = function (newNode) {
+  let inserted = this.parentNode.insertBefore(newNode, this.nextSibling);
+
+  return inserted;
+};
+
+HTMLElement.prototype.copyAttrsTo = function (target) {
+  for (let attr of this.attributes) {
+    if (attr.name == "class") {
+      continue;
+    }
+    target.setAttribute(attr.name, attr.value);
+  }
+
+  for (let i = 0; i < this.classList.length; i++) {
+    if (!target.classList.contains(this.classList[i])) {
+      target.classList.add(this.classList[i]);
+    }
+  }
+};
+
+highway.setCookie = (name, value, exp) => {
+  var date = new Date();
+  date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
+  document.cookie =
+    name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
+};
+
+highway.getCookie = (name) => {
+  var value = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
+  return value ? value[2] : null;
+};
+
+https: String.prototype.toCamelCase = function () {
+  return this.replace(/-([a-z0-9+])/g, function (g) {
+    let reg = /^[a-z]/g;
+    if (reg.test(g[1])) {
+      return g[1].toUpperCase();
+    } else {
+      return g[1];
+    }
+  });
+};
+
+Array.prototype.remove = function (el) {
+  let index = this.indexOf(el);
+
+  if (index != -1) {
+    this.splice(index, 1);
+  }
+
+  return this;
+};
 
 // 템플릿 요소들의 부모 클래스 역할을 하는 TemplateElement 클래스
 
@@ -200,19 +209,7 @@ class TemplateElement extends HTMLElement {
     }
 
     // 커스텀 요소의 속성들 템플릿 요소로 모두 복사
-    for (let attr of this.attributes) {
-      if (attr.name == "class") {
-        continue;
-      }
-      this.body.setAttribute(attr.name, attr.value);
-    }
-
-    // 커스텀 요소의 class를 템플릿 요소의 클래스에 병합
-    for (let i = 0; i < this.classList.length; i++) {
-      if (!this.body.classList.contains(this.classList[i])) {
-        this.body.classList.add(this.classList[i]);
-      }
-    }
+    this.copyAttrsTo(this.body);
 
     this.body.classList.remove("_hidden");
 

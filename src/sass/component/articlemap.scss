@@ -1,0 +1,21 @@
+.article-map.always-opened ul ul {
+  display: block;
+}
+
+.article-map a {
+  font-size: 0.75rem;
+  text-decoration: none;
+  color: rgb(58, 58, 58);
+}
+
+.article-map a.current {
+  font-weight: bold;
+}
+
+.article-map ul ul {
+  display: none;
+}
+
+.article-map ul ul.opened {
+  display: block;
+}

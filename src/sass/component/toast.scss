@@ -1,0 +1,23 @@
+.toast-wrap {
+  position: fixed;
+  width: 100%;
+  bottom: 1rem;
+  padding: 0 1rem;
+  z-index: 10;
+}
+
+.toast {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  background: #e9e9e9;
+}
+
+.close-toast-btn {
+  background: 0;
+  border: 0;
+}

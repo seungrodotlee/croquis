@@ -1,0 +1,13 @@
+.container {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@each $size-key, $size in $screen-size {
+  @include screen-larger-than($size-key) {
+    .container {
+      max-width: $size * 0.95;
+    }
+  }
+}

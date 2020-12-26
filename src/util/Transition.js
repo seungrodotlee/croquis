@@ -1,4 +1,4 @@
-import "./Highway.js";
+import "../Highway.js";
 
 highway.transition = ({ el, transitionName, before, after }) => {
   if (typeof before == "function") {

@@ -1,0 +1,52 @@
+.scroller {
+  position: relative;
+}
+
+.scroller > button {
+  position: absolute;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  top: 50%;
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 1px solid #e9e9e9;
+  border-radius: 50%;
+  margin: 0;
+  transform: translateY(-50%);
+  background: white;
+  opacity: 0.3;
+  transition: opacity 0.5s;
+}
+
+.scroller > button:hover {
+  opacity: 1;
+}
+
+.scroller > button > .material-icons {
+  margin: 0;
+}
+
+.scroller-prev-btn {
+  left: 1rem;
+}
+
+.scroller-next-btn {
+  right: 1rem;
+}
+
+.scroller-content {
+  overflow: hidden;
+}
+
+.scroller-content > div,
+.scroller-content > img {
+  display: none;
+  object-fit: cover;
+  min-width: 100%;
+}
+
+.scroller-content > div.current,
+.scroller-content > img.current {
+  display: inline-block;
+}

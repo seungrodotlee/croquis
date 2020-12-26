@@ -1,0 +1,23 @@
+.collapse {
+  border-radius: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: #e9e9e9;
+  overflow: hidden;
+  transition: height 1s;
+}
+
+.collapse-trigger {
+  display: inline-block;
+  height: fit-content;
+  font-weight: bold;
+  padding: 1rem;
+  border: 0;
+  background: transparent;
+  transition: height 1s;
+}
+
+.collapse-content {
+  padding: 1rem;
+  background: white;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+}
