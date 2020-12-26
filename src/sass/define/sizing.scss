@@ -1,0 +1,28 @@
+// // 모바일 세로 화면
+// @media (max-width: 575.98px) {
+//   // 코드 작성
+// }
+
+.row {
+  display: flex;
+}
+
+.col {
+  width: 100%;
+}
+
+@for $i from 1 through 12 {
+  .col.take-#{$i} {
+    width: $i * (1 / 12) * 100%;
+  }
+}
+
+@each $size-key, $size in $screen-size {
+  @include screen-larger-than($size-key) {
+    @for $i from 1 through 12 {
+      .col.take-#{$i}-#{$size-key} {
+        width: $i * (1 / 12) * 100%;
+      }
+    }
+  }
+}

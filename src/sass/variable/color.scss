@@ -1,6 +1,21 @@
 $black: rgb(34, 34, 34);
 $white: rgb(245, 245, 245);
 
+$background: $white;
+$foreground: $black;
+$background-black: $black;
+$foreground-black: $white;
+
+body {
+  background: $background;
+  color: $foreground;
+}
+
+body.dark-mode {
+  background: $background-black;
+  color: $foreground-black;
+}
+
 $theme-color: (
   "primary": #0d3cca,
   "secondary": #0f7de4,
@@ -9,6 +24,8 @@ $theme-color: (
   "invert-secondary": #f2cb05,
   "grey": #afafaf,
 );
+
+$criteria-grey: #a8a8a8;
 
 $color-steps: (
   "darkest": (
@@ -36,3 +53,30 @@ $color-steps: (
     30%,
   ),
 );
+
+$color-map: (
+  "white": $white,
+  "black": $black,
+);
+
+$color-map: map-merge($color-map, $theme-color);
+
+@each $color-title, $color in $theme-color {
+  @each $step, $weight in $color-steps {
+    $c: white;
+
+    @if nth($weight, 1) == "d" {
+      $c: darken($color, nth($weight, 2));
+    } @else if nth($weight, 1) == "l" {
+      $c: lighten($color, nth($weight, 2));
+    }
+
+    $temp: (
+      "#{$color-title}-#{$step}": $c,
+    );
+
+    $color-map: map-merge($color-map, $temp);
+  }
+}
+
+$border-color: map-get($color-map, "grey-light");
