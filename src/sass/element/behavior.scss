@@ -1,0 +1,98 @@
+.hover {
+  &-line-bottom,
+  &-back {
+    position: relative;
+  }
+
+  &-line-bottom::after,
+  &-back::after {
+    content: "";
+    position: absolute;
+    transform-origin: left;
+    transition: transform 1s;
+    transition-timing-function: cubic-bezier(0.5, 0, 0.3, 1);
+    background: $foreground;
+    transform: scaleX(0);
+  }
+
+  &-line-bottom::after {
+    top: 100%;
+    left: 0;
+    height: 2px;
+    width: 100%;
+  }
+
+  &-back::after {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+  }
+
+  &-back {
+    background: transparent;
+    transition: color 0.5s;
+    z-index: 0;
+  }
+
+  &-back:hover {
+    color: $background;
+  }
+
+  &-line-bottom.from-center::after {
+    transform-origin: center;
+  }
+
+  &-line-bottom.from-right::after,
+  &-back.from-right::after {
+    transform-origin: right;
+  }
+
+  &-back.from-top::after {
+    transform-origin: top;
+    transform: scaleY(0);
+  }
+
+  &-back.from-bottom::after {
+    transform-origin: bottom;
+    transform: scaleY(0);
+  }
+
+  &-line-bottom:hover::after,
+  &-back:hover::after {
+    transform: scaleX(1);
+  }
+
+  &-back.from-top:hover::after,
+  &-back.from-bottom:hover::after {
+    transform: scaleY(1);
+  }
+
+  @each $color-title, $color in $color-map {
+    &-line-bottom.#{$color-title}-text::after,
+    &-back.#{$color-title}-text::after {
+      background: $color;
+    }
+
+    &-back.#{$color-title}-bg:hover {
+      color: $color;
+    }
+
+    &-back.#{$color-title}-bg::after {
+      @if abs(brightness($criteria-grey)) <= abs(brightness($color)) {
+        background: $foreground;
+      } @else {
+        background: $background;
+      }
+    }
+
+    &-back.#{$color-title}-text:hover {
+      @if abs(brightness($criteria-grey)) <= abs(brightness($color)) {
+        color: $foreground;
+      } @else {
+        color: $background;
+      }
+    }
+  }
+}
