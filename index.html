@@ -4,30 +4,49 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>HIGHWAY</title>
-    <!-- <script src="../dist/build.js"></script> -->
-    <script type="module" src="../src/index.js"></script>
-    <script src="./script/index.js"></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Material+Icons"
-      rel="stylesheet"
-    />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Icons"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;400;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../dist/main.css" />
-    <link rel="stylesheet" href="./style/highway.css" />
+    <link rel="stylesheet" href="./style/main.css" />
   </head>
   <body>
-    <div class="intro-wrap fit" style="background: black">
-      <video id="intro" src="img/intro_anim.mp4" autoplay muted></video>
+    <div class="intro-wrap fixed fit">
+      <video
+        id="intro"
+        class="_hidden"
+        src="img/intro_anim.mp4"
+        autoplay
+        muted
+      ></video>
     </div>
-    <div class="root-container"></div>
+    <div class="root-container">
+      <nav-bar
+        id="nav-bar"
+        class="fixed grey-lighter-border d2"
+        data-title="highway"
+        data-logo="./img/logo.svg"
+      >
+        <div>
+          <button class="no-border">알아보기</button>
+          <button class="no-border">시작하기</button>
+          <button class="no-border">CSS</button>
+          <button class="no-border">템플릿</button>
+          <button class="no-border">골라담기</button>
+        </div>
+        <div>
+          <button>다운로드</button>
+          <button id="intro-toggler">인트로 안 볼래요</button>
+        </div>
+      </nav-bar>
+    </div>
   </body>
-  <style>
-    .intro-wrap {
-      background: black;
-    }
-  </style>
+  <script src="../dist/build.js"></script>
+  <script src="./script/index.js"></script>
 </html>
