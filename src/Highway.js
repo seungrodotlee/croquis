@@ -134,20 +134,21 @@ class TemplateElement extends HTMLElement {
     super();
 
     // 입력받은 파라미터들을 멤버로 등록한다.
-    this._template = template;
-    this._templateHandler = templateHandler;
-    this._childHandler = childHandler;
-    this._dataHandler = dataHandler;
-    this._bindBracket = bindBracket;
-    this._bind = bind;
+    this.__template = template;
+    this.__templateHandler = templateHandler;
+    this.__childHandler = childHandler;
+    this.__dataHandler = dataHandler;
+    this.__bindBracket = bindBracket;
+    this.__bind = bind;
+    this.__called = false;
 
     // data-* 속성들의 속성명을 배열로 저장
-    this._datas = Object.keys(dataHandler);
+    this.__datas = Object.keys(dataHandler);
 
-    for (let i = 0; i < this._datas.length; i++) {
-      let val = this._datas[i];
+    for (let i = 0; i < this.__datas.length; i++) {
+      let val = this.__datas[i];
       this[`_${val}`] = "";
-      this._datas[i] = `data-${val}`;
+      this.__datas[i] = `data-${val}`;
     }
   }
 
@@ -155,38 +156,44 @@ class TemplateElement extends HTMLElement {
   setAttr(val, newVal) {
     val = val.replace("data-", "");
     this[`_${val}`] = newVal;
-    this._dataHandler[val](newVal);
+    this.__dataHandler[val](newVal);
   }
 
   // 커스텀 요소가 DOM에 등록되었을 때 호출되는 메소드
   connectedCallback() {
+    if (this.__called) return;
+    this.__called = true;
+    let me = this;
     // 커스텀 요소 바로 뒤에 템플릿 요소(this.body)를 등록
     let temp = document.createElement("div");
-    temp.innerHTML = this._template;
-    let body = temp.firstElementChild;
-    console.log("el = ", this);
-    console.log("parent = ", this.parentElement);
-    if (this.parentElement == null) return;
-    this.body = this.insertAfter(body);
-    this.body.data = {};
-    console.log("body of ", this, this.body);
+    temp.innerHTML = this.__template;
+    temp = temp.firstElementChild;
+    this.body = this.insertAfter(temp);
 
-    let me = this;
+    this.__bindTargetNodes = {};
+
+    let handler = {
+      get: function (target, key, receiver) {
+        console.log("get");
+        if (typeof target[key] === "object" && target[key] !== null) {
+          return new Proxy(target[key], handler);
+        } else {
+          return Reflect.get(target, key, receiver);
+        }
+      },
+      set: function (target, key, value, receiver) {
+        console.log("set");
+        me.__bindTargetNodes[key].nodeValue = value;
+        target[key] = value;
+        return Reflect.get(target, key, value, receiver);
+      },
+    };
+
+    this.body.data = new Proxy(this.__bind, handler);
 
     let elements = this.fromTemplateAll("*");
+    let vars = Object.keys(this.__bind);
 
-    console.log("elems of ", this, elements);
-    console.log("binds of ", this, this._bind);
-    let vars = Object.keys(this._bind);
-    console.log("vars = ", vars);
-
-    // for(let i = 0; i < elements.length; i++) {
-    //   let el = elements[i];
-
-    //   for(let j = 0; j < vars.length; j++) {
-
-    //   }
-    // }
     elements.forEach((el) => {
       vars.forEach((v) => {
         let texts = [];
@@ -201,30 +208,19 @@ class TemplateElement extends HTMLElement {
           if (
             t.nodeValue
               .replace(/ /g, "")
-              .indexOf(this._bindBracket[0] + v + this._bindBracket[1]) != -1
+              .indexOf(this.__bindBracket[0] + v + this.__bindBracket[1]) != -1
           ) {
-            let splited = t.nodeValue.split(`${v}`);
-
-            console.log(
-              "bind = " + this._bindBracket[0] + v + this._bindBracket[1]
-            );
-
-            t.nodeValue = this._bind[v];
+            t.nodeValue = this.__bind[v];
             console.log(v);
 
-            //this.data = Object.create(null);
-            Object.defineProperty(this.body.data, v, {
-              set: function (newVal) {
-                t.nodeValue = newVal;
-              },
-            });
+            this.__bindTargetNodes[v] = t;
           }
         });
       });
     });
 
     // templateHandler 호출
-    this._templateHandler();
+    this.__templateHandler();
 
     // 커스텀 요소 하위 노드들이 DOM에 등록될 때 실행되는 콜백
     const callback = (mutationsList, observer) => {
@@ -242,7 +238,7 @@ class TemplateElement extends HTMLElement {
           highway.isElement(addedNode) ||
           !highway.isEmpty(addedNode.data.replace(/(\s*)/g, ""))
         ) {
-          this._childHandler(addedNode);
+          this.__childHandler(addedNode);
         }
       }
     };
@@ -260,6 +256,19 @@ class TemplateElement extends HTMLElement {
         // data-* 속성만 감지하여 dataHandler 실행 (setAttr 메소드 내에서)
         if (attrName.indexOf("data-") != -1) {
           let newVal = mutation.target.getAttribute(attrName);
+
+          if (attrName == "data-bind-target") {
+            let keys = Object.keys(highway[newVal]);
+            console.log(keys);
+            for (let key of keys) {
+              this.__bindTargetNodes[key].nodeValue = highway[newVal][key];
+              this.__bind[key] = highway[newVal][key];
+            }
+
+            highway[newVal] = new Proxy(this.__bind, handler);
+
+            return;
+          }
 
           this[`_${attrName.replace("data-", "")}`] = newVal;
           this.setAttr(attrName, newVal);
@@ -286,7 +295,7 @@ class TemplateElement extends HTMLElement {
         highway.isElement(addedNode) ||
         !highway.isEmpty(addedNode.data.replace(/(\s*)/g, ""))
       ) {
-        this._childHandler(addedNode);
+        this.__childHandler(addedNode);
       }
     }
 
