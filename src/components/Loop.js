@@ -60,7 +60,6 @@ class Loop extends TemplateElement {
               );
 
               for (let j = 0; j < this._temp.length; j++) {
-                //node = this._temp[j].cloneNode(true);
                 node = nodes[j];
                 console.log("add", node);
                 console.log("behind ", this._position);

@@ -30,6 +30,8 @@ let highwayProxyHandler = {
   set: function (target, key, value, receiver) {
     let r = Reflect.set(target, key, value, receiver);
     if (typeof value == "object" && !highway.isElement(value)) {
+      console.log("highway set");
+
       if (!highway.isEmpty(_highway.request[key])) {
         console.log(_highway.request[key]);
 
@@ -432,28 +434,6 @@ class TemplateElement extends HTMLElement {
           }
         }
       });
-
-      // vars.forEach((v) => {
-      //   let texts = [];
-      //   el.childNodes.forEach((node) => {
-      //     if (!highway.isElement(node) && !highway.isEmpty(node)) {
-      //       texts.push(node);
-      //     }
-      //   });
-
-      //   texts.forEach((t) => {
-      //     if (
-      //       t.nodeValue
-      //         .replace(/ /g, "")
-      //         .indexOf(this.__bindBracket[0] + v + this.__bindBracket[1]) != -1
-      //     ) {
-      //       t.nodeValue = this.__bind[v];
-      //       console.log(v);
-
-      //       this.__bindTargetNodes[v] = t;
-      //     }
-      //   });
-      // });
     });
 
     console.log("registry complete", this.__bindTargetNodes);
