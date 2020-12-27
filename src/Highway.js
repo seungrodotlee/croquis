@@ -1,6 +1,62 @@
 import "@webcomponents/custom-elements";
 
 window.highway = window.highway || {};
+window._highway = window._highway || {};
+
+let highwayProxyHandler = {
+  get: function (target, key, receiver) {
+    if (key.indexOf(".") != -1) {
+      let splited = key.split(".");
+
+      let r = Reflect.get(target, splited[0], receiver);
+
+      let inner = r;
+      for (let i = 1; i < splited.length; i++) {
+        inner = inner[splited[i]];
+      }
+
+      return inner;
+    }
+
+    let r = Reflect.get(target, key, receiver);
+    if (typeof r == "object" && !highway.isElement(r)) {
+      console.log("highway get");
+      console.log(r);
+      return new Proxy(r, highwayProxyHandler);
+    } else {
+      return Reflect.get(target, key, receiver);
+    }
+  },
+  set: function (target, key, value, receiver) {
+    let r = Reflect.set(target, key, value, receiver);
+    if (typeof value == "object" && !highway.isElement(value)) {
+      if (!highway.isEmpty(_highway.request[key])) {
+        console.log(_highway.request[key]);
+
+        for (let c of _highway.request[key]) {
+          c();
+        }
+
+        _highway.request[key] = [];
+      }
+    }
+
+    return r;
+  },
+};
+
+highway = new Proxy(highway, highwayProxyHandler);
+
+highway.bindRequest = (key, callback) => {
+  if (highway[key] != undefined) {
+    callback();
+    return;
+  }
+
+  _highway.request = _highway.request || {};
+  _highway.request[key] = _highway.request[key] || [];
+  _highway.request[key].push(callback);
+};
 
 highway.isElement = (obj) => {
   try {
@@ -86,6 +142,18 @@ Node.prototype.insertAfter = function (newNode) {
 //   return inserted;
 // };
 
+highway.setCookie = (name, value, exp) => {
+  var date = new Date();
+  date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
+  document.cookie =
+    name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
+};
+
+highway.getCookie = (name) => {
+  var value = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
+  return value ? value[2] : null;
+};
+
 HTMLElement.prototype.copyAttrsTo = function (target) {
   for (let attr of this.attributes) {
     if (attr.name == "class") {
@@ -99,18 +167,6 @@ HTMLElement.prototype.copyAttrsTo = function (target) {
       target.classList.add(this.classList[i]);
     }
   }
-};
-
-highway.setCookie = (name, value, exp) => {
-  var date = new Date();
-  date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
-  document.cookie =
-    name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
-};
-
-highway.getCookie = (name) => {
-  var value = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
-  return value ? value[2] : null;
 };
 
 String.prototype.toCamelCase = function () {
@@ -220,25 +276,6 @@ class TemplateElement extends HTMLElement {
     };
 
     this.body.data = new Proxy(this.__bind, handler);
-    // this.body.bindingTarget = new Proxy(this.__bindTarget, {
-    //   get: function (target, key, receiver) {
-    //     console.log("get");
-    //     return Reflect.get(target, key, receiver);
-    //   },
-    //   set: function (target, key, value, receiver) {
-    //     console.log("set");
-    //     console.log("value ", value);
-    //     // let keys = Object.keys(target);
-    //     // console.log(keys);
-    //     // for (let key of keys) {
-    //     //   this.__bindTargetNodes[key].nodeValue = target[key];
-    //     //   this.__bind[key] = target[key];
-    //     // }
-
-    //     //target = new Proxy(this.__bind, handler);
-    //     return Reflect.set(target, key, value, receiver);
-    //   },
-    // });
 
     this.body.setBindTarget = function (newVal) {
       let keys = Object.keys(newVal);

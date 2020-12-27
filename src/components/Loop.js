@@ -33,6 +33,31 @@ class Loop extends TemplateElement {
             }
           }
         },
+        for: (newVal) => {
+          // let data = highway[newVal];
+
+          // console.log(typeof data);
+
+          highway.bindRequest(newVal, () => {
+            console.log(newVal);
+            console.log("b t ", highway[newVal]);
+            this._loopCount = Object.keys(highway[newVal]).length;
+            console.log(this._loopCount);
+
+            for (let i = 0; i < this._loopCount; i++) {
+              for (let j = 0; j < this._temp.length; j++) {
+                let node = this._temp[j].cloneNode(true);
+                console.log("add", node);
+                console.log("behind ", this._position);
+                this._position.insertAfter(node);
+                if (this._position == this.body) {
+                  this.body.parentElement.removeChild(this.body);
+                }
+                this._position = node;
+              }
+            }
+          });
+        },
       },
     });
   }
