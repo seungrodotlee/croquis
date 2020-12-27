@@ -1,3 +1,5 @@
+import "../components/top-bar.js";
+
 window.addEventListener("load", () => {
   let isIntroActive = JSON.parse(highway.getCookie("intro"));
   let intro = document.querySelector("#intro");
