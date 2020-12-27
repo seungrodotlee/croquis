@@ -140,6 +140,7 @@ class TemplateElement extends HTMLElement {
     this.__dataHandler = dataHandler;
     this.__bindBracket = bindBracket;
     this.__bind = bind;
+    this.__bindTarget = {};
     this.__called = false;
 
     // data-* 속성들의 속성명을 배열로 저장
@@ -185,11 +186,43 @@ class TemplateElement extends HTMLElement {
         console.log("set");
         me.__bindTargetNodes[key].nodeValue = value;
         target[key] = value;
-        return Reflect.get(target, key, value, receiver);
+        return Reflect.set(target, key, value, receiver);
       },
     };
 
     this.body.data = new Proxy(this.__bind, handler);
+    // this.body.bindingTarget = new Proxy(this.__bindTarget, {
+    //   get: function (target, key, receiver) {
+    //     console.log("get");
+    //     return Reflect.get(target, key, receiver);
+    //   },
+    //   set: function (target, key, value, receiver) {
+    //     console.log("set");
+    //     console.log("value ", value);
+    //     // let keys = Object.keys(target);
+    //     // console.log(keys);
+    //     // for (let key of keys) {
+    //     //   this.__bindTargetNodes[key].nodeValue = target[key];
+    //     //   this.__bind[key] = target[key];
+    //     // }
+
+    //     //target = new Proxy(this.__bind, handler);
+    //     return Reflect.set(target, key, value, receiver);
+    //   },
+    // });
+
+    this.body.setBindTarget = function (newVal) {
+      let keys = Object.keys(newVal);
+      console.log(keys);
+      for (let key of keys) {
+        me.__bindTargetNodes[key].nodeValue = newVal[key];
+        me.__bind[key] = newVal[key];
+      }
+
+      newVal = new Proxy(me.__bind, handler);
+      me.__bindTarget = newVal;
+      return newVal;
+    };
 
     let elements = this.fromTemplateAll("*");
     let vars = Object.keys(this.__bind);
@@ -259,7 +292,7 @@ class TemplateElement extends HTMLElement {
 
           if (attrName == "data-bind-target") {
             let keys = Object.keys(highway[newVal]);
-            console.log(keys);
+
             for (let key of keys) {
               this.__bindTargetNodes[key].nodeValue = highway[newVal][key];
               this.__bind[key] = highway[newVal][key];
