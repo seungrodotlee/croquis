@@ -3,7 +3,7 @@ highway.newComponent("top-bar", {
   <div class="top-bar">
     <nav-bar
       id="nav-bar"
-      class="fixed grey-light-border d2"
+      class="grey-light-border d2"
       data-title="highway"
       data-logo="./img/logo.svg"
     >
