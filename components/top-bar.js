@@ -29,3 +29,5 @@ highway.newComponent("top-bar", {
     test: "안녕",
   },
 });
+
+highway.bt = { test: "크크" };
