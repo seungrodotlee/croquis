@@ -113,7 +113,7 @@ highway.newComponent = function (
     templateHandler = () => {},
     childHandler = () => {},
     dataHandler = {},
-    bindBracket = "",
+    bindBracket = "{}",
     bind = {},
   }
 ) {
@@ -213,7 +213,7 @@ class TemplateElement extends HTMLElement {
     templateHandler = () => {},
     childHandler = () => {},
     dataHandler = {},
-    bindBracket = "",
+    bindBracket = "{}",
     bind = {},
   } = {}) {
     super();
@@ -291,32 +291,7 @@ class TemplateElement extends HTMLElement {
     };
 
     let elements = this.fromTemplateAll("*");
-    let vars = Object.keys(this.__bind);
-
-    elements.forEach((el) => {
-      vars.forEach((v) => {
-        let texts = [];
-
-        el.childNodes.forEach((node) => {
-          if (!highway.isElement(node) && !highway.isEmpty(node)) {
-            texts.push(node);
-          }
-        });
-
-        texts.forEach((t) => {
-          if (
-            t.nodeValue
-              .replace(/ /g, "")
-              .indexOf(this.__bindBracket[0] + v + this.__bindBracket[1]) != -1
-          ) {
-            t.nodeValue = this.__bind[v];
-            console.log(v);
-
-            this.__bindTargetNodes[v] = t;
-          }
-        });
-      });
-    });
+    this.registryTargetNodes(elements, this.__bind);
 
     // templateHandler 호출
     this.__templateHandler();
@@ -419,6 +394,69 @@ class TemplateElement extends HTMLElement {
 
   fromTemplateAll(query) {
     return this.body.querySelectorAll(query);
+  }
+
+  registryTargetNodes(elements, bindObj) {
+    if (Object.keys(bindObj).length == 0) return;
+
+    console.log("start registry");
+    console.log(bindObj);
+
+    let vars = Object.keys(bindObj);
+    console.log(vars);
+
+    let reg = new RegExp(
+      `(?<=${this.__bindBracket[0]}).+?(?=${this.__bindBracket[1]})`
+    );
+
+    elements.forEach((el) => {
+      let texts = [];
+
+      el.childNodes.forEach((node) => {
+        if (!highway.isElement(node) && !highway.isEmpty(node)) {
+          texts.push(node);
+        }
+      });
+
+      texts.forEach((t) => {
+        if (reg.test(t.nodeValue)) {
+          let selector = t.nodeValue
+            .replace("{", "")
+            .replace("}", "")
+            .replace(/ /g, "");
+
+          if (!highway.isEmpty(bindObj[selector])) {
+            console.log("val = ", bindObj[selector]);
+            t.nodeValue = bindObj[selector];
+            this.__bindTargetNodes[selector] = t;
+          }
+        }
+      });
+
+      // vars.forEach((v) => {
+      //   let texts = [];
+      //   el.childNodes.forEach((node) => {
+      //     if (!highway.isElement(node) && !highway.isEmpty(node)) {
+      //       texts.push(node);
+      //     }
+      //   });
+
+      //   texts.forEach((t) => {
+      //     if (
+      //       t.nodeValue
+      //         .replace(/ /g, "")
+      //         .indexOf(this.__bindBracket[0] + v + this.__bindBracket[1]) != -1
+      //     ) {
+      //       t.nodeValue = this.__bind[v];
+      //       console.log(v);
+
+      //       this.__bindTargetNodes[v] = t;
+      //     }
+      //   });
+      // });
+    });
+
+    console.log("registry complete", this.__bindTargetNodes);
   }
 }
 

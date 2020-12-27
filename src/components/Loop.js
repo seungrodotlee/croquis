@@ -26,6 +26,7 @@ class Loop extends TemplateElement {
               console.log("add", node);
               console.log("behind ", this._position);
               this._position.insertAfter(node);
+              this.body.appendChild(node);
               if (this._position == this.body) {
                 this.body.parentElement.removeChild(this.body);
               }
@@ -45,17 +46,36 @@ class Loop extends TemplateElement {
             console.log(this._loopCount);
 
             for (let i = 0; i < this._loopCount; i++) {
+              let nodes = [];
+              let node = null;
               for (let j = 0; j < this._temp.length; j++) {
-                let node = this._temp[j].cloneNode(true);
+                node = this._temp[j].cloneNode(true);
+                this.body.appendChild(node);
+                nodes[j] = node;
+              }
+
+              this.registryTargetNodes(
+                this.fromTemplateAll("*"),
+                highway[newVal]
+              );
+
+              for (let j = 0; j < this._temp.length; j++) {
+                //node = this._temp[j].cloneNode(true);
+                node = nodes[j];
                 console.log("add", node);
                 console.log("behind ", this._position);
                 this._position.insertAfter(node);
+                this.body.appendChild(this._temp[j]);
                 if (this._position == this.body) {
                   this.body.parentElement.removeChild(this.body);
                 }
                 this._position = node;
               }
             }
+
+            console.log("p = ", this._position.parentElement);
+
+            console.log("body", this.fromTemplateAll("*"));
           });
         },
       },
