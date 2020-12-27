@@ -22,6 +22,10 @@ body {
   z-index: 10;
 }
 
+.top-bar {
+  width: 100%;
+}
+
 .nav-bar {
   border-bottom: 1px solid;
 }

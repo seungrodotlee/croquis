@@ -16,11 +16,34 @@ highway.isElement = (obj) => {
 };
 
 highway.isEmpty = (value) => {
+  if (typeof value == "string") {
+    if (value.trim() == "") {
+      return true;
+    }
+  }
+
   if (value == "" || value == null || value == undefined) {
     return true;
   } else {
     return false;
   }
+};
+
+highway.children = (node) => {
+  let list = [];
+  let length = node.childNodes.length;
+
+  for (let child of node.childNodes) {
+    if (!highway.isElement(child)) {
+      child = child.nodeValue;
+    }
+
+    if (!highway.isEmpty(child)) {
+      list.push(child);
+    }
+  }
+
+  return list;
 };
 
 highway.define = (name, constructor) => {
@@ -51,11 +74,17 @@ highway.newComponent = function (
 highway._toastWrap = document.createElement("div");
 highway._toastWrap.classList.add("toast-wrap");
 
-HTMLElement.prototype.insertAfter = function (newNode) {
+Node.prototype.insertAfter = function (newNode) {
   let inserted = this.parentElement.insertBefore(newNode, this.nextSibling);
 
   return inserted;
 };
+
+// HTMLElement.prototype.insertAfter = function (newNode) {
+//   let inserted = this.parentElement.insertBefore(newNode, this.nextSibling);
+
+//   return inserted;
+// };
 
 HTMLElement.prototype.copyAttrsTo = function (target) {
   for (let attr of this.attributes) {
