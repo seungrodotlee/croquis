@@ -27,11 +27,32 @@ highway.define = (name, constructor) => {
   customElements.define(name, constructor);
 };
 
+highway.newComponent = function (
+  name,
+  {
+    template = "",
+    templateHandler = () => {},
+    childHandler = () => {},
+    dataHandler = {},
+    bindBracket = "",
+    bind = {},
+  }
+) {
+  console.log(arguments);
+  let data = arguments[1];
+  let C = class extends TemplateElement {
+    constructor() {
+      super(data);
+    }
+  };
+
+  highway.define(name, C);
+};
 highway._toastWrap = document.createElement("div");
 highway._toastWrap.classList.add("toast-wrap");
 
 HTMLElement.prototype.insertAfter = function (newNode) {
-  let inserted = this.parentNode.insertBefore(newNode, this.nextSibling);
+  let inserted = this.parentElement.insertBefore(newNode, this.nextSibling);
 
   return inserted;
 };
@@ -63,7 +84,7 @@ highway.getCookie = (name) => {
   return value ? value[2] : null;
 };
 
-https: String.prototype.toCamelCase = function () {
+String.prototype.toCamelCase = function () {
   return this.replace(/-([a-z0-9+])/g, function (g) {
     let reg = /^[a-z]/g;
     if (reg.test(g[1])) {
@@ -107,6 +128,8 @@ class TemplateElement extends HTMLElement {
     templateHandler = () => {},
     childHandler = () => {},
     dataHandler = {},
+    bindBracket = "",
+    bind = {},
   } = {}) {
     super();
 
@@ -115,6 +138,8 @@ class TemplateElement extends HTMLElement {
     this._templateHandler = templateHandler;
     this._childHandler = childHandler;
     this._dataHandler = dataHandler;
+    this._bindBracket = bindBracket;
+    this._bind = bind;
 
     // data-* 속성들의 속성명을 배열로 저장
     this._datas = Object.keys(dataHandler);
@@ -139,7 +164,64 @@ class TemplateElement extends HTMLElement {
     let temp = document.createElement("div");
     temp.innerHTML = this._template;
     let body = temp.firstElementChild;
+    console.log("el = ", this);
+    console.log("parent = ", this.parentElement);
+    if (this.parentElement == null) return;
     this.body = this.insertAfter(body);
+    this.body.data = {};
+    console.log("body of ", this, this.body);
+
+    let me = this;
+
+    let elements = this.fromTemplateAll("*");
+
+    console.log("elems of ", this, elements);
+    console.log("binds of ", this, this._bind);
+    let vars = Object.keys(this._bind);
+    console.log("vars = ", vars);
+
+    // for(let i = 0; i < elements.length; i++) {
+    //   let el = elements[i];
+
+    //   for(let j = 0; j < vars.length; j++) {
+
+    //   }
+    // }
+    elements.forEach((el) => {
+      vars.forEach((v) => {
+        let texts = [];
+
+        el.childNodes.forEach((node) => {
+          if (!highway.isElement(node) && !highway.isEmpty(node)) {
+            texts.push(node);
+          }
+        });
+
+        texts.forEach((t) => {
+          if (
+            t.nodeValue
+              .replace(/ /g, "")
+              .indexOf(this._bindBracket[0] + v + this._bindBracket[1]) != -1
+          ) {
+            let splited = t.nodeValue.split(`${v}`);
+
+            console.log(
+              "bind = " + this._bindBracket[0] + v + this._bindBracket[1]
+            );
+
+            t.nodeValue = this._bind[v];
+            console.log(v);
+
+            //this.data = Object.create(null);
+            Object.defineProperty(this.body.data, v, {
+              set: function (newVal) {
+                t.nodeValue = newVal;
+              },
+            });
+          }
+        });
+      });
+    });
 
     // templateHandler 호출
     this._templateHandler();
