@@ -36,7 +36,9 @@ let highwayProxyHandler = {
         console.log(_highway.request[key]);
 
         for (let c of _highway.request[key]) {
-          c();
+          setTimeout(() => {
+            c();
+          }, 1);
         }
 
         _highway.request[key] = [];
@@ -271,11 +273,16 @@ class TemplateElement extends HTMLElement {
       },
       set: function (target, key, value, receiver) {
         console.log("set");
-        me.__bindTargetNodes[key].nodeValue = value;
+        //me.__bindTargetNodes[key].nodeValue = value;
+        for (let n of me.__bindTargetNodes[key]) {
+          n.nodeValue = value;
+        }
         target[key] = value;
         return Reflect.set(target, key, value, receiver);
       },
     };
+
+    this.__bindHandler = handler;
 
     this.body.data = new Proxy(this.__bind, handler);
 
@@ -283,7 +290,10 @@ class TemplateElement extends HTMLElement {
       let keys = Object.keys(newVal);
       console.log(keys);
       for (let key of keys) {
-        me.__bindTargetNodes[key].nodeValue = newVal[key];
+        //me.__bindTargetNodes[key].nodeValue = newVal[key];
+        for (let n of me.__bindTargetNodes[key]) {
+          n.nodeValue = newVal[key];
+        }
         me.__bind[key] = newVal[key];
       }
 
@@ -337,7 +347,10 @@ class TemplateElement extends HTMLElement {
             let keys = Object.keys(highway[newVal]);
 
             for (let key of keys) {
-              this.__bindTargetNodes[key].nodeValue = highway[newVal][key];
+              //this.__bindTargetNodes[key].nodeValue = highway[newVal][key];
+              for (let n of this.__bindTargetNodes[key]) {
+                n.nodeValue = highway[newVal][key];
+              }
               this.__bind[key] = highway[newVal][key];
             }
 
@@ -430,13 +443,17 @@ class TemplateElement extends HTMLElement {
           if (!highway.isEmpty(bindObj[selector])) {
             console.log("val = ", bindObj[selector]);
             t.nodeValue = bindObj[selector];
-            this.__bindTargetNodes[selector] = t;
+            this.__bindTargetNodes[selector] =
+              this.__bindTargetNodes[selector] || [];
+            this.__bindTargetNodes[selector].push(t);
           }
         }
       });
     });
 
     console.log("registry complete", this.__bindTargetNodes);
+
+    return new Proxy(this.__bind, this.__bindHandler);
   }
 }
 

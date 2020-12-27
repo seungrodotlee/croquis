@@ -39,28 +39,32 @@ class Loop extends TemplateElement {
 
           // console.log(typeof data);
 
+          let p = null;
           highway.bindRequest(newVal, () => {
             console.log(newVal);
             console.log("b t ", highway[newVal]);
             this._loopCount = Object.keys(highway[newVal]).length;
             console.log(this._loopCount);
 
+            let nodes = [];
+            let node = null;
             for (let i = 0; i < this._loopCount; i++) {
-              let nodes = [];
-              let node = null;
+              nodes[i] = [];
               for (let j = 0; j < this._temp.length; j++) {
                 node = this._temp[j].cloneNode(true);
                 this.body.appendChild(node);
-                nodes[j] = node;
+                nodes[i][j] = node;
               }
+            }
 
-              this.registryTargetNodes(
-                this.fromTemplateAll("*"),
-                highway[newVal]
-              );
+            p = this.registryTargetNodes(
+              this.fromTemplateAll("*"),
+              highway[newVal]
+            );
 
+            for (let i = 0; i < this._loopCount; i++) {
               for (let j = 0; j < this._temp.length; j++) {
-                node = nodes[j];
+                node = nodes[i][j];
                 console.log("add", node);
                 console.log("behind ", this._position);
                 this._position.insertAfter(node);
@@ -72,9 +76,7 @@ class Loop extends TemplateElement {
               }
             }
 
-            console.log("p = ", this._position.parentElement);
-
-            console.log("body", this.fromTemplateAll("*"));
+            highway[newVal] = p;
           });
         },
       },
