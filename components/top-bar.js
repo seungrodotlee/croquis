@@ -14,7 +14,6 @@ highway.newComponent("top-bar", {
           <button>CSS</button>
           <button>템플릿</button>
           <button>골라담기</button>
-          <button>{test}</button>
         </sync->
       </div>
       <div>
@@ -24,10 +23,4 @@ highway.newComponent("top-bar", {
     </nav-bar>
   </div>
 `,
-  bindBracket: "{}",
-  bind: {
-    test: "안녕",
-  },
 });
-
-highway.bt = { test: "크크" };
