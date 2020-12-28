@@ -1,9 +1,15 @@
-import "@webcomponents/custom-elements";
+//import "@webcomponents/custom-elements";
 
 window.highway = window.highway || {};
 window._highway = window._highway || {};
 
 let highwayProxyHandler = {
+  deleteProperty: function (target, prop) {
+    if (prop in target) {
+      delete target[prop];
+      console.log("remove");
+    }
+  },
   get: function (target, key, receiver) {
     if (key.indexOf(".") != -1) {
       let splited = key.split(".");
@@ -21,6 +27,8 @@ let highwayProxyHandler = {
     let r = Reflect.get(target, key, receiver);
     if (typeof r == "object" && !highway.isElement(r)) {
       console.log("highway get");
+      console.log("target", target);
+      console.log("key", key);
       console.log(r);
       return new Proxy(r, highwayProxyHandler);
     } else {
@@ -87,6 +95,18 @@ highway.isEmpty = (value) => {
   } else {
     return false;
   }
+};
+
+highway.isPrintable = (value) => {
+  if (
+    typeof value == "boolean" ||
+    typeof value == "number" ||
+    typeof value == "string"
+  ) {
+    return true;
+  }
+
+  return false;
 };
 
 highway.children = (node) => {
@@ -231,6 +251,10 @@ class TemplateElement extends HTMLElement {
     this.__bind = bind;
     this.__bindTarget = {};
     this.__called = false;
+    this.bindKey = "key";
+    this.bindVal = "val";
+    this.kIdx = 0;
+    this.vIdx = 0;
 
     // data-* 속성들의 속성명을 배열로 저장
     this.__datas = Object.keys(dataHandler);
@@ -261,6 +285,7 @@ class TemplateElement extends HTMLElement {
     this.body = this.insertAfter(temp);
 
     this.__bindTargetNodes = {};
+    this.__bindKeyTargetNodesOrigin = [];
 
     let handler = {
       get: function (target, key, receiver) {
@@ -273,12 +298,53 @@ class TemplateElement extends HTMLElement {
       },
       set: function (target, key, value, receiver) {
         console.log("set");
-        //me.__bindTargetNodes[key].nodeValue = value;
-        for (let n of me.__bindTargetNodes[key]) {
+        console.log("target ", target);
+        console.log("key ", key);
+        console.log("val", value);
+        console.log("bind k ", me.bindKey);
+        console.log("bind v", me.bindVal);
+        console.log(me.__bindTargetNodes);
+
+        let g = Reflect.get(target, key, receiver);
+        let r = Reflect.set(target, key, value, receiver);
+
+        console.log(g);
+        if (highway.isEmpty(g)) {
+          console.log("empty");
+
+          if (r && me.body.classList.contains("loop")) {
+            let f = me.body.dataset.for;
+            me.body.dataset.for = f;
+          }
+
+          return;
+        }
+
+        if (!highway.isEmpty(me.__bindTargetNodes[key])) {
+          for (let n of me.__bindTargetNodes[key]) {
+            n.nodeValue = value;
+          }
+        }
+
+        // if (!highway.isEmpty(me.__bindTargetNodes[me.bindKey])) {
+        //   for (let n of me.__bindTargetNodes[me.bindKey]) {
+        //     n.nodeValue = value;
+        //   }
+        // }
+
+        if (!highway.isEmpty(me.__bindTargetNodes[me.bindVal])) {
+          let keys = Object.keys(target);
+          console.log(keys);
+
+          let idx = keys.indexOf(key);
+
+          let n = me.__bindTargetNodes[me.bindVal][idx];
           n.nodeValue = value;
         }
-        target[key] = value;
-        return Reflect.set(target, key, value, receiver);
+
+        //target[key] = value;
+
+        return r;
       },
     };
 
@@ -294,7 +360,6 @@ class TemplateElement extends HTMLElement {
         for (let n of me.__bindTargetNodes[key]) {
           n.nodeValue = newVal[key];
         }
-        me.__bind[key] = newVal[key];
       }
 
       newVal = new Proxy(me.__bind, handler);
@@ -310,23 +375,12 @@ class TemplateElement extends HTMLElement {
 
     // 커스텀 요소 하위 노드들이 DOM에 등록될 때 실행되는 콜백
     const callback = (mutationsList, observer) => {
+      let childList = [];
       for (let mutation of mutationsList) {
-        let addedNode = mutation.addedNodes[0];
-
-        // 추가된 노드가 공백, undefined 등 빈 요소일 경우 거름
-        if (highway.isEmpty(addedNode)) {
-          continue;
-        }
-
-        // 추가된 노드가 HTML 요소이거나, 공백이 아닌 텍스트인 경우
-        // childHandler를 실행
-        if (
-          highway.isElement(addedNode) ||
-          !highway.isEmpty(addedNode.data.replace(/(\s*)/g, ""))
-        ) {
-          this.__childHandler(addedNode);
-        }
+        childList.push(mutation.addedNodes[0]);
       }
+
+      this.childConnectedCallback(childList);
     };
 
     // 콜백을 가지고 observer 등록
@@ -344,17 +398,24 @@ class TemplateElement extends HTMLElement {
           let newVal = mutation.target.getAttribute(attrName);
 
           if (attrName == "data-bind-target") {
-            let keys = Object.keys(highway[newVal]);
+            //highway[newVal] = new Proxy(this.__bind, handler);
 
-            for (let key of keys) {
-              //this.__bindTargetNodes[key].nodeValue = highway[newVal][key];
-              for (let n of this.__bindTargetNodes[key]) {
-                n.nodeValue = highway[newVal][key];
+            highway.bindRequest(newVal, () => {
+              let keys = Object.keys(highway[newVal]);
+
+              for (let key of keys) {
+                console.log(this.__bindTargetNodes);
+                //this.__bindTargetNodes[key].nodeValue = highway[newVal][key];
+                console.log(this.__bindTargetNodes);
+                for (let n of this.__bindTargetNodes[key]) {
+                  if (highway.isPrintable(highway[newVal][key]))
+                    n.nodeValue = highway[newVal][key];
+                }
+                this.__bind[key] = highway[newVal][key];
               }
-              this.__bind[key] = highway[newVal][key];
-            }
 
-            highway[newVal] = new Proxy(this.__bind, handler);
+              highway[newVal] = new Proxy(this.__bind, handler);
+            });
 
             return;
           }
@@ -373,21 +434,7 @@ class TemplateElement extends HTMLElement {
     // 그 때를 대비해 자식노드가 존재할 경우 callback의 실행 내용을 실행하는 코드
     let children = this.childNodes;
 
-    for (let i = 0; i < children.length; i++) {
-      let addedNode = children[i];
-
-      if (highway.isEmpty(addedNode)) {
-        continue;
-      }
-
-      if (
-        highway.isElement(addedNode) ||
-        !highway.isEmpty(addedNode.data.replace(/(\s*)/g, ""))
-      ) {
-        this.__childHandler(addedNode);
-      }
-    }
-
+    this.childConnectedCallback(children);
     // 커스텀 요소의 속성들 템플릿 요소로 모두 복사
     this.copyAttrsTo(this.body);
 
@@ -411,20 +458,47 @@ class TemplateElement extends HTMLElement {
     return this.body.querySelectorAll(query);
   }
 
+  childConnectedCallback(children) {
+    for (let i = 0; i < children.length; i++) {
+      let addedNode = children[i];
+
+      if (highway.isEmpty(addedNode)) {
+        continue;
+      }
+
+      if (
+        highway.isElement(addedNode) ||
+        !highway.isEmpty(addedNode.data.replace(/(\s*)/g, ""))
+      ) {
+        this.__childHandler(addedNode);
+
+        if (!highway.isElement(addedNode)) {
+          console.log("start reg", addedNode);
+          this.registryTargetNodeEach(addedNode);
+        }
+      }
+    }
+  }
+
   registryTargetNodes(elements, bindObj) {
     if (Object.keys(bindObj).length == 0) return;
+
+    this.__bindTarget = bindObj;
 
     console.log("start registry");
     console.log(bindObj);
 
-    let vars = Object.keys(bindObj);
-    console.log(vars);
-
-    let reg = new RegExp(
-      `(?<=${this.__bindBracket[0]}).+?(?=${this.__bindBracket[1]})`
-    );
-
+    //let idx = -1;
     elements.forEach((el) => {
+      // idx++;
+      // console.log(idx);
+      // console.log(this.kIdx);
+
+      // if (idx < this.kIdx * elements.length) {
+      //   console.log("continue");
+      //   return;
+      // }
+
       let texts = [];
 
       el.childNodes.forEach((node) => {
@@ -433,27 +507,125 @@ class TemplateElement extends HTMLElement {
         }
       });
 
-      texts.forEach((t) => {
-        if (reg.test(t.nodeValue)) {
-          let selector = t.nodeValue
-            .replace("{", "")
-            .replace("}", "")
-            .replace(/ /g, "");
+      console.log(texts);
 
-          if (!highway.isEmpty(bindObj[selector])) {
-            console.log("val = ", bindObj[selector]);
-            t.nodeValue = bindObj[selector];
-            this.__bindTargetNodes[selector] =
-              this.__bindTargetNodes[selector] || [];
-            this.__bindTargetNodes[selector].push(t);
-          }
-        }
+      texts.forEach((t) => {
+        this.registryTargetNodeEach(t);
       });
     });
 
     console.log("registry complete", this.__bindTargetNodes);
 
+    let keys = Object.keys(bindObj);
+    for (let key of keys) {
+      this.__bind[key] = bindObj[key];
+    }
+
     return new Proxy(this.__bind, this.__bindHandler);
+  }
+
+  registryTargetNodeEach(t) {
+    console.log("start reg new node");
+    let val = t.nodeValue;
+
+    let pos = 0;
+    let startBracketPosList = [];
+    while (true) {
+      let foundPos = val.indexOf(this.__bindBracket[0], pos);
+
+      if (foundPos == -1) break;
+
+      startBracketPosList.push(foundPos);
+      pos = foundPos + 1;
+    }
+
+    pos = 0;
+    let endBracketPosList = [];
+    while (true) {
+      let foundPos = val.indexOf(this.__bindBracket[1], pos);
+
+      if (foundPos == -1) break;
+
+      endBracketPosList.push(foundPos);
+      pos = foundPos + 1;
+    }
+
+    let reg = new RegExp(
+      `(?<=${this.__bindBracket[0]}).+?(?=${this.__bindBracket[1]})`
+    );
+
+    let vars = Object.keys(this.__bindTarget);
+    console.log(vars);
+
+    if (reg.test(t.nodeValue)) {
+      // let selector = t.nodeValue
+      //   .replace("{", "")
+      //   .replace("}", "")
+      //   .replace(/ /g, "");
+
+      let sp = 0;
+      let ep = 0;
+      while (true) {
+        let val = t.nodeValue;
+        sp = val.indexOf(this.__bindBracket[0]);
+        ep = val.indexOf(this.__bindBracket[1]);
+
+        if (sp == -1 || ep == -1) break;
+
+        if (sp != -1) {
+          console.log("sp ", sp);
+          console.log("cut from ", t.nodeValue);
+          t = t.splitText(sp);
+          console.log("cut s bracket: " + t);
+
+          if (ep != -1) {
+            console.log("ep ", ep);
+            let r = t.splitText(ep - sp + 1);
+            console.log(t.nodeValue);
+            console.log(r.nodeValue);
+
+            console.log("emp? ", highway.isEmpty(t));
+            if (highway.isEmpty(t)) continue;
+
+            console.log("reg ", t.nodeValue);
+
+            let selector = t.nodeValue
+              .replace("{", "")
+              .replace("}", "")
+              .replace(/ /g, "");
+
+            this.__bindTargetNodes[selector] =
+              this.__bindTargetNodes[selector] || [];
+
+            if (selector == this.bindKey) {
+              console.log("bind key", vars[this.kIdx]);
+              t.nodeValue = vars[this.kIdx];
+              //this.__bindTargetNodes[vars[idx]].push(t);
+              this.kIdx++;
+            } else if (selector == this.bindVal) {
+              let val = this.__bindTarget[vars[this.vIdx]];
+              if (highway.isPrintable(val)) {
+                this.__bindKeyTargetNodesOrigin.push(t.nodeValue);
+                console.log("bind val", val);
+                t.nodeValue = val;
+                this.vIdx++;
+                //his.__bindTargetNodes[selector].push(t);
+              }
+            } else if (!highway.isEmpty(this.__bindTarget[selector])) {
+              console.log("val = ", this.__bindTarget[selector]);
+              t.nodeValue = this.__bindTarget[selector];
+            } else {
+              t.nodeValue = "";
+            }
+
+            this.__bindTargetNodes[selector].push(t);
+            console.log("reg[" + selector + "] success: ", t.nodeValue);
+
+            t = r;
+          }
+        }
+      }
+    }
   }
 }
 

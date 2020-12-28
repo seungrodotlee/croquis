@@ -18,8 +18,9 @@ class Toast extends TemplateElement {
         });
       },
       childHandler: (addedNode) => {
+        console.log("?");
         this.content.appendChild(addedNode);
-        highway._alertWrap.appendChild(this.body);
+        highway._toastWrap.appendChild(this.body);
       },
     });
   }

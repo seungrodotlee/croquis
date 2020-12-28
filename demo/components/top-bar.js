@@ -24,7 +24,4 @@ highway.newComponent("top-bar", {
     </nav-bar>
   </div>
 `,
-  bind: {
-    test: "왜 안돼",
-  },
 });

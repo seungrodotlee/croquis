@@ -1,4 +1,4 @@
-import TemplateElement from "../Highway";
+import TemplateElement from "../Highway.js";
 
 class Sync extends TemplateElement {
   constructor() {
