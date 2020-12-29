@@ -1,4 +1,5 @@
-import TemplateElement from "../Highway.js";
+import TemplateElement from "../old/BindableElement.js";
+
 class DropDown extends TemplateElement {
   constructor() {
     super({

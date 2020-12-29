@@ -1,5 +1,4 @@
-import TemplateElement from "../Highway.js";
-import { Col } from "./Grid.js";
+import TemplateElement from "../old/BindableElement.js";
 
 class Collapse extends TemplateElement {
   constructor() {

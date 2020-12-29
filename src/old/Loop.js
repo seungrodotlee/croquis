@@ -1,20 +1,12 @@
-import TemplateElement from "../Highway.js";
+import TemplateElement from "./BindableElement.js";
 
 class Loop extends TemplateElement {
   constructor() {
     super({
       template: `<div class="loop"></div>`,
       templateHandler: () => {
-        this._childCount = 0;
         this._loopCount = 0;
         this._position = this.body;
-        this._temp = [];
-      },
-      childHandler: (addedNode) => {
-        console.log(addedNode);
-        this._temp.push(addedNode);
-
-        this._childCount++;
       },
       dataHandler: {
         count: (newVal) => {
@@ -82,7 +74,7 @@ class Loop extends TemplateElement {
               }
             }
 
-            highway[newVal] = p;
+            _highway.proxys[newVal].push(p);
             console.log(this.body);
           };
 

@@ -1,4 +1,4 @@
-import TemplateElement from "../Highway.js";
+import TemplateElement from "../old/BindableElement.js";
 
 class Row extends TemplateElement {
   constructor() {
