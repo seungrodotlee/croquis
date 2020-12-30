@@ -1,4 +1,4 @@
-import TemplateElement from "../util/BindableElement.js";
+import TemplateElement from "../util/TemplateElement.js";
 
 class Modal extends TemplateElement {
   constructor() {

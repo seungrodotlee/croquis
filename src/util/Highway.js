@@ -1,4 +1,4 @@
-import TemplateElement from "./BindableElement.js";
+import TemplateElement from "./TemplateElement.js";
 
 class HighwayObject extends Object {
   constructor(name, depth) {
@@ -173,21 +173,17 @@ let highwayBindingHandler = {
       return r;
     }
 
-    if (target instanceof HighwayObject) {
-      if (r instanceof HighwayObject && !("_data" in r)) {
-        return r;
-      }
-
-      console.log("get ", key);
-
-      let path = highway.getPath(target);
-
-      console.log("path ", path);
-
-      return r._data;
-    } else {
+    if (r instanceof HighwayObject && !("_data" in r)) {
       return r;
     }
+
+    console.log("get ", key);
+
+    let path = highway.getPath(target);
+
+    console.log("path ", path);
+
+    return r._data;
   },
   set(target, key, val) {
     if (typeof val == "function" || highway.isElement(val)) {
@@ -225,8 +221,9 @@ let highwayBindingHandler = {
 
         console.log("path ", path);
         //_highway.dataMap(path, val);
-        return true;
       }
+
+      return true;
     } else {
       return Reflect.set(target, key, val);
     }
