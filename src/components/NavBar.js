@@ -1,4 +1,4 @@
-import TemplateElement from "../old/BindableElement.js";
+import TemplateElement from "../util/BindableElement.js";
 
 class NavBar extends TemplateElement {
   constructor() {

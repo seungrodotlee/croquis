@@ -15,9 +15,14 @@ class BindableElement extends TemplateElement {
       childHandler,
       dataHandler,
     });
+
+    this.__called = false;
   }
 
   connectedCallback() {
+    if (this.__called) return;
+    this.__called = true;
+
     super.connectedCallback();
   }
 

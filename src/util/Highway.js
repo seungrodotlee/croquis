@@ -1,8 +1,18 @@
-window.highway = window.highway || {};
-window._highway = window._highway || {};
+import TemplateElement from "./BindableElement.js";
 
-_highway.request = _highway.request || {};
-_highway.proxys = _highway.proxys || {};
+class HighwayObject extends Object {
+  constructor(name, depth) {
+    super();
+    this.name = name;
+    this.depth = depth;
+    this.parent = null;
+  }
+}
+
+window.highway = window.highway || new HighwayObject("highway", -1);
+//window.highway = window.highway || {};
+window._highway = window._highway || {};
+_highway.dataMap = new Map();
 
 highway.bindRequest = (key, callback) => {
   console.log("bind req");
@@ -11,8 +21,8 @@ highway.bindRequest = (key, callback) => {
     return;
   }
 
-  _highway.request[key] = _highway.request[key] || [];
-  _highway.request[key].push(callback);
+  // _highway.request[key] = _highway.request[key] || [];
+  // _highway.request[key].push(callback);
 };
 
 highway.isElement = (obj) => {
@@ -32,6 +42,16 @@ highway.isEmpty = (value) => {
   if (typeof value == "string") {
     if (value.trim() == "") {
       return true;
+    }
+  }
+
+  if (value instanceof Object) {
+    let keys = Object.keys(value);
+
+    if (keys.length == 0) {
+      return true;
+    } else {
+      return false;
     }
   }
 
@@ -129,73 +149,101 @@ highway.getCookie = (name) => {
   return value ? value[2] : null;
 };
 
-let highwayProxyHandler = {
-  get: function (target, key, receiver) {
-    if (key.indexOf(".") != -1) {
-      let splited = key.split(".");
-
-      let r = Reflect.get(target, splited[0], receiver);
-
-      let inner = r;
-      for (let i = 1; i < splited.length; i++) {
-        inner = inner[splited[i]];
-      }
-
-      return inner;
+highway.getPath = (target) => {
+  let path = "";
+  let p = target;
+  for (let i = target.depth; i > -1; i--) {
+    if (path == "") {
+      path = p.name;
+    } else {
+      path = p.name + "." + path;
     }
 
-    let r = Reflect.get(target, key, receiver);
-    if (typeof r == "object" && !highway.isElement(r)) {
-      console.log("highway get");
-      console.log("target", target);
-      console.log("key", key);
-      console.log(r);
-      return new Proxy(r, highwayProxyHandler);
+    p = p.parent;
+  }
+
+  return path;
+};
+
+let highwayBindingHandler = {
+  get(target, key) {
+    let r = Reflect.get(target, key);
+
+    if (typeof r == "function" || highway.isElement(target[key])) {
+      return r;
+    }
+
+    if (target instanceof HighwayObject) {
+      if (r instanceof HighwayObject && !("_data" in r)) {
+        return r;
+      }
+
+      console.log("get ", key);
+
+      let path = highway.getPath(target);
+
+      console.log("path ", path);
+
+      return r._data;
     } else {
-      return Reflect.get(target, key, receiver);
+      return r;
     }
   },
-  set: function (target, key, value, receiver) {
-    console.log("highway set");
-    console.log("target", target);
-    console.log("key", key);
-
-    console.log("req", _highway.request[key]);
-    if (typeof value == "object" && !highway.isElement(value)) {
-      if (!highway.isEmpty(_highway.request[key])) {
-        console.log(_highway.request[key]);
-
-        for (let c of _highway.request[key]) {
-          setTimeout(() => {
-            c();
-          }, 1);
-        }
-
-        _highway.request[key] = [];
-      }
+  set(target, key, val) {
+    if (typeof val == "function" || highway.isElement(val)) {
+      return Reflect.set(target, key, val);
     }
 
-    let r = Reflect.set(target, key, value, receiver);
+    if (target instanceof HighwayObject) {
+      if (val instanceof Object) {
+        let keys = Object.keys(val);
 
-    console.log("proxys", _highway.proxys[key]);
-    if (!highway.isEmpty(_highway.proxys[key])) {
-      for (let p of _highway.proxys[key]) {
-        console.log(p);
-        let keys = Object.keys(value);
+        let prx = new HighwayObject(key, target.depth + 1);
+        prx.parent = target;
+        target[key] = new Proxy(prx, highwayBindingHandler);
+
         for (let k of keys) {
-          //p[k] = value[k];
-          Reflect.set(p, k, value[k], receiver);
+          target[key][k] = val[k];
         }
 
-        //p = Object.assign({}, value);
+        return true;
       }
-    }
 
-    return r;
+      console.log("set ", key);
+
+      if (key in target) {
+        console.log(`${key} exist in ${target.name}`);
+        target[key]._data = val;
+      } else {
+        console.log(`${key} not exist in ${target}`);
+
+        target[key] = new HighwayObject(key, target.depth + 1);
+        target[key]._data = val;
+        target[key].parent = target;
+
+        let path = highway.getPath(target);
+
+        console.log("path ", path);
+        //_highway.dataMap(path, val);
+        return true;
+      }
+    } else {
+      return Reflect.set(target, key, val);
+    }
   },
 };
 
-highway = new Proxy(highway, highwayProxyHandler);
+highway = new Proxy(highway, highwayBindingHandler);
+
+Object.prototype.equals = function (x) {
+  // 인자값의 Type이 object가 아닐경우 false를 리턴한다.
+  if (typeof x !== "object") return false;
+  // Type을 String으로 변환한다.
+  var arr1 = JSON.stringify(this);
+  var arr2 = JSON.stringify(x);
+
+  return arr1 === arr2;
+};
 
 Node.prototype.insertAfter = function (newNode) {
   let inserted = this.parentElement.insertBefore(newNode, this.nextSibling);

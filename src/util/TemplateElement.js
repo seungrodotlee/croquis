@@ -29,6 +29,7 @@ class TemplateElement extends HTMLElement {
     this.__templateHandler = templateHandler;
     this.__childHandler = childHandler;
     this.__dataHandler = dataHandler;
+    this.__called = false;
 
     // data-* 속성들의 속성명을 배열로 저장
     this.__datas = Object.keys(dataHandler);
@@ -49,9 +50,6 @@ class TemplateElement extends HTMLElement {
 
   // 커스텀 요소가 DOM에 등록되었을 때 호출되는 메소드
   connectedCallback() {
-    if (this.__called) return;
-    this.__called = true;
-
     // 커스텀 요소 바로 뒤에 템플릿 요소(this.body)를 등록
     let temp = document.createElement("div");
     temp.innerHTML = this.__template;

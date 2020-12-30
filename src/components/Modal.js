@@ -1,4 +1,4 @@
-import TemplateElement from "../old/BindableElement.js";
+import TemplateElement from "../util/BindableElement.js";
 
 class Modal extends TemplateElement {
   constructor() {
@@ -68,12 +68,6 @@ class Modal extends TemplateElement {
     return a;
   }
 }
-
-highway.newModal = ({ id, title, content }) => {
-  let m = Modal.newInstance(id, title, content, null);
-
-  return m;
-};
 
 highway.newModal = ({ id, title, content, callback }) => {
   let m = Modal.newInstance(id, title, content, callback);

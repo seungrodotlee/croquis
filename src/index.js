@@ -11,7 +11,7 @@ import ArticleMap from "./components/ArticleMap.js";
 import Tag from "./components/Tag.js";
 import NavBar from "./components/NavBar.js";
 import Sync from "./components/Sync.js";
-import Loop from "./old/Loop.js";
+//import Loop from "./old/Loop.js";
 import { Row, Col } from "./components/Grid.js";
 
 import "./util/Transition.js";
