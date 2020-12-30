@@ -1,10 +1,16 @@
 .hover {
-  &-line-bottom,
+  &-underscore,
   &-back {
     position: relative;
   }
 
-  &-line-bottom::after,
+  &-underscore {
+    padding-left: 0;
+    padding-right: 0;
+    overflow: visible;
+  }
+
+  &-underscore::after,
   &-back::after {
     content: "";
     position: absolute;
@@ -15,7 +21,7 @@
     transform: scaleX(0);
   }
 
-  &-line-bottom::after {
+  &-underscore::after {
     top: 100%;
     left: 0;
     height: 2px;
@@ -40,11 +46,11 @@
     color: $background;
   }
 
-  &-line-bottom.from-center::after {
+  &-underscore.from-center::after {
     transform-origin: center;
   }
 
-  &-line-bottom.from-right::after,
+  &-underscore.from-right::after,
   &-back.from-right::after {
     transform-origin: right;
   }
@@ -59,7 +65,7 @@
     transform: scaleY(0);
   }
 
-  &-line-bottom:hover::after,
+  &-underscore:hover::after,
   &-back:hover::after {
     transform: scaleX(1);
   }
@@ -70,7 +76,7 @@
   }
 
   @each $color-title, $color in $color-map {
-    &-line-bottom.#{$color-title}-text::after,
+    &-underscore.#{$color-title}-text::after,
     &-back.#{$color-title}-text::after {
       background: $color;
     }

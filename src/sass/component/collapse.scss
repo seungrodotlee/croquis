@@ -1,7 +1,6 @@
 .collapse {
   border-radius: 0.5rem;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  background: #e9e9e9;
+  background: map-get($color-map, "grey-darkest");
   overflow: hidden;
   transition: height 1s;
 }
@@ -12,6 +11,7 @@
   font-weight: bold;
   padding: 1rem;
   border: 0;
+  color: $white;
   background: transparent;
   transition: height 1s;
 }
@@ -19,5 +19,4 @@
 .collapse-content {
   padding: 1rem;
   background: white;
-  border-top: 1px solid rgba(0, 0, 0, 0.15);
 }

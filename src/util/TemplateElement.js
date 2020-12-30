@@ -63,20 +63,17 @@ class TemplateElement extends HTMLElement {
 
     // 콜백을 가지고 observer 등록
     // 이제 this의 childList에 변화가 있을 때마다 callback이 실행됩니다.
-    // const observer = new MutationObserver(
-    //   this.childConnectedCallback.bind(this)
-    // );
-    // observer.observe(this, { childList: true });
+    const observer = new MutationObserver(this.childAddedCallback.bind(this));
+    observer.observe(this, { childList: true });
+
+    let children = this.childNodes;
+
+    this.registryChildren(children);
 
     // observer 등록
     const attrObserver = new MutationObserver(this.attrCallback.bind(this));
     attrObserver.observe(this.body, { attributes: true });
 
-    // connectedCallback 호출 시기가 this의 자식 요소들이 DOM에 등록되는 시점보다 늦는 오류가 아주 가끔 발생한다.
-    // 그 때를 대비해 자식노드가 존재할 경우 callback의 실행 내용을 실행하는 코드
-    let children = this.childNodes;
-
-    this.registryChildren(children);
     // 커스텀 요소의 속성들 템플릿 요소로 모두 복사
     this.copyAttrsTo(this.body);
 
@@ -101,12 +98,12 @@ class TemplateElement extends HTMLElement {
   }
 
   registryChildren(children) {
+    console.log(children);
     for (let i = 0; i < children.length; i++) {
       let addedNode = children[i];
-
-      if (highway.isEmpty(addedNode)) {
-        continue;
-      }
+      // if (highway.isEmpty(addedNode)) {
+      //   continue;
+      // }
 
       if (
         highway.isElement(addedNode) ||
@@ -122,6 +119,18 @@ class TemplateElement extends HTMLElement {
     }
   }
 
+  childAddedCallback(mutationsList, observer) {
+    let children = [];
+    for (let mutation of mutationsList) {
+      //console.log(mutation);
+      if (mutation.addedNode != undefined) {
+        children.push(mutation.addedNode[0]);
+      }
+    }
+
+    this.registryChildren(children);
+  }
+
   attrCallback(mutationsList, observer) {
     for (let mutation of mutationsList) {
       let attrName = mutation.attributeName;
@@ -131,6 +140,7 @@ class TemplateElement extends HTMLElement {
         let newVal = mutation.target.getAttribute(attrName);
 
         this[`_${attrName.replace("data-", "")}`] = newVal;
+        console.log("dat");
         this.setAttr(attrName, newVal);
       }
     }

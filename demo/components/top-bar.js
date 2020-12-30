@@ -8,7 +8,7 @@ highway.newComponent("top-bar", {
       data-logo="./img/logo.svg"
     >
       <div>
-        <sync- class="no-border hover-back">
+        <sync- class="no-border hover-underscore">
           <button>알아보기</button>
           <button>시작하기</button>
           <button>CSS</button>

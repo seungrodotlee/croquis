@@ -19,6 +19,7 @@ class ArticleMap extends TemplateElement {
       },
       dataHandler: {
         target: (newVal) => {
+          console.log(document.body.innerHTML);
           this.content.innerHTML = "";
           this._target = document.querySelector(`#${newVal}`);
 

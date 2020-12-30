@@ -3,7 +3,6 @@ button {
   align-items: center;
   background: $background;
   padding: 0.25rem 0.75rem;
-  border: 1px solid $border-color;
   border-radius: 0.25rem;
   font-size: 1rem;
   cursor: pointer;
@@ -13,9 +12,13 @@ button {
     padding-right: 0.5rem;
   }
 
-  &.no-border {
+  &.short-btn {
     padding: 0.25em;
     border: 0;
+  }
+
+  &.round-btn {
+    border-radius: 0.85rem;
   }
 
   .material-icons {
