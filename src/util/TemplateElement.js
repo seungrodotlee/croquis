@@ -30,6 +30,8 @@ class TemplateElement extends HTMLElement {
     this.__childHandler = childHandler;
     this.__dataHandler = dataHandler;
     this.__called = false;
+    this.__bindBracket = "{}";
+    this.__origins = [];
 
     // data-* 속성들의 속성명을 배열로 저장
     this.__datas = Object.keys(dataHandler);
@@ -109,7 +111,8 @@ class TemplateElement extends HTMLElement {
         highway.isElement(addedNode) ||
         !highway.isEmpty(addedNode.data.replace(/(\s*)/g, ""))
       ) {
-        this.__childHandler(addedNode);
+        this.__origins.push(addedNode);
+        -this.__childHandler(addedNode);
 
         // if (!highway.isElement(addedNode)) {
         //   console.log("start reg", addedNode);
@@ -135,13 +138,90 @@ class TemplateElement extends HTMLElement {
     for (let mutation of mutationsList) {
       let attrName = mutation.attributeName;
 
+      console.log("attrName ", attrName);
+      if (attrName == "data-bind") {
+        console.log("data bind");
+        let target = mutation.target.getAttribute(attrName);
+
+        if (!_highway.dataMap.has(target)) {
+          highway[target] = {};
+          this.__bindObj = highway[target];
+        } else {
+          this.__bindObj = highway[target];
+        }
+
+        this.registryBindingNodes();
+
+        return;
+      }
+
       // data-* 속성만 감지하여 dataHandler 실행 (setAttr 메소드 내에서)
       if (attrName.indexOf("data-") != -1) {
         let newVal = mutation.target.getAttribute(attrName);
 
         this[`_${attrName.replace("data-", "")}`] = newVal;
         console.log("dat");
-        this.setAttr(attrName, newVal);
+
+        if (attrName.replace("data-", "") in this.__dataHandler) {
+          this.setAttr(attrName, newVal);
+        }
+      }
+    }
+  }
+
+  registryBindingNodes() {
+    let textNodes = highway.getTextNodesUnder(this.body);
+    let reg = new RegExp(
+      `${this.__bindBracket[0]}.+?${this.__bindBracket[1]}`,
+      "g"
+    );
+
+    for (let t of textNodes) {
+      let value = t.nodeValue;
+      let matches = value.match(reg);
+      if (matches != null) {
+        console.log("found in ", t.nodeValue);
+
+        let removedIndexSum = 0;
+        for (let target of matches) {
+          let targetValue = target
+            .replace(this.__bindBracket[0], "")
+            .replace(this.__bindBracket[1], "");
+          //this.__bindObj._target.push(target);
+
+          let cutted = "";
+
+          if (t.nodeValue == target) {
+            cutted = t;
+          }
+
+          if (t.nodeValue != target) {
+            let s = t.nodeValue.indexOf(target);
+            let e = t.nodeValue.indexOf(target) + target.length;
+
+            t = t.splitText(s);
+            cutted = t;
+            console.log(t.nodeValue);
+            t = t.splitText(e - s);
+            console.log("cutted ", cutted);
+          }
+
+          if (!(target in this.__bindObj)) {
+            this.__bindObj[targetValue] = "";
+            cutted.nodeValue = "";
+          } else {
+            cutted.nodeValue = this.__bindObj[targetValue];
+          }
+
+          let path = this.__bindObj._name + "." + targetValue;
+          console.log(path);
+          console.log(_highway.origin.get(path));
+          if (!("_target" in _highway.origin.get(path))) {
+            _highway.origin.get(path)._target = [];
+          }
+
+          _highway.origin.get(path)._target.push(cutted);
+        }
       }
     }
   }

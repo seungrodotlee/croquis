@@ -3,7 +3,7 @@ import TemplateElement from "./TemplateElement.js";
 class HighwayObject extends Object {
   constructor(name, depth) {
     super();
-    this.name = name;
+    this._name = name;
     this.depth = depth;
     this.parent = null;
   }
@@ -13,6 +13,7 @@ window.highway = window.highway || new HighwayObject("highway", -1);
 //window.highway = window.highway || {};
 window._highway = window._highway || {};
 _highway.dataMap = new Map();
+_highway.origin = new Map();
 
 highway.bindRequest = (key, callback) => {
   console.log("bind req");
@@ -119,10 +120,8 @@ highway.newComponent = function (
 highway._toastWrap = document.createElement("div");
 highway._toastWrap.classList.add("toast-wrap");
 
-highway.textNodesUnder = function (el) {
-  if (el.nodeType == Node.TEXT_NODE) {
-    return [el];
-  } else {
+highway.getTextNodesUnder = function (el) {
+  if (el instanceof HTMLElement) {
     let n,
       a = [],
       nodeltr = document.createNodeIterator(
@@ -134,6 +133,8 @@ highway.textNodesUnder = function (el) {
 
     while ((n = nodeltr.nextNode())) a.push(n);
     return a;
+  } else if (el.nodeType == Node.TEXT_NODE) {
+    return [el];
   }
 };
 
@@ -154,9 +155,9 @@ highway.getPath = (target) => {
   let p = target;
   for (let i = target.depth; i > -1; i--) {
     if (path == "") {
-      path = p.name;
+      path = p._name;
     } else {
-      path = p.name + "." + path;
+      path = p._name + "." + path;
     }
 
     p = p.parent;
@@ -168,6 +169,16 @@ highway.getPath = (target) => {
 let highwayBindingHandler = {
   get(target, key) {
     let r = Reflect.get(target, key);
+
+    if (target instanceof HighwayObject && !("_data" in target)) {
+      if (key.indexOf("_") != -1) {
+        return r;
+      }
+    }
+
+    if (r == undefined) {
+      return undefined;
+    }
 
     if (typeof r == "function" || highway.isElement(target[key])) {
       return r;
@@ -208,20 +219,25 @@ let highwayBindingHandler = {
       console.log("set ", key);
 
       if (key in target) {
-        console.log(`${key} exist in ${target.name}`);
+        console.log(`${key} exist in ${target._name}`);
         target[key]._data = val;
+
+        if ("_target" in target[key]) {
+          for (let t of target[key]._target) {
+            t.nodeValue = val;
+          }
+        }
       } else {
         console.log(`${key} not exist in ${target}`);
 
         target[key] = new HighwayObject(key, target.depth + 1);
         target[key]._data = val;
         target[key].parent = target;
-
-        let path = highway.getPath(target);
-
-        console.log("path ", path);
-        //_highway.dataMap(path, val);
       }
+
+      let path = highway.getPath(target[key]);
+      _highway.dataMap.set(path, target[key]._data);
+      _highway.origin.set(path, target[key]);
 
       return true;
     } else {
