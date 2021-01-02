@@ -30,7 +30,10 @@ class TemplateElement extends HTMLElement {
     this.__childHandler = childHandler;
     this.__dataHandler = dataHandler;
     this.__called = false;
-    this.__bindBracket = "{}";
+    this.__openBracket = "{";
+    this.__closeBracket = "}";
+    this.__bindBracket = [this.__openBracket, this.__closeBracket];
+    this.data = {};
     this.__origins = [];
 
     // data-* 속성들의 속성명을 배열로 저장
@@ -100,7 +103,6 @@ class TemplateElement extends HTMLElement {
   }
 
   registryChildren(children) {
-    console.log(children);
     for (let i = 0; i < children.length; i++) {
       let addedNode = children[i];
       // if (highway.isEmpty(addedNode)) {
@@ -138,16 +140,15 @@ class TemplateElement extends HTMLElement {
     for (let mutation of mutationsList) {
       let attrName = mutation.attributeName;
 
-      console.log("attrName ", attrName);
       if (attrName == "data-bind") {
         console.log("data bind");
         let target = mutation.target.getAttribute(attrName);
 
         if (!_highway.dataMap.has(target)) {
           highway[target] = {};
-          this.__bindObj = highway[target];
+          this.data = highway[target];
         } else {
-          this.__bindObj = highway[target];
+          this.data = highway[target];
         }
 
         this.registryBindingNodes();
@@ -160,7 +161,6 @@ class TemplateElement extends HTMLElement {
         let newVal = mutation.target.getAttribute(attrName);
 
         this[`_${attrName.replace("data-", "")}`] = newVal;
-        console.log("dat");
 
         if (attrName.replace("data-", "") in this.__dataHandler) {
           this.setAttr(attrName, newVal);
@@ -180,14 +180,10 @@ class TemplateElement extends HTMLElement {
       let value = t.nodeValue;
       let matches = value.match(reg);
       if (matches != null) {
-        console.log("found in ", t.nodeValue);
-
-        let removedIndexSum = 0;
         for (let target of matches) {
           let targetValue = target
             .replace(this.__bindBracket[0], "")
             .replace(this.__bindBracket[1], "");
-          //this.__bindObj._target.push(target);
 
           let cutted = "";
 
@@ -201,21 +197,18 @@ class TemplateElement extends HTMLElement {
 
             t = t.splitText(s);
             cutted = t;
-            console.log(t.nodeValue);
             t = t.splitText(e - s);
-            console.log("cutted ", cutted);
           }
 
-          if (!(target in this.__bindObj)) {
-            this.__bindObj[targetValue] = "";
+          if (!(target in this.data)) {
+            this.data[targetValue] = "";
             cutted.nodeValue = "";
           } else {
-            cutted.nodeValue = this.__bindObj[targetValue];
+            cutted.nodeValue = this.data[targetValue];
           }
 
-          let path = this.__bindObj._name + "." + targetValue;
-          console.log(path);
-          console.log(_highway.origin.get(path));
+          let path = this.data._name + "." + targetValue;
+
           if (!("_target" in _highway.origin.get(path))) {
             _highway.origin.get(path)._target = [];
           }

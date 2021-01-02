@@ -14,6 +14,7 @@ window.highway = window.highway || new HighwayObject("highway", -1);
 window._highway = window._highway || {};
 _highway.dataMap = new Map();
 _highway.origin = new Map();
+_highway.proxys = new Map();
 
 highway.bindRequest = (key, callback) => {
   console.log("bind req");
@@ -170,6 +171,11 @@ let highwayBindingHandler = {
   get(target, key) {
     let r = Reflect.get(target, key);
 
+    if (r instanceof HighwayObject && !("_data" in r)) {
+      let path = highway.getPath(r);
+      return _highway.proxys.get(path);
+    }
+
     if (target instanceof HighwayObject && !("_data" in target)) {
       if (key.indexOf("_") != -1) {
         return r;
@@ -202,16 +208,52 @@ let highwayBindingHandler = {
     }
 
     if (target instanceof HighwayObject) {
+      if (key.indexOf(".") != -1) {
+        let p = key.split(".");
+        console.log("pieces", p);
+
+        let inner = target;
+        let path = p[0];
+        for (let i = 0; i < p.length - 1; i++) {
+          let k = p[i];
+          console.log(k);
+          if (i != 0) {
+            path = path + "." + k;
+          }
+
+          if (!(k in inner)) {
+            inner[k] = new HighwayObject(k, inner.depth + 1);
+            inner[k].parent = inner;
+            _highway.origin.set(path, inner[k]);
+            _highway.proxys.set(
+              path,
+              new Proxy(inner[k], highwayBindingHandler)
+            );
+          }
+
+          inner = inner[k];
+        }
+
+        target = inner;
+        key = p[p.length - 1];
+      }
+
       if (val instanceof Object) {
         let keys = Object.keys(val);
 
-        let prx = new HighwayObject(key, target.depth + 1);
-        prx.parent = target;
-        target[key] = new Proxy(prx, highwayBindingHandler);
+        target[key] = new HighwayObject(key, target.depth + 1);
+        target[key].parent = target;
 
         for (let k of keys) {
           target[key][k] = val[k];
         }
+
+        let path = highway.getPath(target[key]);
+        _highway.origin.set(path, target[key]);
+        _highway.proxys.set(
+          path,
+          new Proxy(target[key], highwayBindingHandler)
+        );
 
         return true;
       }
@@ -237,6 +279,7 @@ let highwayBindingHandler = {
 
       let path = highway.getPath(target[key]);
       _highway.dataMap.set(path, target[key]._data);
+      console.log(path, target[key]);
       _highway.origin.set(path, target[key]);
 
       return true;
