@@ -14,7 +14,6 @@ highway.newComponent("top-bar", {
           <button>CSS</button>
           <button>템플릿</button>
           <button>골라담기</button>
-          <button>12{test}34{test}56</button>
         </sync->
       </div>
       <div>
