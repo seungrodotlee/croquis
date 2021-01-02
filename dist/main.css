@@ -380,6 +380,10 @@ body {
   position: fixed;
 }
 
+.sticky {
+  position: sticky;
+}
+
 .flex {
   display: flex;
 }

@@ -27,30 +27,15 @@
       ></video>
     </div>
     <div class="root-container">
-      <!-- <nav-bar
-        id="nav-bar"
-        class="fixed grey-light-border d2"
-        data-title="highway"
-        data-logo="./img/logo.svg"
-      >
-        <div>
-          <sync- class="no-border hover-back">
-            <button>알아보기</button>
-            <button>시작하기</button>
-            <button>CSS</button>
-            <button>템플릿</button>
-            <button>골라담기</button>
-          </sync->
-        </div>
-        <div>
-          <button class="primary-bg hover-back">다운로드</button>
-          <button id="intro-toggler">인트로 안 볼래요</button>
-        </div>
-      </nav-bar> -->
-      <top-bar id="top-bar-test" class="fixed" data-bind="abc"></top-bar>
+      <top-bar id="top-bar" class="sticky" style="top: 0px"></top-bar>
+      <div class="container full">
+        <loop- data-for="5">
+          <button>1</button>
+        </loop->
+      </div>
     </div>
+    <!-- <script src="../dist/build.js"></script> -->
+    <script type="module" src="../src/index.js"></script>
+    <script type="module" src="./script/index.js"></script>
   </body>
-  <!-- <script src="../dist/build.js"></script> -->
-  <script type="module" src="../src/index.js"></script>
-  <script type="module" src="./script/index.js"></script>
 </html>
