@@ -140,6 +140,8 @@ class TemplateElement extends HTMLElement {
     for (let mutation of mutationsList) {
       let attrName = mutation.attributeName;
 
+      console.log("attr ", attrName);
+
       if (attrName == "data-bind") {
         console.log("data bind");
         let target = mutation.target.getAttribute(attrName);
@@ -153,7 +155,22 @@ class TemplateElement extends HTMLElement {
 
         this.registryBindingNodes();
 
-        return;
+        continue;
+      }
+
+      if (attrName == "data-bind-bracket") {
+        let parted = mutation.target
+          .getAttribute("data-bind-bracket")
+          .split(" ");
+
+        this.__openBracket = parted[0];
+        this.__closeBracket = parted[1];
+
+        this.__bindBracket = [this.__openBracket, this.__closeBracket];
+
+        console.log("reg brackets");
+        console.log(this.__bindBracket);
+        continue;
       }
 
       // data-* 속성만 감지하여 dataHandler 실행 (setAttr 메소드 내에서)
