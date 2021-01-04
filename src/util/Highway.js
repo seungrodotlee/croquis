@@ -4,8 +4,8 @@ class HighwayObject extends Object {
   constructor(name, depth) {
     super();
     this._name = name;
-    this.depth = depth;
-    this.parent = null;
+    this._depth = depth;
+    this._parent = null;
   }
 }
 
@@ -108,7 +108,6 @@ highway.newComponent = function (
     bind = {},
   }
 ) {
-  console.log(arguments);
   let data = arguments[1];
   let C = class extends TemplateElement {
     constructor() {
@@ -154,14 +153,14 @@ highway.getCookie = (name) => {
 highway.getPath = (target) => {
   let path = "";
   let p = target;
-  for (let i = target.depth; i > -1; i--) {
+  for (let i = target._depth; i > -1; i--) {
     if (path == "") {
       path = p._name;
     } else {
       path = p._name + "." + path;
     }
 
-    p = p.parent;
+    p = p._parent;
   }
 
   return path;
@@ -222,8 +221,8 @@ let highwayBindingHandler = {
           }
 
           if (!(k in inner)) {
-            inner[k] = new HighwayObject(k, inner.depth + 1);
-            inner[k].parent = inner;
+            inner[k] = new HighwayObject(k, inner._depth + 1);
+            inner[k]._parent = inner;
             _highway.origin.set(path, inner[k]);
             _highway.proxys.set(
               path,
@@ -241,11 +240,23 @@ let highwayBindingHandler = {
       if (val instanceof Object) {
         let keys = Object.keys(val);
 
-        target[key] = new HighwayObject(key, target.depth + 1);
-        target[key].parent = target;
+        if (!(key in target)) {
+          target[key] = new HighwayObject(key, target._depth + 1);
+          target[key]._parent = target;
+        }
 
         for (let k of keys) {
-          target[key][k] = val[k];
+          //target[key][k] = val[k];
+          let path = highway.getPath(target);
+          if (path == "") {
+            path = key + "." + k;
+          } else {
+            path = path + "." + key + "." + k;
+          }
+
+          console.log(path);
+
+          highway[path] = val[k];
         }
 
         let path = highway.getPath(target[key]);
@@ -259,9 +270,12 @@ let highwayBindingHandler = {
       }
 
       console.log("set ", key);
+      console.log(target);
 
+      let flag = false;
       if (key in target) {
         console.log(`${key} exist in ${target._name}`);
+        console.log(_highway.origin.get(highway.getPath(target) + "." + key));
         target[key]._data = val;
 
         if ("_target" in target[key]) {
@@ -270,17 +284,29 @@ let highwayBindingHandler = {
           }
         }
       } else {
+        flag = true;
         console.log(`${key} not exist in ${target}`);
 
-        target[key] = new HighwayObject(key, target.depth + 1);
+        target[key] = new HighwayObject(key, target._depth + 1);
         target[key]._data = val;
-        target[key].parent = target;
+        target[key]._parent = target;
       }
 
       let path = highway.getPath(target[key]);
       _highway.dataMap.set(path, target[key]._data);
       console.log(path, target[key]);
       _highway.origin.set(path, target[key]);
+
+      if (flag && "_loopTarget" in target) {
+        console.log("loop");
+        let loop = target._loopTarget;
+
+        for (let i = 0; i < loop.__origins.length; i++) {
+          let el = loop.__origins[i].cloneNode(true);
+
+          loop.registryBindingNodes(el);
+        }
+      }
 
       return true;
     } else {

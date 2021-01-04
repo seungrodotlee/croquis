@@ -1,6 +1,10 @@
 import "../components/top-bar.js";
 
-console.log("here");
+highway.abc = {
+  test: "a",
+  test2: "b",
+  test3: "c",
+};
 
 window.addEventListener("load", () => {
   let isIntroActive = JSON.parse(highway.getCookie("intro"));

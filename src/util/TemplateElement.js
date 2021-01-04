@@ -170,6 +170,7 @@ class TemplateElement extends HTMLElement {
   }
 
   registryBindingNodes() {
+    console.log("reg");
     let textNodes = highway.getTextNodesUnder(this.body);
     let reg = new RegExp(
       `${this.__bindBracket[0]}.+?${this.__bindBracket[1]}`,
@@ -200,7 +201,7 @@ class TemplateElement extends HTMLElement {
             t = t.splitText(e - s);
           }
 
-          if (!(target in this.data)) {
+          if (!(targetValue in this.data)) {
             this.data[targetValue] = "";
             cutted.nodeValue = "";
           } else {
