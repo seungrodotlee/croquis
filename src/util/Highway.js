@@ -6,6 +6,7 @@ class HighwayObject extends Object {
     this._name = name;
     this._depth = depth;
     this._parent = null;
+    this._removed = 0;
   }
 }
 
@@ -167,13 +168,43 @@ highway.getPath = (target) => {
 };
 
 let highwayBindingHandler = {
+  deleteProperty(target, key) {
+    if ("_loopTarget" in target) {
+      let keys = Object.keys(target);
+
+      let filtered = [];
+      for (let k of keys) {
+        if (k.indexOf("_") == -1) {
+          filtered.push(k);
+        }
+      }
+
+      keys = filtered;
+
+      console.log("prop ", key);
+
+      let idx = keys.indexOf(key);
+
+      let loops = target._loopTarget;
+
+      console.log("idx ", idx);
+      for (let loop of loops) {
+        for (let i = 0; i < loop.__origins.length; i++) {
+          console.log(loop._bindedElements[idx].innerHTML);
+          let el = loop._bindedElements[idx];
+          console.log(el.parentElement);
+          el.parentElement.removeChild(el);
+        }
+      }
+    }
+
+    target._removed++;
+    delete target[key];
+
+    return true;
+  },
   get(target, key) {
     let r = Reflect.get(target, key);
-
-    if (r instanceof HighwayObject && !("_data" in r)) {
-      let path = highway.getPath(r);
-      return _highway.proxys.get(path);
-    }
 
     if (target instanceof HighwayObject && !("_data" in target)) {
       if (key.indexOf("_") != -1) {
@@ -190,7 +221,8 @@ let highwayBindingHandler = {
     }
 
     if (r instanceof HighwayObject && !("_data" in r)) {
-      return r;
+      let path = highway.getPath(r);
+      return _highway.proxys.get(path);
     }
 
     console.log("get ", key);
@@ -203,6 +235,10 @@ let highwayBindingHandler = {
   },
   set(target, key, val) {
     if (typeof val == "function" || highway.isElement(val)) {
+      return Reflect.set(target, key, val);
+    }
+
+    if (key.indexOf("_") != -1) {
       return Reflect.set(target, key, val);
     }
 
@@ -299,12 +335,14 @@ let highwayBindingHandler = {
 
       if (flag && "_loopTarget" in target) {
         console.log("loop");
-        let loop = target._loopTarget;
+        let loops = target._loopTarget;
 
-        for (let i = 0; i < loop.__origins.length; i++) {
-          let el = loop.__origins[i].cloneNode(true);
+        for (let loop of loops) {
+          for (let i = 0; i < loop.__origins.length; i++) {
+            let el = loop.__origins[i].cloneNode(true);
 
-          loop.registryBindingNodes(el);
+            loop.registryBindingNodes(el);
+          }
         }
       }
 

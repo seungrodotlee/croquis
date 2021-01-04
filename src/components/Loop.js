@@ -11,6 +11,7 @@ class Loop extends TemplateElement {
         this._valBind;
         this._keyBind;
         this._idxBind;
+        this._bindedElements = [];
       },
       dataHandler: {
         for: (newVal) => {
@@ -52,7 +53,9 @@ class Loop extends TemplateElement {
               this.data = highway[target];
             }
 
-            this.data._loopTarget = this;
+            this.data._loopTarget = this.data._loopTarget || [];
+            console.log(this.data._loopTarget);
+            this.data._loopTarget.push(this);
 
             let keysReg = new RegExp(
               `^(${regVarConf})(?:\\,\\s*(${regVarConf}))?(?:\\,\\s*(${regVarConf}))?$`
@@ -198,11 +201,13 @@ class Loop extends TemplateElement {
           console.log(objKeys);
           console.log(this._currentIdx);
 
+          let idx = this._currentIdx - this.data._removed;
+
           if (objKeys != 0) {
             if (targetValue == this._valBind) {
-              cutted.nodeValue = this.data[objKeys[this._currentIdx]];
+              cutted.nodeValue = this.data[objKeys[idx]];
 
-              let path = this.data._name + "." + objKeys[this._currentIdx];
+              let path = this.data._name + "." + objKeys[idx];
               console.log("path ", path);
 
               if (!("_target" in _highway.origin.get(path))) {
@@ -213,7 +218,7 @@ class Loop extends TemplateElement {
             }
 
             if (targetValue == this._keyBind) {
-              cutted.nodeValue = objKeys[this._currentIdx];
+              cutted.nodeValue = objKeys[idx];
             }
 
             console.log("tv", targetValue);
@@ -233,6 +238,7 @@ class Loop extends TemplateElement {
       }
     }
 
+    this._bindedElements.push(el);
     this._position.insertAfter(el);
     this._position = el;
 
