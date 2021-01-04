@@ -29,8 +29,8 @@
     <div class="root-container">
       <top-bar id="top-bar" class="sticky" style="top: 0px"></top-bar>
       <div class="container full">
-        <loop- data-for="5">
-          <button>1</button>
+        <loop- data-for="v, k, i in abc">
+          <p><button>idx: {i} key: {k} val: {v}</button></p>
         </loop->
       </div>
     </div>
