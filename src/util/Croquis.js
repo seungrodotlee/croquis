@@ -1,6 +1,6 @@
 import TemplateElement from "./TemplateElement.js";
 
-class croquisObject extends Object {
+class CroquisObject extends Object {
   constructor(name, depth) {
     super();
     this._name = name;
@@ -10,7 +10,7 @@ class croquisObject extends Object {
   }
 }
 
-window.croquis = window.croquis || new croquisObject("croquis", -1);
+window.croquis = window.croquis || new CroquisObject("croquis", -1);
 //window.croquis = window.croquis || {};
 window._croquis = window._croquis || {};
 _croquis.dataMap = new Map();
@@ -206,7 +206,7 @@ let croquisBindingHandler = {
   get(target, key) {
     let r = Reflect.get(target, key);
 
-    if (target instanceof croquisObject && !("_data" in target)) {
+    if (target instanceof CroquisObject && !("_data" in target)) {
       if (key.indexOf("_") != -1) {
         return r;
       }
@@ -220,7 +220,7 @@ let croquisBindingHandler = {
       return r;
     }
 
-    if (r instanceof croquisObject && !("_data" in r)) {
+    if (r instanceof CroquisObject && !("_data" in r)) {
       let path = croquis.getPath(r);
       return _croquis.proxys.get(path);
     }
@@ -242,7 +242,7 @@ let croquisBindingHandler = {
       return Reflect.set(target, key, val);
     }
 
-    if (target instanceof croquisObject) {
+    if (target instanceof CroquisObject) {
       if (key.indexOf(".") != -1) {
         let p = key.split(".");
         console.log("pieces", p);
@@ -257,7 +257,7 @@ let croquisBindingHandler = {
           }
 
           if (!(k in inner)) {
-            inner[k] = new croquisObject(k, inner._depth + 1);
+            inner[k] = new CroquisObject(k, inner._depth + 1);
             inner[k]._parent = inner;
             _croquis.origin.set(path, inner[k]);
             _croquis.proxys.set(
@@ -277,7 +277,7 @@ let croquisBindingHandler = {
         let keys = Object.keys(val);
 
         if (!(key in target)) {
-          target[key] = new croquisObject(key, target._depth + 1);
+          target[key] = new CroquisObject(key, target._depth + 1);
           target[key]._parent = target;
         }
 
@@ -323,7 +323,7 @@ let croquisBindingHandler = {
         flag = true;
         console.log(`${key} not exist in ${target}`);
 
-        target[key] = new croquisObject(key, target._depth + 1);
+        target[key] = new CroquisObject(key, target._depth + 1);
         target[key]._data = val;
         target[key]._parent = target;
       }
