@@ -27,12 +27,8 @@
       ></video>
     </div>
     <div class="root-container">
-      <top-bar id="top-bar" class="sticky" style="top: 0px"></top-bar>
-      <div class="container full">
-        <loop- data-bind-bracket="{{ }}" data-for="v, k, i in abc">
-          <p><button>idx: {{i}} key: {{k}} val: {{v}}</button></p>
-        </loop->
-      </div>
+      <top-bar id="top-bar" class="fixed"></top-bar>
+      <div class="container full flex centering"></div>
     </div>
     <!-- <script src="../dist/build.js"></script> -->
     <script type="module" src="../src/index.js"></script>
