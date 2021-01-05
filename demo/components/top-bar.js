@@ -15,7 +15,6 @@ croquis.newComponent("top-bar", {
               <button>시작하기</button>
               <button>CSS</button>
               <button>템플릿</button>
-              <button>골라담기</button>
             </sync->
           </div>
           <div class="only-in-s">
@@ -24,7 +23,6 @@ croquis.newComponent("top-bar", {
               <div>시작하기</div>
               <div>CSS</div>
               <div>템플릿</div>
-              <div>골라담기</div>
             </drop-down>
           </div>
         </sync->

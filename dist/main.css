@@ -2573,7 +2573,8 @@ td {
 .nav-bar-left,
 .nav-bar-right,
 .nav-bar-left-inner,
-.nav-bar-right-inner {
+.nav-bar-right-inner,
+.nav-bar-title-wrap {
   display: flex;
   align-items: stretch;
 }
@@ -2595,13 +2596,15 @@ td {
 
 .nav-bar-left,
 .nav-bar-left-inner,
-.nav-bar-inner {
+.nav-bar-inner,
+.nav-bar-title-wrap {
   justify-content: flex-start;
 }
 
 .nav-bar-left > *,
 .nav-bar-left-inner > *,
-.nav-bar-inner > * {
+.nav-bar-inner > *,
+.nav-bar-title-wrap > * {
   margin-right: 1rem;
 }
 

@@ -8,7 +8,7 @@ class NavBar extends TemplateElement {
           <div class="nav-bar-content container">
             <div class="nav-bar-left">
               <img class="nav-bar-logo"></img>
-              <h1 class="nav-bar-title"></h1>
+              <h2 class="nav-bar-title"></h2>
             </div>
             <div class="nav-bar-right">
             </div>
