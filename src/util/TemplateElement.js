@@ -84,10 +84,10 @@ class TemplateElement extends HTMLElement {
 
     this.body.classList.remove("_hidden");
 
-    // 템플릿 요소를 highway 객체에 등록
+    // 템플릿 요소를 croquis 객체에 등록
     // 등록될 때는 카멜케이스로 변환되어 등록된다 ( some-el => someEl )
     if (this.getAttribute("id")) {
-      window.highway[this.getAttribute("id").toCamelCase()] = this.body;
+      window.croquis[this.getAttribute("id").toCamelCase()] = this.body;
     }
 
     // 커스텀 요소를 DOM에서 제거
@@ -105,18 +105,18 @@ class TemplateElement extends HTMLElement {
   registryChildren(children) {
     for (let i = 0; i < children.length; i++) {
       let addedNode = children[i];
-      // if (highway.isEmpty(addedNode)) {
+      // if (croquis.isEmpty(addedNode)) {
       //   continue;
       // }
 
       if (
-        highway.isElement(addedNode) ||
-        !highway.isEmpty(addedNode.data.replace(/(\s*)/g, ""))
+        croquis.isElement(addedNode) ||
+        !croquis.isEmpty(addedNode.data.replace(/(\s*)/g, ""))
       ) {
         this.__origins.push(addedNode);
         -this.__childHandler(addedNode);
 
-        // if (!highway.isElement(addedNode)) {
+        // if (!croquis.isElement(addedNode)) {
         //   console.log("start reg", addedNode);
         //   this.registryTargetNodeEach(addedNode);
         // }
@@ -146,11 +146,11 @@ class TemplateElement extends HTMLElement {
         console.log("data bind");
         let target = mutation.target.getAttribute(attrName);
 
-        if (!_highway.dataMap.has(target)) {
-          highway[target] = {};
-          this.data = highway[target];
+        if (!_croquis.dataMap.has(target)) {
+          croquis[target] = {};
+          this.data = croquis[target];
         } else {
-          this.data = highway[target];
+          this.data = croquis[target];
         }
 
         this.registryBindingNodes();
@@ -188,7 +188,7 @@ class TemplateElement extends HTMLElement {
 
   registryBindingNodes() {
     console.log("reg");
-    let textNodes = highway.getTextNodesUnder(this.body);
+    let textNodes = croquis.getTextNodesUnder(this.body);
     let reg = new RegExp(
       `${this.__bindBracket[0]}.+?${this.__bindBracket[1]}`,
       "g"
@@ -227,11 +227,11 @@ class TemplateElement extends HTMLElement {
 
           let path = this.data._name + "." + targetValue;
 
-          if (!("_target" in _highway.origin.get(path))) {
-            _highway.origin.get(path)._target = [];
+          if (!("_target" in _croquis.origin.get(path))) {
+            _croquis.origin.get(path)._target = [];
           }
 
-          _highway.origin.get(path)._target.push(cutted);
+          _croquis.origin.get(path)._target.push(cutted);
         }
       }
     }

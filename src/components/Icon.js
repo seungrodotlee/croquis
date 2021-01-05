@@ -18,6 +18,6 @@ class Icon extends TemplateElement {
   }
 }
 
-highway.define("icon-", Icon);
+croquis.define("icon-", Icon);
 
 export default Icon;

@@ -1,6 +1,6 @@
 import TemplateElement from "./TemplateElement.js";
 
-class HighwayObject extends Object {
+class croquisObject extends Object {
   constructor(name, depth) {
     super();
     this._name = name;
@@ -10,25 +10,25 @@ class HighwayObject extends Object {
   }
 }
 
-window.highway = window.highway || new HighwayObject("highway", -1);
-//window.highway = window.highway || {};
-window._highway = window._highway || {};
-_highway.dataMap = new Map();
-_highway.origin = new Map();
-_highway.proxys = new Map();
+window.croquis = window.croquis || new croquisObject("croquis", -1);
+//window.croquis = window.croquis || {};
+window._croquis = window._croquis || {};
+_croquis.dataMap = new Map();
+_croquis.origin = new Map();
+_croquis.proxys = new Map();
 
-highway.bindRequest = (key, callback) => {
+croquis.bindRequest = (key, callback) => {
   console.log("bind req");
-  if (highway[key] != undefined) {
+  if (croquis[key] != undefined) {
     callback();
     return;
   }
 
-  // _highway.request[key] = _highway.request[key] || [];
-  // _highway.request[key].push(callback);
+  // _croquis.request[key] = _croquis.request[key] || [];
+  // _croquis.request[key].push(callback);
 };
 
-highway.isElement = (obj) => {
+croquis.isElement = (obj) => {
   try {
     return obj instanceof HTMLElement;
   } catch (e) {
@@ -41,7 +41,7 @@ highway.isElement = (obj) => {
   }
 };
 
-highway.isEmpty = (value) => {
+croquis.isEmpty = (value) => {
   if (typeof value == "string") {
     if (value.trim() == "") {
       return true;
@@ -65,7 +65,7 @@ highway.isEmpty = (value) => {
   }
 };
 
-highway.isPrintable = (value) => {
+croquis.isPrintable = (value) => {
   if (
     typeof value == "boolean" ||
     typeof value == "number" ||
@@ -77,16 +77,16 @@ highway.isPrintable = (value) => {
   return false;
 };
 
-highway.children = (node) => {
+croquis.children = (node) => {
   let list = [];
   let length = node.childNodes.length;
 
   for (let child of node.childNodes) {
-    if (!highway.isElement(child)) {
+    if (!croquis.isElement(child)) {
       child = child.nodeValue;
     }
 
-    if (!highway.isEmpty(child)) {
+    if (!croquis.isEmpty(child)) {
       list.push(child);
     }
   }
@@ -94,11 +94,11 @@ highway.children = (node) => {
   return list;
 };
 
-highway.define = (name, constructor) => {
+croquis.define = (name, constructor) => {
   customElements.define(name, constructor);
 };
 
-highway.newComponent = function (
+croquis.newComponent = function (
   name,
   {
     template = "",
@@ -116,12 +116,12 @@ highway.newComponent = function (
     }
   };
 
-  highway.define(name, C);
+  croquis.define(name, C);
 };
-highway._toastWrap = document.createElement("div");
-highway._toastWrap.classList.add("toast-wrap");
+croquis._toastWrap = document.createElement("div");
+croquis._toastWrap.classList.add("toast-wrap");
 
-highway.getTextNodesUnder = function (el) {
+croquis.getTextNodesUnder = function (el) {
   if (el instanceof HTMLElement) {
     let n,
       a = [],
@@ -139,19 +139,19 @@ highway.getTextNodesUnder = function (el) {
   }
 };
 
-highway.setCookie = (name, value, exp) => {
+croquis.setCookie = (name, value, exp) => {
   var date = new Date();
   date.setTime(date.getTime() + exp * 24 * 60 * 60 * 1000);
   document.cookie =
     name + "=" + value + ";expires=" + date.toUTCString() + ";path=/";
 };
 
-highway.getCookie = (name) => {
+croquis.getCookie = (name) => {
   var value = document.cookie.match("(^|;) ?" + name + "=([^;]*)(;|$)");
   return value ? value[2] : null;
 };
 
-highway.getPath = (target) => {
+croquis.getPath = (target) => {
   let path = "";
   let p = target;
   for (let i = target._depth; i > -1; i--) {
@@ -167,7 +167,7 @@ highway.getPath = (target) => {
   return path;
 };
 
-let highwayBindingHandler = {
+let croquisBindingHandler = {
   deleteProperty(target, key) {
     if ("_loopTarget" in target) {
       let keys = Object.keys(target);
@@ -206,7 +206,7 @@ let highwayBindingHandler = {
   get(target, key) {
     let r = Reflect.get(target, key);
 
-    if (target instanceof HighwayObject && !("_data" in target)) {
+    if (target instanceof croquisObject && !("_data" in target)) {
       if (key.indexOf("_") != -1) {
         return r;
       }
@@ -216,25 +216,25 @@ let highwayBindingHandler = {
       return undefined;
     }
 
-    if (typeof r == "function" || highway.isElement(target[key])) {
+    if (typeof r == "function" || croquis.isElement(target[key])) {
       return r;
     }
 
-    if (r instanceof HighwayObject && !("_data" in r)) {
-      let path = highway.getPath(r);
-      return _highway.proxys.get(path);
+    if (r instanceof croquisObject && !("_data" in r)) {
+      let path = croquis.getPath(r);
+      return _croquis.proxys.get(path);
     }
 
     console.log("get ", key);
 
-    let path = highway.getPath(target);
+    let path = croquis.getPath(target);
 
     console.log("path ", path);
 
     return r._data;
   },
   set(target, key, val) {
-    if (typeof val == "function" || highway.isElement(val)) {
+    if (typeof val == "function" || croquis.isElement(val)) {
       return Reflect.set(target, key, val);
     }
 
@@ -242,7 +242,7 @@ let highwayBindingHandler = {
       return Reflect.set(target, key, val);
     }
 
-    if (target instanceof HighwayObject) {
+    if (target instanceof croquisObject) {
       if (key.indexOf(".") != -1) {
         let p = key.split(".");
         console.log("pieces", p);
@@ -257,12 +257,12 @@ let highwayBindingHandler = {
           }
 
           if (!(k in inner)) {
-            inner[k] = new HighwayObject(k, inner._depth + 1);
+            inner[k] = new croquisObject(k, inner._depth + 1);
             inner[k]._parent = inner;
-            _highway.origin.set(path, inner[k]);
-            _highway.proxys.set(
+            _croquis.origin.set(path, inner[k]);
+            _croquis.proxys.set(
               path,
-              new Proxy(inner[k], highwayBindingHandler)
+              new Proxy(inner[k], croquisBindingHandler)
             );
           }
 
@@ -277,13 +277,13 @@ let highwayBindingHandler = {
         let keys = Object.keys(val);
 
         if (!(key in target)) {
-          target[key] = new HighwayObject(key, target._depth + 1);
+          target[key] = new croquisObject(key, target._depth + 1);
           target[key]._parent = target;
         }
 
         for (let k of keys) {
           //target[key][k] = val[k];
-          let path = highway.getPath(target);
+          let path = croquis.getPath(target);
           if (path == "") {
             path = key + "." + k;
           } else {
@@ -292,14 +292,14 @@ let highwayBindingHandler = {
 
           console.log(path);
 
-          highway[path] = val[k];
+          croquis[path] = val[k];
         }
 
-        let path = highway.getPath(target[key]);
-        _highway.origin.set(path, target[key]);
-        _highway.proxys.set(
+        let path = croquis.getPath(target[key]);
+        _croquis.origin.set(path, target[key]);
+        _croquis.proxys.set(
           path,
-          new Proxy(target[key], highwayBindingHandler)
+          new Proxy(target[key], croquisBindingHandler)
         );
 
         return true;
@@ -311,7 +311,7 @@ let highwayBindingHandler = {
       let flag = false;
       if (key in target) {
         console.log(`${key} exist in ${target._name}`);
-        console.log(_highway.origin.get(highway.getPath(target) + "." + key));
+        console.log(_croquis.origin.get(croquis.getPath(target) + "." + key));
         target[key]._data = val;
 
         if ("_target" in target[key]) {
@@ -323,15 +323,15 @@ let highwayBindingHandler = {
         flag = true;
         console.log(`${key} not exist in ${target}`);
 
-        target[key] = new HighwayObject(key, target._depth + 1);
+        target[key] = new croquisObject(key, target._depth + 1);
         target[key]._data = val;
         target[key]._parent = target;
       }
 
-      let path = highway.getPath(target[key]);
-      _highway.dataMap.set(path, target[key]._data);
+      let path = croquis.getPath(target[key]);
+      _croquis.dataMap.set(path, target[key]._data);
       console.log(path, target[key]);
-      _highway.origin.set(path, target[key]);
+      _croquis.origin.set(path, target[key]);
 
       if (flag && "_loopTarget" in target) {
         console.log("loop");
@@ -353,7 +353,7 @@ let highwayBindingHandler = {
   },
 };
 
-highway = new Proxy(highway, highwayBindingHandler);
+croquis = new Proxy(croquis, croquisBindingHandler);
 
 Object.prototype.equals = function (x) {
   // 인자값의 Type이 object가 아닐경우 false를 리턴한다.

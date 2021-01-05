@@ -29,6 +29,6 @@ class Tag extends TemplateElement {
   }
 }
 
-highway.define("tag-", Tag);
+croquis.define("tag-", Tag);
 
 export default Tag;

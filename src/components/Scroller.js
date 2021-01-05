@@ -120,6 +120,6 @@ class Scroller extends TemplateElement {
   // }
 }
 
-highway.define("scroller-", Scroller);
+croquis.define("scroller-", Scroller);
 
 export default Scroller;

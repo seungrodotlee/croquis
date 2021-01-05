@@ -91,7 +91,7 @@ class Col extends TemplateElement {
   }
 }
 
-highway.define("row-", Row);
-highway.define("col-", Col);
+croquis.define("row-", Row);
+croquis.define("col-", Col);
 
 export { Row, Col };

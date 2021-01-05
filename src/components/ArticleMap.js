@@ -123,6 +123,6 @@ class ArticleMap extends TemplateElement {
   }
 }
 
-highway.define("article-map", ArticleMap);
+croquis.define("article-map", ArticleMap);
 
 export default ArticleMap;

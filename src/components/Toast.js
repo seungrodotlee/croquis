@@ -20,7 +20,7 @@ class Toast extends TemplateElement {
       childHandler: (addedNode) => {
         console.log("?");
         this.content.appendChild(addedNode);
-        highway._toastWrap.appendChild(this.body);
+        croquis._toastWrap.appendChild(this.body);
       },
     });
   }
@@ -32,15 +32,15 @@ class Toast extends TemplateElement {
   }
 }
 
-highway.newToast = (content) => {
+croquis.newToast = (content) => {
   Alert.newInstance(content);
 };
 
 window.addEventListener("DOMContentLoaded", () => {
   // alertWrap DOM에 등록
-  document.body.appendChild(highway._toastWrap);
+  document.body.appendChild(croquis._toastWrap);
 });
 
-highway.define("toast-", Toast);
+croquis.define("toast-", Toast);
 
 export default Toast;

@@ -72,6 +72,6 @@ class Collapse extends TemplateElement {
   }
 }
 
-highway.define("collapse-", Collapse);
+croquis.define("collapse-", Collapse);
 
 export default Collapse;

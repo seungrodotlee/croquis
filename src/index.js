@@ -1,4 +1,4 @@
-import "./util/Highway.js";
+import "./util/Croquis.js";
 import DropDown from "./components/DropDown.js";
 import Tabs from "./components/Tabs.js";
 import Alert from "./components/Toast.js";

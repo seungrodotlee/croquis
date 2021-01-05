@@ -69,12 +69,12 @@ class Modal extends TemplateElement {
   }
 }
 
-highway.newModal = ({ id, title, content, callback }) => {
+croquis.newModal = ({ id, title, content, callback }) => {
   let m = Modal.newInstance(id, title, content, callback);
 
   return m;
 };
 
-highway.define("modal-", Modal);
+croquis.define("modal-", Modal);
 
 export default Modal;

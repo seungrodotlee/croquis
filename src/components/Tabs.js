@@ -43,6 +43,6 @@ class Tabs extends TemplateElement {
   }
 }
 
-highway.define("tabs-", Tabs);
+croquis.define("tabs-", Tabs);
 
 export default Tabs;

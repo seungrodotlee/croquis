@@ -46,11 +46,11 @@ class Loop extends TemplateElement {
             matches = matches.remove(newVal);
             let target = matches[1];
 
-            if (!_highway.dataMap.has(target)) {
-              highway[target] = {};
-              this.data = highway[target];
+            if (!_croquis.dataMap.has(target)) {
+              croquis[target] = {};
+              this.data = croquis[target];
             } else {
-              this.data = highway[target];
+              this.data = croquis[target];
             }
 
             this.data._loopTarget = this.data._loopTarget || [];
@@ -104,8 +104,8 @@ class Loop extends TemplateElement {
           // let bindCallback = () => {
           //   console.log(newVal);
 
-          //   console.log("b t ", highway[newVal]);
-          //   this._loopCount = Object.keys(highway[newVal]).length;
+          //   console.log("b t ", croquis[newVal]);
+          //   this._loopCount = Object.keys(croquis[newVal]).length;
           //   console.log(this._loopCount);
 
           //   this._loopCount -= this.kIdx;
@@ -129,7 +129,7 @@ class Loop extends TemplateElement {
           //   console.log("body" + this.body.innerHTML);
           //   p = this.registryTargetNodes(
           //     this.fromTemplateAll("*"),
-          //     highway[newVal]
+          //     croquis[newVal]
           //   );
 
           //   for (let i = 0; i < this._loopCount; i++) {
@@ -146,18 +146,18 @@ class Loop extends TemplateElement {
           //     }
           //   }
 
-          //   _highway.proxys[newVal].push(p);
+          //   _croquis.proxys[newVal].push(p);
           //   console.log(this.body);
           // };
 
-          // highway.bindRequest(newVal, bindCallback);
+          // croquis.bindRequest(newVal, bindCallback);
         },
       },
     });
   }
 
   registryBindingNodes(el) {
-    let nodes = highway.getTextNodesUnder(el);
+    let nodes = croquis.getTextNodesUnder(el);
 
     let reg = new RegExp(
       `${this.__bindBracket[0]}.+?${this.__bindBracket[1]}`,
@@ -210,11 +210,11 @@ class Loop extends TemplateElement {
               let path = this.data._name + "." + objKeys[idx];
               console.log("path ", path);
 
-              if (!("_target" in _highway.origin.get(path))) {
-                _highway.origin.get(path)._target = [];
+              if (!("_target" in _croquis.origin.get(path))) {
+                _croquis.origin.get(path)._target = [];
               }
 
-              _highway.origin.get(path)._target.push(cutted);
+              _croquis.origin.get(path)._target.push(cutted);
             }
 
             if (targetValue == this._keyBind) {

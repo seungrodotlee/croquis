@@ -18,6 +18,6 @@ class TopButton extends TemplateElement {
   }
 }
 
-highway.define("top-button", TopButton);
+croquis.define("top-button", TopButton);
 
 export default TopButton;

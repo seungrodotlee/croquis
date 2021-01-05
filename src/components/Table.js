@@ -223,6 +223,6 @@ class Table extends TemplateElement {
   }
 }
 
-highway.define("table-", Table);
+croquis.define("table-", Table);
 
 export default Table;

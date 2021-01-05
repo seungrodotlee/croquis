@@ -1,4 +1,4 @@
-highway.transition = ({ el, transitionName, before, after }) => {
+croquis.transition = ({ el, transitionName, before, after }) => {
   if (typeof before == "function") {
     before();
   }
@@ -22,8 +22,8 @@ highway.transition = ({ el, transitionName, before, after }) => {
   }, 1);
 };
 
-highway.attachElement = (el, parent, transitionName) => {
-  highway.transition({
+croquis.attachElement = (el, parent, transitionName) => {
+  croquis.transition({
     el: el,
     transitionName: transitionName,
     before: () => {
@@ -32,8 +32,8 @@ highway.attachElement = (el, parent, transitionName) => {
   });
 };
 
-highway.removeElement = (el, transitionName) => {
-  highway.transition({
+croquis.removeElement = (el, transitionName) => {
+  croquis.transition({
     el: el,
     transitionName: transitionName,
     after: () => {

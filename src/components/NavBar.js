@@ -63,6 +63,6 @@ class NavBar extends TemplateElement {
   }
 }
 
-highway.define("nav-bar", NavBar);
+croquis.define("nav-bar", NavBar);
 
 export default NavBar;
