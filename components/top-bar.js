@@ -1,10 +1,10 @@
-highway.newComponent("top-bar", {
+croquis.newComponent("top-bar", {
   template: `
   <div class="top-bar">
     <nav-bar
       id="nav-bar"
       class="grey-light-border d2"
-      data-title="highway"
+      data-title="croquis"
       data-logo="./img/logo.svg"
     >
       <div>

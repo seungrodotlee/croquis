@@ -1,18 +1,18 @@
 import "../components/top-bar.js";
 
-highway.abc = {
+croquis.abc = {
   test: "a",
   test2: "b",
   test3: "c",
 };
 
 window.addEventListener("load", () => {
-  let isIntroActive = JSON.parse(highway.getCookie("intro"));
+  let isIntroActive = JSON.parse(croquis.getCookie("intro"));
   let intro = document.querySelector("#intro");
 
   if (isIntroActive != null && !isIntroActive) {
     let p = intro.parentElement;
-    highway.removeElement(p, "hidden-by-slide-right");
+    croquis.removeElement(p, "hidden-by-slide-right");
   } else {
     intro.classList.remove("_hidden");
     let promise = intro.play();
@@ -29,7 +29,7 @@ window.addEventListener("load", () => {
 
     intro.addEventListener("ended", () => {
       let p = intro.parentElement;
-      highway.removeElement(p, "hidden-by-slide-right");
+      croquis.removeElement(p, "hidden-by-slide-right");
     });
   }
 
@@ -54,11 +54,11 @@ window.addEventListener("load", () => {
 
   introToggler.addEventListener("click", () => {
     if (isIntroActive != null && !isIntroActive) {
-      highway.setCookie("intro", true, 7);
+      croquis.setCookie("intro", true, 7);
       introToggler.textContent = "인트로 안 볼래요";
       isIntroActive = true;
     } else {
-      highway.setCookie("intro", false, 7);
+      croquis.setCookie("intro", false, 7);
       introToggler.textContent = "인트로 볼래요";
       isIntroActive = false;
     }
