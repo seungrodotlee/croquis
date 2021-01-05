@@ -10,7 +10,7 @@ class DropDown extends TemplateElement {
           <span class="material-icons"> keyboard_arrow_down </span>
         </button>
         <div class="dropdown-content">
-          <div style="padding: 0.25em; pointer-events: none">&nbsp;</div>
+          <div style="padding: 0.25em; line-height: 1.5; pointer-events: none">&nbsp;</div>
           <hr style="margin-top: 0;">
         </div>
       </div>

@@ -1447,9 +1447,8 @@ button {
   display: inline-flex;
   align-items: center;
   background: #f5f5f7;
-  padding: 0.25rem 0.75rem;
-  border-radius: 0.25rem;
-  font-size: 1rem;
+  padding: 0.25em 0.75em;
+  border-radius: 0.25em;
   cursor: pointer;
   overflow: hidden;
   transition: all 0.5s;
@@ -2258,19 +2257,6 @@ ul ul {
   clip-path: polygon(-100vh 0, 100vh 0, 100% 100vh, 0 100vh);
 }
 
-.dropdown-content {
-  position: absolute;
-  padding: 0.5rem 0;
-  padding-top: 0;
-  border-radius: 0.25rem;
-  min-width: 100%;
-  transform: translateY(-100%);
-  top: 0;
-  background: white;
-  z-index: 1;
-  transition: transform 1s;
-}
-
 .dropdown-head {
   position: relative;
   border-radius: 0.25rem;
@@ -2306,8 +2292,23 @@ ul ul {
   background: transparent;
 }
 
+.dropdown-content {
+  position: absolute;
+  padding: 0.5rem 0;
+  padding-top: 0;
+  border-radius: 0.25rem;
+  min-width: 100%;
+  transform: translateY(-100%);
+  top: 0;
+  background: white;
+  color: transparent;
+  z-index: 1;
+  transition: transform 1s, color 1s;
+}
+
 .dropdown.active .dropdown-content {
   transform: translateY(0);
+  color: #222222;
 }
 
 .dropdown-content > div {
