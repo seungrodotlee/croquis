@@ -7,6 +7,7 @@ button {
   font-size: 1rem;
   cursor: pointer;
   overflow: hidden;
+  transition: all 0.5s;
 
   &.icon-btn {
     padding-right: 0.5rem;
@@ -29,6 +30,14 @@ button {
     &.#{$color-title}-bg {
       border: 1px solid $color;
     }
+  }
+
+  &:not([class*="hover-"]):hover {
+    background: map-get($color-map, "grey-lightest");
+  }
+
+  &:not([class*="active-"]):active {
+    transform: scale(0.95);
   }
 }
 

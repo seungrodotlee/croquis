@@ -1,11 +1,27 @@
 @mixin screen-larger-than($size) {
-  @media (min-width: map-get($screen-size, $size)) {
+  @media (min-width: map-get($screen-size, $size) + "px") {
     @content;
   }
 }
 
 @mixin screen-between($s1, $s2) {
-  @media (min-width: map-get($screen-size, $s1)) and (max-width: map-get($screen-size, $s2) - 1px) {
+  @media (min-width: map-get($screen-size, $s1) + "px") and (max-width: (map-get($screen-size, $s2) - 1) + "px") {
+    @content;
+  }
+}
+
+@mixin screen-except($s1, $s2) {
+  @media (max-width: map-get($screen-size, $s1) + "px") {
+    @content;
+  }
+
+  @media (min-width: (map-get($screen-size, $s2) - 1)  + "px") {
+    @content;
+  }
+}
+
+@mixin screen-smaller-than($size) {
+  @media (max-width: (map-get($screen-size, $size) - 1) + "px") {
     @content;
   }
 }

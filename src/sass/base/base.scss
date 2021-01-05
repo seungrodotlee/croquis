@@ -1,8 +1,27 @@
 @each $size-key, $size in $screen-size {
-  @include screen-larger-than($size-key) {
-    html,
-    body {
-      font-size: map-get($font-size, $size-key);
+  $keys: map-keys($screen-size);
+  $idx: index($keys, $size-key);
+
+  @if $size-key == "xl" {
+    @include screen-larger-than($size-key) {
+      html,
+      body {
+        font-size: map-get($font-size, $size-key);
+      }
+    }
+  } @else if $size-key == "s" {
+    @include screen-smaller-than(nth($keys, $idx + 1)) {
+      html,
+      body {
+        font-size: map-get($font-size, $size-key);
+      }
+    }
+  } @else {
+    @include screen-between($size-key, nth($keys, $idx + 1)) {
+      html,
+      body {
+        font-size: map-get($font-size, $size-key);
+      }
     }
   }
 }
@@ -90,6 +109,11 @@
   top: 50%;
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
+}
+
+.flex.centering {
+  justify-content: center;
+  align-items: center;
 }
 
 /* shadow */

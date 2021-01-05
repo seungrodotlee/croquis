@@ -18,6 +18,48 @@
 }
 
 @each $size-key, $size in $screen-size {
+  $keys: map-keys($screen-size);
+  $idx: index($keys, $size-key);
+
+  @if $size-key == "xl" {
+    @include screen-smaller-than($size-key) {
+      .only-in-#{$size-key} {
+        display: none;
+      }
+    }
+
+    @include screen-larger-than($size-key) {
+      .hidden-#{$size-key} {
+        display: none;
+      }
+    }
+  } @else if $size-key == "s" {
+    @debug $size-key;
+    @include screen-larger-than($size-key) {
+      .only-in-#{$size-key} {
+        display: none;
+      }
+    }
+
+    @include screen-smaller-than($size-key) {
+      .hidden-#{$size-key} {
+        display: none;
+      }
+    }
+  } @else {
+    @include screen-except($size-key, nth($keys, $idx + 1)) {
+      .only-in-#{$size-key} {
+        display: none;
+      }
+    }
+
+    @include screen-between($size-key, nth($keys, $idx + 1)) {
+      .hidden-#{$size-key} {
+        display: none;
+      }
+    }
+  }
+
   @include screen-larger-than($size-key) {
     @for $i from 1 through 12 {
       .col.take-#{$i}-#{$size-key} {

@@ -19,12 +19,13 @@ body {
 
 .intro-wrap {
   background: black;
-  z-index: 10;
+  z-index: 100;
 }
 
 .top-bar {
   width: 100%;
   z-index: 10;
+  top: 0;
   background: var(--white);
 }
 

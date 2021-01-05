@@ -29,12 +29,14 @@
 }
 
 .nav-bar-left,
-.nav-bar-left-inner {
+.nav-bar-left-inner,
+.nav-bar-inner {
   justify-content: flex-start;
 }
 
 .nav-bar-left > *,
-.nav-bar-left-inner > * {
+.nav-bar-left-inner > *,
+.nav-bar-inner > * {
   margin-right: 1rem;
 }
 
