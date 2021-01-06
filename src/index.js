@@ -12,6 +12,7 @@ import Tag from "./components/Tag.js";
 import NavBar from "./components/NavBar.js";
 import Sync from "./components/Sync.js";
 import Loop from "./components/Loop.js";
+import Svg from "./components/Svg.js";
 import { Row, Col } from "./components/Grid.js";
 
 import "./util/Transition.js";
