@@ -35,4 +35,10 @@ body {
 
 .nav-bar-title {
   font-size: 2rem;
+  margin-left: 3.5rem;
+}
+
+.croquis-logo {
+  width: 7rem;
+  transform: translateX(-0.5rem) translateY(-0.125rem);
 }

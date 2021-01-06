@@ -1,11 +1,11 @@
 croquis.newComponent("top-bar", {
   template: `
   <div class="top-bar">
-    <nav-bar
+    <object type="image/svg+xml" data="./img/logo.svg" class="croquis-logo abs"></object>
+    <nav-bar 
       id="nav-bar"
       class="grey-light-border d2"
       data-title="croquis"
-      data-logo="./img/logo.svg"
     >
       <div>
         <sync- class="nav-bar-inner">
