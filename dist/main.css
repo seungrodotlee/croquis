@@ -17,6 +17,14 @@ html body .ready-hidden-by-slide-right {
 html body .hidden-by-slide-right {
   transform: translateX(100%);
 }
+html body .ready-hidden-by-offset-slide-right {
+  left: 0;
+  transition: left 2s;
+  transition-timing-function: cubic-bezier(0.75, 0, 0, 1);
+}
+html body .hidden-by-offset-slide-right {
+  left: 100%;
+}
 
 html,
 body,
@@ -451,6 +459,10 @@ body {
 .flex.centering {
   justify-content: center;
   align-items: center;
+}
+
+.clip-overflow {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
 /* shadow */

@@ -6,10 +6,10 @@ class Svg extends TemplateElement {
       template: `<svg></svg>`,
       dataHandler: {
         src: (newVal) => {
-          this.body.removeAttribute("data-src");
+          console.log(newVal);
 
           let client = new XMLHttpRequest();
-          client.open("GET", "img/logo.svg");
+          client.open("GET", newVal);
           client.onreadystatechange = () => {
             if (client.readyState === 4) {
               console.log(client);

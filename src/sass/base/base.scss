@@ -116,6 +116,10 @@
   align-items: center;
 }
 
+.clip-overflow {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
 /* shadow */
 .box-shadow-s {
   box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.1),

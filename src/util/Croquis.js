@@ -28,6 +28,15 @@ croquis.bindRequest = (key, callback) => {
   // _croquis.request[key].push(callback);
 };
 
+croquis.delay = (callback, delay) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      callback();
+      resolve(true);
+    }, delay);
+  });
+};
+
 croquis.isElement = (obj) => {
   try {
     return obj instanceof HTMLElement;

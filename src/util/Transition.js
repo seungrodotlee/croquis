@@ -1,4 +1,4 @@
-croquis.transition = ({ el, transitionName, before, after }) => {
+croquis.transition = (el, transitionName, before, after) => {
   if (typeof before == "function") {
     before();
   }
@@ -19,25 +19,17 @@ croquis.transition = ({ el, transitionName, before, after }) => {
     };
 
     el.addEventListener("transitionend", callback);
-  }, 1);
+  }, 50);
 };
 
 croquis.attachElement = (el, parent, transitionName) => {
-  croquis.transition({
-    el: el,
-    transitionName: transitionName,
-    before: () => {
-      parent.attachElement(el);
-    },
+  croquis.transition(el, transitionName, () => {
+    parent.attachElement(el);
   });
 };
 
 croquis.removeElement = (el, transitionName) => {
-  croquis.transition({
-    el: el,
-    transitionName: transitionName,
-    after: () => {
-      el.parentElement.removeChild(el);
-    },
+  croquis.transition(el, transitionName, undefined, () => {
+    el.parentElement.removeChild(el);
   });
 };

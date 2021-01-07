@@ -18,17 +18,39 @@ body {
 }
 
 .intro-wrap {
-  background: black;
+  background: var(--black);
   z-index: 100;
+}
+
+#intro-logo {
+  min-height: 140vh;
+  min-width: 140vw;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  fill: none;
+  stroke: var(--primary);
+  stroke-dasharray: 1700;
+  stroke-dashoffset: 1700;
+  transition: stroke-dashoffset 1s;
+  transition-timing-function: cubic-bezier(0, 0.8, 1, 0.2);
+}
+
+#intro-logo path {
+  stroke: inherit;
+  stroke-linecap: round;
+  fill: inherit;
 }
 
 .slogan-wrap {
   height: 7rem;
   left: 10%;
-  background: linear-gradient(to bottom, #1a6aef, #22f257);
-  -webkit-background-clip: text;
-  background-size: cover;
-  color: transparent;
+  color: var(--white);
+  z-index: 2;
+}
+
+.main-slogan {
+  color: var(--black);
 }
 
 .slogan-wrap > h1 {

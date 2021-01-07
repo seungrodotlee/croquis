@@ -9,4 +9,14 @@ html body {
   .hidden-by-slide-right {
     transform: translateX(100%);
   }
+
+  .ready-hidden-by-offset-slide-right {
+    left: 0;
+    transition: left 2s;
+    transition-timing-function: cubic-bezier(0.75, 0, 0, 1);
+  }
+
+  .hidden-by-offset-slide-right {
+    left: 100%;
+  }
 }
