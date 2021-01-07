@@ -7,6 +7,15 @@ croquis.abc = {
 };
 
 window.addEventListener("load", () => {
+  let introSloganTop = document.querySelector("#intro-slogan-top");
+  let introSloganBottom = document.querySelector("#intro-slogan-bottom");
+  let p = introSloganTop.geul("당신의 도화지를");
+
+  p.then((r) => {
+    introSloganBottom.geul("더 쉽게 채우기 위한 도구");
+  });
+
+  return;
   let isIntroActive = JSON.parse(croquis.getCookie("intro"));
   let intro = document.querySelector("#intro");
 

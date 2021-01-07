@@ -17,20 +17,21 @@
     <link rel="stylesheet" href="./style/main.css" />
   </head>
   <body>
-    <div class="intro-wrap fixed fit">
-      <video
-        id="intro"
-        class="_hidden"
-        src="img/intro_anim.mp4"
-        autoplay
-        muted
-      ></video>
+    <div class="intro-wrap fixed full">
+      <div class="inner fixed full">
+        <div class="slogan-wrap abs centered-y">
+          <h1 id="intro-slogan-top">&nbsp;</h1>
+          <h1 id="intro-slogan-bottom">&nbsp;</h1>
+        </div>
+        <svg- class="intro-logo" data-src="./img/logo.svg"></svg->
+      </div>
     </div>
     <div class="root-container">
       <top-bar id="top-bar" class="fixed"></top-bar>
       <div class="container full flex centering"></div>
     </div>
     <!-- <script src="../dist/build.js"></script> -->
+    <script src="./script/geul.js"></script>
     <script type="module" src="../src/index.js"></script>
     <script type="module" src="./script/index.js"></script>
   </body>

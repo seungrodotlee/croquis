@@ -22,6 +22,20 @@ body {
   z-index: 100;
 }
 
+.slogan-wrap {
+  height: 7rem;
+  left: 10%;
+  background: linear-gradient(to bottom, #1a6aef, #22f257);
+  -webkit-background-clip: text;
+  background-size: cover;
+  color: transparent;
+}
+
+.slogan-wrap > h1 {
+  font-size: 3rem;
+  font-weight: 900;
+}
+
 .top-bar {
   width: 100%;
   z-index: 10;
