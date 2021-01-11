@@ -23,6 +23,13 @@ body {
 }
 
 #intro-logo {
+  stroke: var(--invert);
+  stroke-dashoffset: 1700;
+  transition: stroke-dashoffset 1s;
+  transition-timing-function: cubic-bezier(0, 0.8, 1, 0.2);
+}
+
+.logo {
   min-height: 140vh;
   min-width: 140vw;
   top: 50%;
@@ -31,12 +38,9 @@ body {
   fill: none;
   stroke: var(--primary);
   stroke-dasharray: 1700;
-  stroke-dashoffset: 1700;
-  transition: stroke-dashoffset 1s;
-  transition-timing-function: cubic-bezier(0, 0.8, 1, 0.2);
 }
 
-#intro-logo path {
+.logo path {
   stroke: inherit;
   stroke-linecap: round;
   fill: inherit;
@@ -44,18 +48,23 @@ body {
 
 .slogan-wrap {
   height: 7rem;
-  left: 10%;
+  left: 0;
   color: var(--white);
   z-index: 2;
 }
 
 .main-slogan {
+  transform-origin: left;
   color: var(--black);
 }
 
 .slogan-wrap > h1 {
   font-size: 3rem;
   font-weight: 900;
+}
+
+.root-container .logo {
+  stroke-dashoffset: 0;
 }
 
 .top-bar {
@@ -71,10 +80,4 @@ body {
 
 .nav-bar-title {
   font-size: 2rem;
-  margin-left: 3.5rem;
-}
-
-.croquis-logo {
-  width: 7rem;
-  transform: translateX(-0.5rem) translateY(-0.125rem);
 }
