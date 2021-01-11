@@ -26,8 +26,8 @@ class TemplateElement extends HTMLElement {
 
     // 입력받은 파라미터들을 멤버로 등록한다.
     this.__template = template;
-    this.__templateHandler = templateHandler;
-    this.__childHandler = childHandler;
+    this.__templateHandler = templateHandler.bind(this);
+    this.__childHandler = childHandler.bind(this);
     this.__dataHandler = dataHandler;
     this.__called = false;
     this.__openBracket = "{";
@@ -50,7 +50,7 @@ class TemplateElement extends HTMLElement {
   setAttr(val, newVal) {
     val = val.replace("data-", "");
     this[`_${val}`] = newVal;
-    this.__dataHandler[val](newVal);
+    this.__dataHandler[val].call(this, newVal);
   }
 
   // 커스텀 요소가 DOM에 등록되었을 때 호출되는 메소드

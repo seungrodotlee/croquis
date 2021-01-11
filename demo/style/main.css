@@ -23,7 +23,7 @@ body {
 }
 
 #intro-logo {
-  stroke: var(--invert);
+  stroke: var(--invert-secondary);
   stroke-dashoffset: 1700;
   transition: stroke-dashoffset 1s;
   transition-timing-function: cubic-bezier(0, 0.8, 1, 0.2);
@@ -49,11 +49,20 @@ body {
 .slogan-wrap {
   height: 7rem;
   left: 0;
-  color: var(--white);
   z-index: 2;
 }
 
-.main-slogan {
+@media (max-width: 767px) {
+  .landing {
+    max-width: calc(100% - 2rem);
+  }
+}
+
+#intro-slogan {
+  color: var(--white);
+}
+
+#main-slogan {
   transform-origin: left;
   color: var(--black);
 }
@@ -76,8 +85,4 @@ body {
 
 .nav-bar {
   border-bottom: 1px solid;
-}
-
-.nav-bar-title {
-  font-size: 2rem;
 }
