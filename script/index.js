@@ -1,4 +1,5 @@
 import "../components/top-bar.js";
+import "../components/landing.js";
 
 croquis.abc = {
   test: "a",
@@ -14,10 +15,10 @@ window.addEventListener("load", () => {
   let introLogo = document.querySelector("#intro-logo");
   let introToggler = document.querySelector("#intro-toggler");
 
-  let bigLogo = document.querySelector("#bg-logo");
-  let sloganWrap = document.querySelector(".main-slogan");
-  let mainSloganTop = document.querySelector("#slogan-top");
-  let mainSloganBottom = document.querySelector("#slogan-bottom");
+  let bigLogo = document.querySelector("#main-logo");
+  let sloganWrap = document.querySelector("#main-slogan");
+  let mainSloganTop = document.querySelector("#main-slogan-top");
+  let mainSloganBottom = document.querySelector("#main-slogan-bottom");
 
   setTimeout(() => {
     window.scrollTo(0, 0);
