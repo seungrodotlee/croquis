@@ -7,7 +7,7 @@
 @each $size-key, $size in $screen-size {
   @include screen-larger-than($size-key) {
     .container {
-      max-width: $size * 0.95;
+      max-width: unquote(($size * 0.95) + "px");
     }
   }
 }

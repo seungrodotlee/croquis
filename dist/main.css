@@ -379,6 +379,9 @@ body {
 .abs {
   position: absolute;
 }
+.abs.container {
+  position: absolute;
+}
 
 .rel {
   position: relative;
@@ -387,8 +390,14 @@ body {
 .fixed {
   position: fixed;
 }
+.fixed.container {
+  position: fixed;
+}
 
 .sticky {
+  position: sticky;
+}
+.sticky.container {
   position: sticky;
 }
 
@@ -419,6 +428,14 @@ body {
   left: 0;
   height: 100vh;
   width: 100vw;
+}
+
+.full-x {
+  width: 100vw;
+}
+
+.full-y {
+  height: 100vh;
 }
 
 .fit {
@@ -1437,22 +1454,22 @@ html body .grey-lightest-border {
 
 @media (min-width: 768px) {
   .container {
-    max-width: 729.6;
+    max-width: 729.6px;
   }
 }
 @media (min-width: 992px) {
   .container {
-    max-width: 942.4;
+    max-width: 942.4px;
   }
 }
 @media (min-width: 1200px) {
   .container {
-    max-width: 1140;
+    max-width: 1140px;
   }
 }
 @media (min-width: 1408px) {
   .container {
-    max-width: 1337.6;
+    max-width: 1337.6px;
   }
 }
 button {
