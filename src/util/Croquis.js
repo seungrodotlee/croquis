@@ -16,6 +16,7 @@ window._croquis = window._croquis || {};
 _croquis.dataMap = new Map();
 _croquis.origin = new Map();
 _croquis.proxys = new Map();
+_croquis.customElements = [];
 
 croquis.bindRequest = (key, callback) => {
   console.log("bind req");
@@ -105,6 +106,7 @@ croquis.children = (node) => {
 
 croquis.define = (name, constructor) => {
   customElements.define(name, constructor);
+  _croquis.customElements.push(constructor);
 };
 
 croquis.newComponent = function (
@@ -190,8 +192,6 @@ let croquisBindingHandler = {
 
       keys = filtered;
 
-      console.log("prop ", key);
-
       let idx = keys.indexOf(key);
 
       let loops = target._loopTarget;
@@ -199,9 +199,7 @@ let croquisBindingHandler = {
       console.log("idx ", idx);
       for (let loop of loops) {
         for (let i = 0; i < loop.__origins.length; i++) {
-          console.log(loop._bindedElements[idx].innerHTML);
           let el = loop._bindedElements[idx];
-          console.log(el.parentElement);
           el.parentElement.removeChild(el);
         }
       }
@@ -234,11 +232,7 @@ let croquisBindingHandler = {
       return _croquis.proxys.get(path);
     }
 
-    console.log("get ", key);
-
     let path = croquis.getPath(target);
-
-    console.log("path ", path);
 
     return r._data;
   },
@@ -254,13 +248,11 @@ let croquisBindingHandler = {
     if (target instanceof CroquisObject) {
       if (key.indexOf(".") != -1) {
         let p = key.split(".");
-        console.log("pieces", p);
 
         let inner = target;
         let path = p[0];
         for (let i = 0; i < p.length - 1; i++) {
           let k = p[i];
-          console.log(k);
           if (i != 0) {
             path = path + "." + k;
           }
@@ -299,8 +291,6 @@ let croquisBindingHandler = {
             path = path + "." + key + "." + k;
           }
 
-          console.log(path);
-
           croquis[path] = val[k];
         }
 
@@ -314,13 +304,8 @@ let croquisBindingHandler = {
         return true;
       }
 
-      console.log("set ", key);
-      console.log(target);
-
       let flag = false;
       if (key in target) {
-        console.log(`${key} exist in ${target._name}`);
-        console.log(_croquis.origin.get(croquis.getPath(target) + "." + key));
         target[key]._data = val;
 
         if ("_target" in target[key]) {
@@ -330,7 +315,6 @@ let croquisBindingHandler = {
         }
       } else {
         flag = true;
-        console.log(`${key} not exist in ${target}`);
 
         target[key] = new CroquisObject(key, target._depth + 1);
         target[key]._data = val;
@@ -339,11 +323,9 @@ let croquisBindingHandler = {
 
       let path = croquis.getPath(target[key]);
       _croquis.dataMap.set(path, target[key]._data);
-      console.log(path, target[key]);
       _croquis.origin.set(path, target[key]);
 
       if (flag && "_loopTarget" in target) {
-        console.log("loop");
         let loops = target._loopTarget;
 
         for (let loop of loops) {
@@ -394,6 +376,46 @@ HTMLElement.prototype.copyAttrsTo = function (target) {
     }
   }
 };
+
+let observer = new MutationObserver((mutationsList) => {
+  // for (let mutation of mutationsList)
+  mutationsList.forEach((mutation) => {
+    if (mutation.type == "childList") {
+      for (let addedNode of mutation.addedNodes) {
+        if (addedNode == undefined) return;
+
+        if (croquis.isElement(addedNode)) {
+          for (let c of _croquis.customElements) {
+            if (addedNode instanceof c) {
+              return;
+            }
+          }
+
+          if (addedNode.getAttribute("id") == null) return;
+
+          window.croquis[
+            addedNode.getAttribute("id").toCamelCase()
+          ] = addedNode;
+        }
+      }
+    }
+
+    if (mutation.type == "attributes" && mutation.attributeName == "id") {
+      window.croquis[mutation.target.getAttribute("id").toCamelCase()] =
+        mutation.target;
+
+      if (mutation.oldValue != null) {
+        delete window.croquis[mutation.oldValue];
+      }
+    }
+  });
+});
+
+observer.observe(document.body, {
+  childList: true,
+  attributes: true,
+  subtree: true,
+});
 
 String.prototype.toCamelCase = function () {
   return this.replace(/-([a-z0-9+])/g, function (g) {

@@ -1,5 +1,5 @@
-import "../components/top-bar.js";
-import "../components/landing.js";
+import "../components/TopBar.js";
+import "../components/Slogan.js";
 
 croquis.abc = {
   test: "a",

@@ -61,7 +61,9 @@ class TemplateElement extends HTMLElement {
     let temp = document.createElement("div");
     temp.innerHTML = this.__template;
     temp = temp.firstElementChild;
+
     this.body = this.insertAfter(temp);
+    //console.log("insert", this.body);
 
     // templateHandler 호출
     this.__templateHandler();
@@ -86,9 +88,9 @@ class TemplateElement extends HTMLElement {
 
     // 템플릿 요소를 croquis 객체에 등록
     // 등록될 때는 카멜케이스로 변환되어 등록된다 ( some-el => someEl )
-    if (this.getAttribute("id")) {
-      window.croquis[this.getAttribute("id").toCamelCase()] = this.body;
-    }
+    // if (this.getAttribute("id")) {
+    //   window.croquis[this.getAttribute("id").toCamelCase()] = this.body;
+    // }
 
     // 커스텀 요소를 DOM에서 제거
     this.parentElement.removeChild(this);
@@ -140,10 +142,7 @@ class TemplateElement extends HTMLElement {
     for (let mutation of mutationsList) {
       let attrName = mutation.attributeName;
 
-      console.log("attr ", attrName);
-
       if (attrName == "data-bind") {
-        console.log("data bind");
         let target = mutation.target.getAttribute(attrName);
 
         if (!_croquis.dataMap.has(target)) {
@@ -168,8 +167,6 @@ class TemplateElement extends HTMLElement {
 
         this.__bindBracket = [this.__openBracket, this.__closeBracket];
 
-        console.log("reg brackets");
-        console.log(this.__bindBracket);
         continue;
       }
 
@@ -187,7 +184,6 @@ class TemplateElement extends HTMLElement {
   }
 
   registryBindingNodes() {
-    console.log("reg");
     let textNodes = croquis.getTextNodesUnder(this.body);
     let reg = new RegExp(
       `${this.__bindBracket[0]}.+?${this.__bindBracket[1]}`,
