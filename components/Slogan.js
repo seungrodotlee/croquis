@@ -21,10 +21,10 @@ croquis.newComponent("slogan-", {
   childHandler: function (addedNode) {
     if (this._count == 0) {
       this.sloganTop.innerHTML = addedNode.innerHTML;
-    }
-
-    if (this._count == 1) {
+    } else if (this._count == 1) {
       this.sloganBottom.innerHTML = addedNode.innerHTML;
+    } else {
+      this.body.appendChild(addedNode);
     }
 
     this._count++;

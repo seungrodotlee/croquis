@@ -13,6 +13,10 @@ body {
   width: 100vw;
 }
 
+h1 {
+  font-weight: 900;
+}
+
 .d2 {
   font-family: "D2Coding";
 }
@@ -29,6 +33,12 @@ body {
   transition-timing-function: cubic-bezier(0, 0.8, 1, 0.2);
 }
 
+svg path {
+  stroke: inherit !important;
+  stroke-linecap: round;
+  fill: inherit !important;
+}
+
 .logo {
   min-height: 140vh;
   min-width: 140vw;
@@ -40,22 +50,26 @@ body {
   stroke-dasharray: 1700;
 }
 
-.logo path {
-  stroke: inherit;
-  stroke-linecap: round;
-  fill: inherit;
+#bg-curve-1 {
+  position: absolute;
+  min-width: 110vw;
+  top: 30%;
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  stroke: var(--secondary);
+  fill: none;
+  overflow: visible;
+}
+
+#bg-curve-1 path {
+  stroke-width: 300px;
 }
 
 .slogan-wrap {
   height: 7rem;
-  left: 0;
+  right: calc(50% + 2rem);
+  text-align: right;
   z-index: 2;
-}
-
-@media (max-width: 767px) {
-  .slogan {
-    max-width: calc(100% - 2rem);
-  }
 }
 
 #intro-slogan {
@@ -63,13 +77,12 @@ body {
 }
 
 #main-slogan {
-  transform-origin: left;
+  transform-origin: right;
   color: var(--black);
 }
 
 .slogan-wrap > h1 {
   font-size: 3rem;
-  font-weight: 900;
 }
 
 .root-container .logo {
@@ -85,4 +98,56 @@ body {
 
 .nav-bar {
   border-bottom: 1px solid;
+}
+
+.landing-article {
+  position: absolute;
+  padding: 1em;
+  bottom: 10%;
+  right: 0;
+  text-align: justify;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+#dropdown-example {
+  white-space: nowrap;
+  bottom: 0;
+  transform: translateX(-50%) translateY(100%);
+}
+
+#id-example {
+  right: 50%;
+  transform: translateY(50vh);
+}
+
+.parallex-zone > div {
+  transition: transform 1s;
+  transition-timing-function: cubic-bezier(0.5, 0, 0.3, 1);
+}
+
+.parallex-zone img {
+  max-width: 45vw;
+  max-height: calc(90vh - 15rem);
+}
+
+.parallex-zone p {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.dd-example-img-wrap {
+  align-items: baseline;
+}
+
+@media (max-width: 767px) {
+  .slogan {
+    max-width: calc(100% - 2rem);
+  }
+
+  .landing-article {
+    right: 2rem;
+    font-size: 1rem;
+    width: 45%;
+  }
 }
