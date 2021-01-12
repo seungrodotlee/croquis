@@ -1,6 +1,6 @@
-croquis.newComponent("landing-", {
+croquis.newComponent("slogan-", {
   template: `
-    <div class="landing fixed container full-y centered-x flex centering">
+    <div class="slogan fixed container full-y centered-x flex centering">
       <div class="slogan-wrap abs centered-y">
         <h1 class="slogan-top"></h1>
         <h1 class="slogan-bottom"></h1>

@@ -53,7 +53,7 @@ body {
 }
 
 @media (max-width: 767px) {
-  .landing {
+  .slogan {
     max-width: calc(100% - 2rem);
   }
 }
