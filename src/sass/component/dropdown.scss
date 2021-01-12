@@ -61,10 +61,11 @@
 
 .dropdown-content > div {
   padding: 0.25rem 0.75rem;
+  white-space: nowrap;
 }
 
 .dropdown-content > div:hover {
-  background: map-get($color-map, "grey-lighter");
+  background: map-get($color-map, "grey-lightest");
 }
 
 .dropdown-content > .selected {

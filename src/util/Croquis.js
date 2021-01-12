@@ -40,7 +40,7 @@ croquis.delay = (callback, delay) => {
 
 croquis.isElement = (obj) => {
   try {
-    return obj instanceof HTMLElement;
+    return obj instanceof HTMLElement || obj instanceof SVGSVGElement;
   } catch (e) {
     return (
       typeof obj === "object" &&
@@ -385,13 +385,17 @@ let observer = new MutationObserver((mutationsList) => {
         if (addedNode == undefined) return;
 
         if (croquis.isElement(addedNode)) {
-          for (let c of _croquis.customElements) {
-            if (addedNode instanceof c) {
-              return;
-            }
+          if (addedNode instanceof TemplateElement) {
+            return;
           }
 
           if (addedNode.getAttribute("id") == null) return;
+
+          addedNode.querySelectorAll(":scope *").forEach((el) => {
+            if (el.getAttribute("id") == null) return;
+
+            window.croquis[el.getAttribute("id").toCamelCase()] = el;
+          });
 
           window.croquis[
             addedNode.getAttribute("id").toCamelCase()
@@ -437,3 +441,14 @@ Array.prototype.remove = function (el) {
 
   return this;
 };
+
+let childs = document.querySelectorAll("body *");
+
+childs.forEach((el) => {
+  if (el instanceof TemplateElement) return;
+
+  console.log(el.getAttribute("id"));
+  if (el.getAttribute("id") != null) {
+    window.croquis[el.getAttribute("id").toCamelCase()] = el;
+  }
+});

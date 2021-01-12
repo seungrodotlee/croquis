@@ -6,13 +6,10 @@ class Svg extends TemplateElement {
       template: `<svg></svg>`,
       dataHandler: {
         src: (newVal) => {
-          console.log(newVal);
-
           let client = new XMLHttpRequest();
           client.open("GET", newVal);
           client.onreadystatechange = () => {
             if (client.readyState === 4) {
-              console.log(client);
               let reg = new RegExp("<svg([^>]*)>((?:.|\n)*?)</svg>", "g");
               let regResult = reg.exec(client.responseText);
               let attrs = regResult[1];

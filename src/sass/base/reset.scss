@@ -87,7 +87,8 @@ video {
   border: 0;
   color: inherit;
   font: inherit;
-  line-height: 1.2;
+  line-height: 1.25;
+  letter-spacing: 0.0125em;
   vertical-align: baseline;
   box-sizing: border-box;
 }
@@ -107,9 +108,7 @@ nav,
 section {
   display: block;
 }
-body {
-  line-height: 1;
-}
+
 ol,
 ul {
   list-style: none;

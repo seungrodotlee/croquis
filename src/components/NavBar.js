@@ -38,11 +38,9 @@ class NavBar extends TemplateElement {
       },
       dataHandler: {
         title: (newVal) => {
-          console.log(this._title);
           this._head.textContent = newVal;
         },
         logo: (newVal) => {
-          console.log(this._logoPlace);
           this._logoPlace.setAttribute("src", newVal);
         },
         parted: (newVal) => {

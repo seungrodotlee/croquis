@@ -34,7 +34,6 @@
       }
     }
   } @else if $size-key == "s" {
-    @debug $size-key;
     @include screen-larger-than($size-key) {
       .only-in-#{$size-key} {
         display: none;

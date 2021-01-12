@@ -18,6 +18,18 @@ $color-slot: (
   border: "border-color",
 );
 
+.real-white-color {
+  color: white;
+}
+
+.real-white-bg {
+  background: white;
+}
+
+.real-white-border {
+  border-color: white;
+}
+
 .white-color {
   color: $white;
 }
@@ -40,8 +52,20 @@ $color-slot: (
   background: $black;
 }
 
-.white-border {
+.black-border {
   border-color: $black !important;
+}
+
+.real-black-color {
+  color: black;
+}
+
+.real-black-bg {
+  background: black;
+}
+
+.real-black-border {
+  border-color: black;
 }
 
 @each $slot-title, $slot in $color-slot {
