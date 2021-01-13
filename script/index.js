@@ -16,6 +16,30 @@ window.addEventListener("load", () => {
     window.scrollTo(0, 0);
   }, 100);
 
+  let origin = parseInt(
+    window.getComputedStyle(croquis.mainSlogan).width.replace("px", "")
+  );
+  let originRatio = 1;
+
+  if (origin >= 0.4 * window.innerWidth) {
+    originRatio = (0.4 * window.innerWidth) / origin;
+  }
+
+  croquis.introSlogan.setAttribute(
+    "style",
+    `top: 50%; transform: translateY(-50%) scale(${originRatio})`
+  );
+
+  croquis.mainSlogan.setAttribute(
+    "style",
+    `top: 50%; transform: translateY(-50%) scale(${originRatio})`
+  );
+
+  croquis.landingTitle.setAttribute(
+    "style",
+    `top: 50%; transform: translateY(-50%) scale(${originRatio})`
+  );
+
   (async () => {
     if (isIntroActive != null && !isIntroActive) {
       croquis.removeElement(introWrap, "hidden-by-slide-right");
@@ -23,10 +47,6 @@ window.addEventListener("load", () => {
       await croquis.introSloganTop.geul("당신의 도화지를", 80);
       croquis.introLogo.setAttribute("style", "stroke-dashoffset: 0;");
       await croquis.introSloganBottom.geul("채우는 가장 쉬운 방법", 80, 500);
-
-      // await croquis.delay(() => {
-      //   introLogo.setAttribute("style", "stroke-dashoffset: -1700;");
-      // }, 1000);
 
       croquis.delay(() => {
         croquis.removeElement(introWrap, "hidden-by-offset-slide-right");
@@ -52,25 +72,47 @@ window.addEventListener("load", () => {
     }
   });
 
-  let origin = parseInt(
-    window.getComputedStyle(croquis.mainSlogan).width.replace("px", "")
-  );
-  let originRatio = 1;
-
-  if (origin >= 0.4 * window.innerWidth) {
-    originRatio = (0.4 * window.innerWidth) / origin;
-  }
-
-  croquis.mainSlogan.setAttribute(
-    "style",
-    `top: 50%; transform: translateY(-50%) scale(${originRatio})`
-  );
-
   let currentPos = 0;
   let hold = false;
-  window.addEventListener("mousewheel", async (e) => {
+
+  window.addEventListener("resize", (e) => {
+    if (origin >= 0.4 * window.innerWidth) {
+      originRatio = (0.4 * window.innerWidth) / origin;
+    }
+
+    croquis.introSlogan.setAttribute(
+      "style",
+      `top: 50%; transform: translateY(-50%) scale(${originRatio})`
+    );
+
+    croquis.mainSlogan.setAttribute(
+      "style",
+      `top: 50%; transform: translateY(-50%) scale(${originRatio})`
+    );
+
+    croquis.landingTitle.setAttribute(
+      "style",
+      `top: 50%; transform: translateY(-50%) scale(${originRatio})`
+    );
+  });
+
+  window.addEventListener("scroll", async (e) => {
     let h = window.innerHeight;
     let pos = window.scrollY;
+
+    if (pos >= 0 && pos < 0.6 * h) {
+      let ratio = 7 - (pos / (0.6 * h)) * 7;
+
+      croquis.landingTitle.textContent = "croquis".slice(0, ratio);
+
+      if (parseInt(ratio) == 0) {
+        croquis.landingTitle.classList.add("_hidden");
+      } else {
+        croquis.landingTitle.classList.remove("_hidden");
+      }
+    } else if (pos < 2 * h) {
+      croquis.landingTitle.classList.add("_hidden");
+    }
 
     if (pos >= 0 && pos < h) {
       if (currentPos != 0 && croquis.sloganAdj.textContent != "쉬운") {
@@ -158,6 +200,33 @@ window.addEventListener("load", () => {
       );
     }
 
+    if (pos >= 2.6 * h && pos < 3.6 * h) {
+      let ratio = (pos - 2.6 * h) / h;
+
+      croquis.dropdownExample.setAttribute(
+        "style",
+        "transform: translateX(-50%) translateY(-3rem)"
+      );
+      croquis.ddWithoutCroquis.setAttribute(
+        "style",
+        `transform: translateY(${-3 * ratio}rem)`
+      );
+      croquis.ddWithCroquis.setAttribute(
+        "style",
+        `transform: translateY(${-9 * ratio}rem)`
+      );
+    } else if (pos < 2.6 * h) {
+      croquis.dropdownExample.setAttribute(
+        "style",
+        "transform: translateX(-50%) translateY(100%)"
+      );
+    } else {
+      croquis.dropdownExample.setAttribute(
+        "style",
+        "transform: translateX(-50%) translateY(-100vh)"
+      );
+    }
+
     if (pos >= 4 * h && pos < 5 * h) {
       if (currentPos != 2) {
         if (!hold) {
@@ -168,63 +237,47 @@ window.addEventListener("load", () => {
           hold = false;
         }
       }
-
-      let ratio = (pos - 4 * h) / h;
-
-      croquis.idExample.classList.add("on");
-      croquis.idExample.setAttribute("style", "transform: translateY(-50%)");
-      croquis.idWithCroquis.setAttribute(
-        "style",
-        `transform: translateY(${-100 * ratio}px)`
-      );
-    } else if (pos < 4 * h) {
-      if (croquis.idExample.classList.contains("on")) {
-        croquis.idExample.classList.remove("on");
-        croquis.idExample.setAttribute("style", "transform: translateY(50vh)");
-      }
-    } else {
-      if (croquis.idExample.classList.contains("on")) {
-        croquis.idExample.classList.remove("on");
-        croquis.idExample.setAttribute(
-          "style",
-          "transform: translateY(-150vh)"
-        );
-      }
     }
 
-    // console.log(e.wheelDeltaY);
+    if (pos >= 3.6 * h && pos < 4.6 * h) {
+      let ratio = (pos - 3.6 * h) / h;
 
-    if (pos >= 2.6 * h && pos < 3.6 * h) {
-      let ratio = (pos - 2.6 * h) / h;
-
-      croquis.dropdownExample.classList.add("on");
-      croquis.dropdownExample.setAttribute(
+      croquis.idExample.setAttribute("style", "transform: translateY(100%)");
+      croquis.idWithCroquis.setAttribute(
         "style",
-        "transform: translateX(-50%) translateY(-3rem)"
+        `transform: translateY(${-100 * ratio}%)`
       );
-      croquis.ddWithoutCroquis.setAttribute(
+      croquis.mainSlogan.setAttribute(
         "style",
-        `transform: translateY(${-100 * ratio}px)`
+        `transition: top 1s; ${croquis.mainSlogan.getAttribute("style")}`
       );
-      croquis.ddWithCroquis.setAttribute(
-        "style",
-        `transform: translateY(${-300 * ratio}px)`
-      );
-    } else if (pos < 2.6 * h) {
-      if (croquis.dropdownExample.classList.contains("on")) {
-        croquis.dropdownExample.classList.remove("on");
-        croquis.dropdownExample.setAttribute(
-          "style",
-          "transform: translateX(-50%) translateY(100%)"
-        );
-      }
+    } else if (pos < 3.6 * h) {
+      croquis.idExample.setAttribute("style", "transform: translateY(100vh)");
     } else {
-      if (croquis.dropdownExample.classList.contains("on")) {
-        croquis.dropdownExample.classList.remove("on");
-        croquis.dropdownExample.setAttribute(
-          "style",
-          "transform: translateX(-50%) translateY(-100vh)"
-        );
+      croquis.idExample.setAttribute("style", "transform: translateY(-150vh)");
+      croquis.mainSlogan.setAttribute(
+        "style",
+        `transition: top 1s; top: 50%; ${croquis.mainSlogan
+          .getAttribute("style")
+          .replace(/top:.*;/g, "")}`
+      );
+    }
+
+    if (pos > 4.8 * h) {
+      if (!hold && croquis.landingTitle.classList.contains("_hidden")) {
+        hold = true;
+        croquis.delay(() => {
+          croquis.landingTitle.classList.remove("_hidden");
+        }, 100);
+        await croquis.landingTitle.geul("croquis");
+        hold = false;
+      }
+    } else if (pos > 4 * h) {
+      if (!hold && !croquis.landingTitle.classList.contains("_hidden")) {
+        hold = true;
+        await croquis.landingTitle.reverse("");
+        croquis.landingTitle.classList.add("_hidden");
+        hold = false;
       }
     }
   });
