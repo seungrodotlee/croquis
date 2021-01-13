@@ -21,6 +21,10 @@ button {
     border-radius: 0.85rem;
   }
 
+  &.square-btn {
+    border-radius: 0;
+  }
+
   .material-icons {
     margin-left: 0.5rem;
   }

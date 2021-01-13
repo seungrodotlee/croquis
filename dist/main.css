@@ -1525,6 +1525,9 @@ button.short-btn {
 button.round-btn, .modal button.submit-btn {
   border-radius: 0.85rem;
 }
+button.square-btn {
+  border-radius: 0;
+}
 button .material-icons {
   margin-left: 0.5rem;
 }

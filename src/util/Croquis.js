@@ -447,7 +447,6 @@ let childs = document.querySelectorAll("body *");
 childs.forEach((el) => {
   if (el instanceof TemplateElement) return;
 
-  console.log(el.getAttribute("id"));
   if (el.getAttribute("id") != null) {
     window.croquis[el.getAttribute("id").toCamelCase()] = el;
   }
