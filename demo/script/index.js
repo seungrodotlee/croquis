@@ -52,6 +52,20 @@ window.addEventListener("load", () => {
     }
   });
 
+  let origin = parseInt(
+    window.getComputedStyle(croquis.mainSlogan).width.replace("px", "")
+  );
+  let originRatio = 1;
+
+  if (origin >= 0.4 * window.innerWidth) {
+    originRatio = (0.4 * window.innerWidth) / origin;
+  }
+
+  croquis.mainSlogan.setAttribute(
+    "style",
+    `top: 50%; transform: translateY(-50%) scale(${originRatio})`
+  );
+
   let currentPos = 0;
   let hold = false;
   window.addEventListener("mousewheel", async (e) => {
@@ -69,12 +83,13 @@ window.addEventListener("load", () => {
         }
       }
 
-      let origin =
-        parseInt(
-          window.getComputedStyle(croquis.mainSlogan).width.replace("px", "")
-        ) * 1.1;
       let ratio = pos / h;
+      let scaleStart = 1;
       let scaleGoal = 0.75;
+
+      if (origin >= 0.4 * window.innerWidth) {
+        scaleStart = (0.4 * window.innerWidth) / origin;
+      }
 
       if (origin * (1 - (1 - scaleGoal)) >= 0.4 * window.innerWidth) {
         scaleGoal = (0.4 * window.innerWidth) / origin;
@@ -85,7 +100,7 @@ window.addEventListener("load", () => {
         `top: calc(${50 - 50 * ratio}% + ${
           9 * ratio
         }rem); transform: translateY(-50%) scale(${
-          1 - (1 - scaleGoal) * ratio
+          scaleStart - (scaleStart - scaleGoal) * ratio
         })`
       );
 
@@ -100,13 +115,9 @@ window.addEventListener("load", () => {
 
       currentPos = 0;
     } else {
-      let origin =
-        parseInt(
-          window.getComputedStyle(croquis.mainSlogan).width.replace("px", "")
-        ) * 1.1;
       let scaleGoal = 0.75;
 
-      if (origin * scaleGoal >= 0.4 * window.innerWidth) {
+      if (origin * (1 - (1 - scaleGoal)) >= 0.4 * window.innerWidth) {
         scaleGoal = (0.4 * window.innerWidth) / origin;
       }
 
