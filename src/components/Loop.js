@@ -246,6 +246,6 @@ class Loop extends TemplateElement {
   }
 }
 
-customElements.define("loop-", Loop);
+croquis.define("loop-", Loop);
 
 export default Loop;

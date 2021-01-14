@@ -6,7 +6,7 @@ module.exports = {
     main: ["@babel/polyfill", "./src/index.js"],
   },
   output: {
-    filename: "build.js",
+    filename: "croquis.js",
     path: path.resolve("./dist"),
   },
   module: {

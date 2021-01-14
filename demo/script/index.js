@@ -1,12 +1,6 @@
 import "../components/TopBar.js";
 import "../components/Slogan.js";
 
-croquis.abc = {
-  test: "a",
-  test2: "b",
-  test3: "c",
-};
-
 window.addEventListener("load", () => {
   let isIntroActive = JSON.parse(croquis.getCookie("intro"));
 

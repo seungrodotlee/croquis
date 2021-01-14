@@ -9,6 +9,21 @@ body.dark-mode {
 }
 
 /* transitions */
+html body .before-appear-by-fade {
+  opacity: 0;
+}
+html body .ready-appear-by-fade {
+  transition: opacity 1s;
+}
+html body .appear-by-fade {
+  opacity: 1;
+}
+html body .ready-hidden-by-fade {
+  transition: opacity 1s;
+}
+html body .hidden-by-fade {
+  opacity: 0;
+}
 html body .ready-hidden-by-slide-right {
   transform: translateX(0);
   transition: transform 2s;

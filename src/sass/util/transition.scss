@@ -1,5 +1,25 @@
 /* transitions */
 html body {
+  .before-appear-by-fade {
+    opacity: 0;
+  }
+
+  .ready-appear-by-fade {
+    transition: opacity 1s;
+  }
+
+  .appear-by-fade {
+    opacity: 1;
+  }
+
+  .ready-hidden-by-fade {
+    transition: opacity 1s;
+  }
+
+  .hidden-by-fade {
+    opacity: 0;
+  }
+
   .ready-hidden-by-slide-right {
     transform: translateX(0);
     transition: transform 2s;

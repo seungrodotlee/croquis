@@ -18,22 +18,31 @@ class Toast extends TemplateElement {
         });
       },
       childHandler: (addedNode) => {
-        console.log("?");
         this.content.appendChild(addedNode);
-        croquis._toastWrap.appendChild(this.body);
+        croquis.attachElement(this.body, croquis._toastWrap, "appear-by-fade");
+        //croquis._toastWrap.appendChild(this.body);
       },
     });
+  }
+
+  autoCloseAt(delay) {
+    setTimeout(() => {
+      //croquis._toastWrap.removeChild(this.body);
+      croquis.removeElement(this.body, "hidden-by-fade");
+    }, delay);
   }
 
   static newInstance(content) {
     let a = new Toast();
     document.body.appendChild(a);
-    a.innerHTML = content;
+    croquis.attachElement(a.body, croquis._toastWrap, "appear-by-fade");
+    a.content.innerHTML = content;
+    return a;
   }
 }
 
 croquis.newToast = (content) => {
-  Alert.newInstance(content);
+  return Toast.newInstance(content);
 };
 
 window.addEventListener("DOMContentLoaded", () => {

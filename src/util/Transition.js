@@ -8,8 +8,9 @@ croquis.transition = (el, transitionName, before, after) => {
   setTimeout(() => {
     el.classList.add(transitionName);
 
-    let callback = () => {
+    let callback = (e) => {
       el.classList.remove(`ready-${transitionName}`);
+      el.classList.remove(`before-${transitionName}`);
       el.classList.remove(transitionName);
       el.removeEventListener("transitionend", callback);
 
@@ -22,14 +23,29 @@ croquis.transition = (el, transitionName, before, after) => {
   }, 50);
 };
 
-croquis.attachElement = (el, parent, transitionName) => {
-  croquis.transition(el, transitionName, () => {
-    parent.attachElement(el);
-  });
+croquis.attachElement = (el, parent, transitionName, before, after) => {
+  el.classList.add(`before-${transitionName}`);
+  parent.appendChild(el);
+  setTimeout(() => {
+    croquis.transition(
+      el,
+      transitionName,
+      function () {
+        if (typeof before == "function") {
+          before();
+        }
+      },
+      after
+    );
+  }, 100);
 };
 
-croquis.removeElement = (el, transitionName) => {
-  croquis.transition(el, transitionName, undefined, () => {
+croquis.removeElement = (el, transitionName, before, after) => {
+  croquis.transition(el, transitionName, before, function () {
     el.parentElement.removeChild(el);
+
+    if (typeof after == "function") {
+      after();
+    }
   });
 };

@@ -105,6 +105,10 @@ croquis.children = (node) => {
 };
 
 croquis.define = (name, constructor) => {
+  if (constructor.name != "TemplateElement") {
+    console.log(constructor.name);
+    //window[constructor.name] = constructor;
+  }
   customElements.define(name, constructor);
   _croquis.customElements.push(constructor);
 };
@@ -121,13 +125,16 @@ croquis.newComponent = function (
   }
 ) {
   let data = arguments[1];
-  let C = class extends TemplateElement {
+  let camelCasedName = name.toCamelCase().replace(/-/g, "");
+  window[camelCasedName] = class extends (
+    TemplateElement
+  ) {
     constructor() {
       super(data);
     }
   };
 
-  croquis.define(name, C);
+  croquis.define(name, window[camelCasedName]);
 };
 croquis._toastWrap = document.createElement("div");
 croquis._toastWrap.classList.add("toast-wrap");

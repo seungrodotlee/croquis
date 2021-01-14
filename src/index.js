@@ -1,3 +1,4 @@
+import TemplateElement from "./util/TemplateElement.js";
 import "./util/Croquis.js";
 import DropDown from "./components/DropDown.js";
 import Tabs from "./components/Tabs.js";
@@ -14,5 +15,4 @@ import Sync from "./components/Sync.js";
 import Loop from "./components/Loop.js";
 import Svg from "./components/Svg.js";
 import { Row, Col } from "./components/Grid.js";
-
 import "./util/Transition.js";

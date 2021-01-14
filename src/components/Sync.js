@@ -21,6 +21,6 @@ class Sync extends TemplateElement {
   }
 }
 
-customElements.define("sync-", Sync);
+croquis.define("sync-", Sync);
 
 export default Sync;
