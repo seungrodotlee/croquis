@@ -10,8 +10,8 @@ class Icon extends TemplateElement {
         this.body.textContent = addedNode;
       },
       dataHandler: {
-        name: () => {
-          this.body.textContent = addedNode;
+        name: (newVal) => {
+          this.body.textContent = newVal;
         },
       },
     });
