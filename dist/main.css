@@ -418,6 +418,10 @@ body {
   display: flex;
 }
 
+.flex.vertical {
+  flex-direction: column;
+}
+
 .flex.align-right {
   justify-content: flex-end;
 }
