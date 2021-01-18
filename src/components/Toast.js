@@ -41,8 +41,13 @@ class Toast extends TemplateElement {
   }
 }
 
-croquis.newToast = (content) => {
-  return Toast.newInstance(content);
+croquis.newToast = (content, type = null) => {
+  let t = Toast.newInstance(content);
+  if (type != null) {
+    t.body.classList.add(`${type}-bg`);
+  }
+
+  return t;
 };
 
 window.addEventListener("DOMContentLoaded", () => {

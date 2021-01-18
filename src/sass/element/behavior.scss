@@ -1,3 +1,7 @@
+.transitionable {
+  transition: all 0.5s;
+}
+
 .hover {
   &-underscore,
   &-back {
@@ -43,6 +47,10 @@
 
   &-back:hover {
     color: $background;
+  }
+
+  &-scale:hover {
+    transform: scale(1.2);
   }
 
   &-underscore.from-center::after {

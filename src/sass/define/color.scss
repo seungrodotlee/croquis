@@ -71,8 +71,16 @@ $color-slot: (
 @each $slot-title, $slot in $color-slot {
   @each $color-title, $color in $color-map {
     html body .#{$color-title}-#{$slot-title} {
-      @if $slot == "border" {
+      @if $slot-title == "border" {
         #{$slot}: $color !important;
+
+        @each $size-key, $size in $border-level {
+          &-#{$size-key} {
+            border-style: solid;
+            border-width: $size;
+            #{$slot}: $color !important;
+          }
+        }
       } @else {
         #{$slot}: $color;
       }

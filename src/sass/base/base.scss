@@ -158,6 +158,29 @@
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
+/* text */
+.thin {
+  font-weight: 100;
+}
+
+.regular {
+  font-weight: 400;
+}
+
+.bold {
+  font-weight: 700;
+}
+
+.black {
+  font-weight: 900;
+}
+
+@each $size-key, $size in $font-level {
+  .text-#{$size-key} {
+    font-size: $size;
+  }
+}
+
 /* shadow */
 .box-shadow-s {
   box-shadow: 0 0.5em 1em -0.125em rgba(0, 0, 0, 0.1),
@@ -178,4 +201,16 @@
 
 .show-on-load {
   display: none;
+}
+
+/* padding & border */
+html body .no-padding {
+  padding: 0;
+}
+
+@each $size-key, $size in $border-level {
+  .border-#{$size-key} {
+    border-style: solid;
+    border-width: $size;
+  }
 }

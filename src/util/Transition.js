@@ -1,7 +1,7 @@
 croquis.transition = (el, transitionName, before, after) => {
-  let prom = new Promise((resolve, reject) => {
+  let prom = new Promise(async (resolve, reject) => {
     if (typeof before == "function") {
-      before();
+      await before();
     }
 
     el.classList.add(`ready-${transitionName}`);
@@ -10,15 +10,16 @@ croquis.transition = (el, transitionName, before, after) => {
       el.classList.add(transitionName);
 
       let callback = (e) => {
-        el.classList.remove(`ready-${transitionName}`);
+        if (e.target != el) return;
         el.classList.remove(`before-${transitionName}`);
+        el.classList.remove(`ready-${transitionName}`);
         el.classList.remove(transitionName);
-        el.removeEventListener("transitionend", callback);
 
         if (typeof after == "function") {
           after();
         }
 
+        el.removeEventListener("transitionend", callback);
         resolve(true);
       };
 
@@ -30,6 +31,10 @@ croquis.transition = (el, transitionName, before, after) => {
 };
 
 croquis.attachElement = (el, parent, transitionName, before, after) => {
+  if (el.classList.contains("_hidden")) {
+    el.classList.remove("_hidden");
+  }
+
   el.classList.add(`before-${transitionName}`);
   let found = false;
   for (let c of parent.children) {
@@ -53,7 +58,8 @@ croquis.attachElement = (el, parent, transitionName, before, after) => {
     transitionName,
     function () {
       if (typeof before == "function") {
-        before();
+        let p = before();
+        return p;
       }
     },
     after
