@@ -7,7 +7,10 @@ class Icon extends TemplateElement {
         <span class="material-icons"></span>
       `,
       childHandler: (addedNode) => {
-        this.body.textContent = addedNode;
+        if (addedNode.nodeType != Node.TEXT_NODE) {
+          throw Error("Only text value can be a child of 'icon-'");
+        }
+        this.body.textContent = addedNode.nodeValue;
       },
       dataHandler: {
         name: (newVal) => {
