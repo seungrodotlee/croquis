@@ -17,6 +17,7 @@ _croquis.dataMap = new Map();
 _croquis.origin = new Map();
 _croquis.proxys = new Map();
 _croquis.customElements = [];
+_croquis.loadCallbacks = [];
 
 croquis.bindRequest = (key, callback) => {
   console.log("bind req");
@@ -31,8 +32,8 @@ croquis.bindRequest = (key, callback) => {
 
 croquis.delay = (callback, delay) => {
   return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      callback();
+    setTimeout(async () => {
+      await callback();
       resolve(true);
     }, delay);
   });
@@ -220,18 +221,18 @@ let croquisBindingHandler = {
   get(target, key) {
     let r = Reflect.get(target, key);
 
-    if (target instanceof CroquisObject && !("_data" in target)) {
-      if (key.indexOf("_") != -1) {
-        return r;
-      }
-    }
-
     if (r == undefined) {
       return undefined;
     }
 
     if (typeof r == "function" || croquis.isElement(target[key])) {
       return r;
+    }
+
+    if (target instanceof CroquisObject && !("_data" in target)) {
+      if (key.indexOf("_") != -1) {
+        return r;
+      }
     }
 
     if (r instanceof CroquisObject && !("_data" in r)) {
@@ -453,8 +454,26 @@ let childs = document.querySelectorAll("body *");
 
 childs.forEach((el) => {
   if (el instanceof TemplateElement) return;
-
   if (el.getAttribute("id") != null) {
-    window.croquis[el.getAttribute("id").toCamelCase()] = el;
+    let camelCasedName = el.getAttribute("id").toCamelCase();
+    croquis[camelCasedName] = el;
   }
+});
+
+croquis.loaded = (callback) => {
+  _croquis.loadCallbacks.push(callback);
+};
+
+window.addEventListener("load", () => {
+  document.fonts.ready.then(function () {
+    _croquis.loadCallbacks.forEach((c) => {
+      c();
+    });
+  });
+});
+
+croquis.loaded(() => {
+  document.querySelectorAll(".show-on-load").forEach((el) => {
+    el.classList.remove("show-on-load");
+  });
 });

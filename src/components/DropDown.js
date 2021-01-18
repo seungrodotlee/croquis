@@ -18,14 +18,23 @@ class DropDown extends TemplateElement {
       templateHandler: () => {
         this.head = this.fromTemplate(".dropdown-head .title");
         this.content = this.fromTemplate(".dropdown-content");
+        this._current = null;
 
         this.body.addEventListener("click", () => {
           this.body.classList.toggle("active");
         });
+
+        this.body.getSelected = () => {
+          if (this._current == null) return null;
+          return this._current.textContent;
+        };
       },
       childHandler: (addedNode) => {
         addedNode.addEventListener("click", () => {
-          this._current.classList.remove("selected");
+          if (this._current != null) {
+            this._current.classList.remove("selected");
+          }
+
           addedNode.classList.toggle("selected");
 
           this._current = addedNode;
@@ -51,8 +60,14 @@ class DropDown extends TemplateElement {
         },
       },
     });
+  }
 
+  setMenus(elements) {
+    this.content.innerHTML = "";
     this._current = null;
+    elements.forEach((el) => {
+      this.__childHandler(el);
+    });
   }
 }
 
