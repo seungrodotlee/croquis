@@ -18,6 +18,7 @@ class DropDown extends TemplateElement {
       templateHandler: () => {
         this.head = this.fromTemplate(".dropdown-head .title");
         this.content = this.fromTemplate(".dropdown-content");
+        this._callbackMap = new Map();
         this._current = null;
 
         this.body.addEventListener("click", () => {
@@ -26,7 +27,38 @@ class DropDown extends TemplateElement {
 
         this.body.getSelected = () => {
           if (this._current == null) return null;
+          if (!croquis.isEmpty(this._current.dataset.title))
+            return this._current.dataset.title;
           return this._current.textContent;
+        };
+
+        this.body.addSelectEventListener = (callback) => {
+          let buttons = this.fromTemplateAll(".dropdown-content > div");
+
+          let callbacks = [];
+          buttons.forEach((b) => {
+            let c = (e) => {
+              callback(e, b);
+            };
+            b.addEventListener("click", c);
+            callbacks.push(c);
+          });
+
+          this._callbackMap.set(callback, callbacks);
+        };
+
+        this.body.removeSelectEventListener = (callback) => {
+          let callbacks = this._callbackMap.get(callback);
+          let buttons = this.fromTemplateAll(".dropdown-content > div");
+
+          for (let i in callbacks) {
+            let c = callbacks[i];
+            let b = buttons[i];
+
+            b.removeEventListener(c);
+          }
+
+          this._callbackMap.delete(callback);
         };
       },
       childHandler: (addedNode) => {
