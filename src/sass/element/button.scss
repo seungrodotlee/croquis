@@ -44,6 +44,10 @@ button {
   }
 }
 
+.button {
+  @extend button;
+}
+
 .button-wrap {
   button {
     margin-left: 8px;
@@ -51,5 +55,17 @@ button {
 
   button:first-child {
     margin-left: 0;
+  }
+}
+
+.dark-mode {
+  button {
+    color: $foreground-black;
+    background: $background-black;
+  }
+
+  button:not([class*="hover-"]):hover,
+  .button:not([class*="hover-"]):hover {
+    background: map-get($color-map, "grey-darkest");
   }
 }

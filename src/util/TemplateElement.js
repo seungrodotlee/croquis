@@ -63,7 +63,6 @@ class TemplateElement extends HTMLElement {
     temp = temp.firstElementChild;
 
     this.body = this.insertAfter(temp);
-    //console.log("insert", this.body);
 
     // templateHandler 호출
     this.__templateHandler();
@@ -107,21 +106,13 @@ class TemplateElement extends HTMLElement {
   registryChildren(children) {
     for (let i = 0; i < children.length; i++) {
       let addedNode = children[i];
-      // if (croquis.isEmpty(addedNode)) {
-      //   continue;
-      // }
 
       if (
         croquis.isElement(addedNode) ||
         !croquis.isEmpty(addedNode.data.replace(/(\s*)/g, ""))
       ) {
         this.__origins.push(addedNode);
-        -this.__childHandler(addedNode);
-
-        // if (!croquis.isElement(addedNode)) {
-        //   console.log("start reg", addedNode);
-        //   this.registryTargetNodeEach(addedNode);
-        // }
+        this.__childHandler(addedNode);
       }
     }
   }
@@ -129,7 +120,6 @@ class TemplateElement extends HTMLElement {
   childAddedCallback(mutationsList, observer) {
     let children = [];
     for (let mutation of mutationsList) {
-      //console.log(mutation);
       if (mutation.addedNode != undefined) {
         children.push(mutation.addedNode[0]);
       }

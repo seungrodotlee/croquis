@@ -218,8 +218,6 @@ class Table extends TemplateElement {
 
       this.registRowDelBtn(tr);
     }
-
-    console.log(this.data);
   }
 }
 

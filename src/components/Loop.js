@@ -15,8 +15,6 @@ class Loop extends TemplateElement {
       },
       dataHandler: {
         for: (newVal) => {
-          console.log("val ", newVal);
-          console.log(isNaN(newVal));
           if (!isNaN(newVal)) {
             this._loopCount = parseInt(newVal);
 
@@ -54,7 +52,6 @@ class Loop extends TemplateElement {
             }
 
             this.data._loopTarget = this.data._loopTarget || [];
-            console.log(this.data._loopTarget);
             this.data._loopTarget.push(this);
 
             let keysReg = new RegExp(
@@ -62,17 +59,9 @@ class Loop extends TemplateElement {
             );
             let keys = keysReg.exec(matches[0]).remove(matches[0]);
 
-            console.log("keys", keys);
             ({ 0: this._valBind, 1: this._keyBind, 2: this._idxBind } = keys);
 
-            console.log(this._valBind);
-
-            console.log(target);
-
-            console.log(this.__origins);
-
             let objKeys = Object.keys(Object.assign({}, this.data));
-            console.log(objKeys);
             let filtered = [];
             for (let k of objKeys) {
               if (k.indexOf("_") == -1) {
@@ -82,7 +71,6 @@ class Loop extends TemplateElement {
 
             objKeys = filtered;
 
-            console.log(objKeys);
             this._loopCount = objKeys.length;
 
             for (let i = this._currentIdx; i < this._loopCount; i++) {
@@ -99,58 +87,6 @@ class Loop extends TemplateElement {
             );
             return;
           }
-
-          // let p = null;
-          // let bindCallback = () => {
-          //   console.log(newVal);
-
-          //   console.log("b t ", croquis[newVal]);
-          //   this._loopCount = Object.keys(croquis[newVal]).length;
-          //   console.log(this._loopCount);
-
-          //   this._loopCount -= this.kIdx;
-          //   console.log("real loop count = " + this._loopCount);
-
-          //   let nodes = [];
-          //   let node = null;
-          //   console.log("temp:");
-          //   console.log(this._temp);
-          //   console.log("nodes:");
-          //   for (let i = 0; i < this._loopCount; i++) {
-          //     nodes[i] = [];
-          //     for (let j = 0; j < this._temp.length; j++) {
-          //       node = this._temp[j].cloneNode(true);
-          //       this.body.appendChild(node);
-          //       nodes[i][j] = node;
-          //       console.log(node.outerHTML);
-          //     }
-          //   }
-
-          //   console.log("body" + this.body.innerHTML);
-          //   p = this.registryTargetNodes(
-          //     this.fromTemplateAll("*"),
-          //     croquis[newVal]
-          //   );
-
-          //   for (let i = 0; i < this._loopCount; i++) {
-          //     for (let j = 0; j < this._temp.length; j++) {
-          //       node = nodes[i][j];
-          //       console.log("add", node);
-          //       console.log("behind ", this._position);
-          //       this._position.insertAfter(node);
-          //       //this.body.appendChild(this._temp[j]);
-          //       if (this._position == this.body) {
-          //         this.body.parentElement.removeChild(this.body);
-          //       }
-          //       this._position = node;
-          //     }
-          //   }
-
-          //   _croquis.proxys[newVal].push(p);
-          //   console.log(this.body);
-          // };
-
-          // croquis.bindRequest(newVal, bindCallback);
         },
       },
     });
@@ -198,8 +134,6 @@ class Loop extends TemplateElement {
           }
 
           objKeys = filtered;
-          console.log(objKeys);
-          console.log(this._currentIdx);
 
           let idx = this._currentIdx - this.data._removed;
 
@@ -208,7 +142,6 @@ class Loop extends TemplateElement {
               cutted.nodeValue = this.data[objKeys[idx]];
 
               let path = this.data._name + "." + objKeys[idx];
-              console.log("path ", path);
 
               if (!("_target" in _croquis.origin.get(path))) {
                 _croquis.origin.get(path)._target = [];
@@ -221,8 +154,6 @@ class Loop extends TemplateElement {
               cutted.nodeValue = objKeys[idx];
             }
 
-            console.log("tv", targetValue);
-            console.log("idx bind", this._idxBind);
             if (targetValue == this._idxBind) {
               cutted.nodeValue = this._currentIdx;
             }

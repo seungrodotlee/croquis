@@ -76,7 +76,6 @@ class Scroller extends TemplateElement {
               this.pages[this.current].classList.add("current");
             }, this.delay);
           } else {
-            console.log("stop intv");
             clearInterval(this.interval);
           }
         },
@@ -106,18 +105,6 @@ class Scroller extends TemplateElement {
       );
     }, 1);
   }
-
-  // scroll() {
-  //   console.log("current = " + this.current);
-  //   this.pages[this.current].classList.remove("current");
-  //   this.current++;
-
-  //   if(this.current == this.length) {
-  //     this.current = 0;
-  //   }
-
-  //   this.pages[this.current].classList.add("current");
-  // }
 }
 
 croquis.define("scroller-", Scroller);

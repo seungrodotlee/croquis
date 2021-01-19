@@ -109,3 +109,13 @@
     }
   }
 }
+
+.dark-mode .hover {
+  &-back:hover {
+    color: $background-black;
+  }
+
+  &-back::after {
+    background: $foreground-black;
+  }
+}

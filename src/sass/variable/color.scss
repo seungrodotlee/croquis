@@ -6,16 +6,6 @@ $foreground: $black;
 $background-black: $black;
 $foreground-black: $white;
 
-body {
-  background: $background;
-  color: $foreground;
-}
-
-body.dark-mode {
-  background: $background-black;
-  color: $foreground-black;
-}
-
 $theme-color: (
   "primary": #0d3cca,
   "secondary": #0f7de4,
@@ -59,6 +49,17 @@ $color-steps: (
 $color-map: (
   "white": $white,
   "black": $black,
+  "foreground": $foreground,
+  "background": $background,
+  "deep-foreground": black,
+  "deep-background": white,
+);
+
+$dark-color-map: (
+  "foreground": $foreground-black,
+  "background": $background-black,
+  "deep-foreground": white,
+  "deep-background": black,
 );
 
 $color-map: map-merge($color-map, $theme-color);

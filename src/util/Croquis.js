@@ -20,7 +20,6 @@ _croquis.customElements = [];
 _croquis.loadCallbacks = [];
 
 croquis.bindRequest = (key, callback) => {
-  console.log("bind req");
   if (croquis[key] != undefined) {
     callback();
     return;
@@ -107,7 +106,6 @@ croquis.children = (node) => {
 
 croquis.define = (name, constructor) => {
   if (constructor.name != "TemplateElement") {
-    console.log(constructor.name);
     //window[constructor.name] = constructor;
   }
   customElements.define(name, constructor);
@@ -204,7 +202,6 @@ let croquisBindingHandler = {
 
       let loops = target._loopTarget;
 
-      console.log("idx ", idx);
       for (let loop of loops) {
         for (let i = 0; i < loop.__origins.length; i++) {
           let el = loop._bindedElements[idx];
