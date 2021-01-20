@@ -7,7 +7,7 @@ module.exports = {
   },
   output: {
     filename: "croquis.js",
-    path: path.resolve("./dist"),
+    path: path.resolve("./demo/script"),
   },
   module: {
     rules: [
