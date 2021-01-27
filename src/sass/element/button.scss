@@ -42,6 +42,19 @@ button {
   &:not([class*="active-"]):active {
     transform: scale(0.95);
   }
+
+  &.centered-anchor:not([class*="active-"]):active,
+  &.centered:not([class*="active-"]):active {
+    transform: scale(0.95) translateX(-50%) translateY(-50%);
+  }
+
+  &.centered-x:not([class*="active-"]):active {
+    transform: scale(0.95) translateX(-50%);
+  }
+
+  &.centered-y:not([class*="active-"]):active {
+    transform: scale(0.95) translateY(-50%);
+  }
 }
 
 .button {
