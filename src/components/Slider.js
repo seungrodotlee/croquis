@@ -1,23 +1,23 @@
 import TemplateElement from "../util/TemplateElement.js";
 
-class Scroller extends TemplateElement {
+class Slider extends TemplateElement {
   constructor() {
     super({
       template: `
-        <div class="scroller">
-          <button class="scroller-prev-btn centered-y">
+        <div class="slider">
+          <button class="slider-prev-btn centered-y">
             <span class="material-icons">keyboard_arrow_left</span>
           </button>
-          <button class="scroller-next-btn centered-y">
+          <button class="slider-next-btn centered-y">
             <span class="material-icons">keyboard_arrow_right</span>
           </button>
-          <div class="scroller-content item-contain"></div>
+          <div class="slider-content item-contain"></div>
         </div>
       `,
       templateHandler: () => {
-        this.prevBtn = this.fromTemplate(".scroller-prev-btn");
-        this.nextBtn = this.fromTemplate(".scroller-next-btn");
-        this.content = this.fromTemplate(".scroller-content");
+        this.prevBtn = this.fromTemplate(".slider-prev-btn");
+        this.nextBtn = this.fromTemplate(".slider-next-btn");
+        this.content = this.fromTemplate(".slider-content");
 
         this.current = 0;
         this.length = 0;
@@ -175,6 +175,6 @@ class Scroller extends TemplateElement {
   }
 }
 
-croquis.define("scroller-", Scroller);
+croquis.define("slider-", Slider);
 
-export default Scroller;
+export default Slider;
