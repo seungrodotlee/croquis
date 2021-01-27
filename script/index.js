@@ -194,8 +194,8 @@ window.addEventListener("load", () => {
       );
     }
 
-    if (pos >= 2.6 * h && pos < 3.6 * h) {
-      let ratio = (pos - 2.6 * h) / h;
+    if (pos >= 2.5 * h && pos < 3.5 * h) {
+      let ratio = (pos - 2.5 * h) / h;
 
       croquis.dropdownExample.setAttribute(
         "style",
@@ -209,7 +209,7 @@ window.addEventListener("load", () => {
         "style",
         `transform: translateY(${-9 * ratio}rem)`
       );
-    } else if (pos < 2.6 * h) {
+    } else if (pos < 2.5 * h) {
       croquis.dropdownExample.setAttribute(
         "style",
         "transform: translateX(-50%) translateY(100%)"

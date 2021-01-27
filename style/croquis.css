@@ -3472,6 +3472,15 @@ button:not([class*=hover-]):hover, .button:not([class*=hover-]):hover {
 button:not([class*=active-]):active, .button:not([class*=active-]):active {
   transform: scale(0.95);
 }
+button.centered-anchor:not([class*=active-]):active, .centered-anchor.button:not([class*=active-]):active, button.centered:not([class*=active-]):active, .centered.button:not([class*=active-]):active {
+  transform: scale(0.95) translateX(-50%) translateY(-50%);
+}
+button.centered-x:not([class*=active-]):active, .centered-x.button:not([class*=active-]):active {
+  transform: scale(0.95) translateX(-50%);
+}
+button.centered-y:not([class*=active-]):active, .centered-y.button:not([class*=active-]):active {
+  transform: scale(0.95) translateY(-50%);
+}
 
 .button-wrap button, .button-wrap .button {
   margin-left: 8px;
@@ -4542,19 +4551,40 @@ html body .dropdown .dropdown-head:hover {
 }
 
 .scroller-content {
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 
-.scroller-content > div,
-.scroller-content > img {
+.scroller-content > * {
   display: none;
-  object-fit: cover;
-  min-width: 100%;
+  width: 100%;
+  height: 100%;
 }
 
-.scroller-content > div.current,
-.scroller-content > img.current {
-  display: inline-block;
+.scroller[class*=item-fit-] {
+  width: fit-content;
+}
+
+.scroller img {
+  max-width: 100%;
+  height: auto;
+}
+
+.scroller.item-fit-contain .scroller-content img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.scroller.item-fit-contain .scroller-content img {
+  object-fit: none;
+  height: 100%;
+  width: 100%;
+}
+
+.scroller-content > .current {
+  display: block;
 }
 
 .table-wrap {
