@@ -1,4 +1,24 @@
 {
+  "name": "@d0t/croquis",
+  "version": "0.1.2",
+  "description": "CSS+JS Frontend Framework based on Template System.",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seungrolee/croquis.git"
+  },
+  "keywords": [
+    "css",
+    "frontend",
+    "framework",
+    "component",
+    "template"
+  ],
+  "author": "seungrodotlee",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seungrolee/croquis/issues"
+  },
   "scripts": {
     "build:all": "npm run build && npm run build:sass",
     "watch:all": "npm run watch && npm run watch:sass",

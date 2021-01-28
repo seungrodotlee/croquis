@@ -11,13 +11,15 @@ class Slider extends TemplateElement {
           <button class="slider-next-btn centered-y">
             <span class="material-icons">keyboard_arrow_right</span>
           </button>
-          <div class="slider-content item-contain"></div>
+          <div class="slider-content item-contain">
+          </div>
         </div>
       `,
       templateHandler: () => {
         this.prevBtn = this.fromTemplate(".slider-prev-btn");
         this.nextBtn = this.fromTemplate(".slider-next-btn");
         this.content = this.fromTemplate(".slider-content");
+        this.roll = this.fromTemplate(".slider-roll");
 
         this.current = 0;
         this.length = 0;
@@ -29,11 +31,16 @@ class Slider extends TemplateElement {
         this.smallestHeight = 0;
         this.biggestHeight = 0;
 
+        this.body.scrollTo = (position) => {
+          this.roll.style.transform = `translateX(${-position * 100}%)`;
+        };
+
         this.prevBtn.addEventListener("click", () => {
           if (this.current != 0) {
             this.pages[this.current].classList.remove("current");
             this.current--;
             this.pages[this.current].classList.add("current");
+            //this.body.scrollTo(this.current);
           }
         });
 
@@ -42,6 +49,7 @@ class Slider extends TemplateElement {
             this.pages[this.current].classList.remove("current");
             this.current++;
             this.pages[this.current].classList.add("current");
+            //this.body.scrollTo(this.current);
           }
         });
 
@@ -52,38 +60,41 @@ class Slider extends TemplateElement {
         });
       },
       childHandler: (addedNode) => {
-        let originDisplay = addedNode.style.display;
-        addedNode.style.display = "inline-block";
-        console.dir(addedNode);
-        console.log(addedNode.clientWidth);
+        // let originDisplay = addedNode.style.display;
 
-        let h = addedNode.clientHeight;
-        let w = addedNode.clientWidth;
+        // this.style.height = "100vh";
+        // this.style.width = "100vw";
+        // addedNode.style.display = "inline-block";
+        // console.dir(addedNode);
+        // console.log(addedNode.getBoundingClientRect());
 
-        addedNode.style.display = originDisplay;
+        // let h = addedNode.clientHeight;
+        // let w = addedNode.clientWidth;
+
+        // addedNode.style.display = originDisplay;
 
         if (this.length == 0) {
           addedNode.classList.add("current");
-          this.smallestHeight = h;
-          this.biggestHeight = h;
-          this.smallestWidth = w;
-          this.biggestWidth = w;
-        } else {
-          if (h < this.smallestHeight) {
-            this.smallestHeight = h;
-          }
+          //   this.smallestHeight = h;
+          //   this.biggestHeight = h;
+          //   this.smallestWidth = w;
+          //   this.biggestWidth = w;
+          // } else {
+          //   if (h < this.smallestHeight) {
+          //     this.smallestHeight = h;
+          //   }
 
-          if (h > this.biggestHeight) {
-            this.biggestHeight = h;
-          }
+          //   if (h > this.biggestHeight) {
+          //     this.biggestHeight = h;
+          //   }
 
-          if (w < this.smallestWidth) {
-            this.smallestWidth = w;
-          }
+          //   if (w < this.smallestWidth) {
+          //     this.smallestWidth = w;
+          //   }
 
-          if (w > this.biggestWidth) {
-            this.biggestWidth = w;
-          }
+          //   if (w > this.biggestWidth) {
+          //     this.biggestWidth = w;
+          //   }
         }
 
         this.pages[this.length] = addedNode;
@@ -115,26 +126,60 @@ class Slider extends TemplateElement {
           }
         },
         align: (newVal) => {
-          if (newVal === "min") {
-            this.body.classList.remove("item-fit-contain");
-            this.body.classList.add("item-fit-cover");
-            this.body.style.height = this.smallestHeight + "px";
-            this.body.style.width = this.smallestWidth + "px";
-          }
+          console.dir(this.content);
+          setTimeout(() => {
+            let children = this.content.children;
+            console.log(children);
 
-          if (newVal === "centering") {
-            this.body.classList.add("item-fit-contain");
-            this.body.classList.remove("item-fit-cover");
-            this.body.style.height = this.biggestHeight + "px";
-            this.body.style.width = this.biggestWidth + "px";
-          }
+            for (let i = 0; i < children.length; i++) {
+              let c = children[i];
+              let origin = c.style.display;
 
-          if (newVal === "max") {
-            this.body.classList.remove("item-fit-contain");
-            this.body.classList.add("item-fit-cover");
-            this.body.style.height = this.biggestHeight + "px";
-            this.body.style.width = this.biggestWidth + "px";
-          }
+              console.log(c);
+
+              c.style.display = "inline-block";
+              c.style.position = "relative";
+              let h = c.getBoundingClientRect().height;
+              c.style.display = origin;
+              c.style.position = "";
+
+              if (i === 0) {
+                this.smallestHeight = h;
+                this.biggestHeight = h;
+              } else {
+                if (h < this.smallestHeight) {
+                  this.smallestHeight = h;
+                }
+
+                if (h > this.biggestHeight) {
+                  this.biggestHeight = h;
+                }
+              }
+            }
+
+            if (newVal === "min") {
+              this.body.classList.remove("item-fit-contain");
+              this.body.classList.add("item-fit-cover");
+
+              if (!this._noHeight) {
+                this.body.style.height = this.smallestHeight + "px";
+              }
+            }
+            if (newVal === "centering") {
+              this.body.classList.add("item-fit-contain");
+              this.body.classList.remove("item-fit-cover");
+              if (!this._noHeight) {
+                this.body.style.height = this.biggestHeight + "px";
+              }
+            }
+            if (newVal === "max") {
+              this.body.classList.remove("item-fit-contain");
+              this.body.classList.add("item-fit-cover");
+              if (!this._noHeight) {
+                this.body.style.height = this.biggestHeight + "px";
+              }
+            }
+          }, 100);
         },
         fit: (newVal) => {
           if (newVal === "centering") {
@@ -145,6 +190,14 @@ class Slider extends TemplateElement {
           if (newVal == "cover") {
             this.body.classList.remove("item-fit-contain");
             this.body.classList.add("item-fit-cover");
+          }
+        },
+        "no-height": (newVal) => {
+          newVal = JSON.parse(newVal);
+          console.log(newVal);
+          if (newVal) {
+            this.body.style.height = "";
+            this._noHeight = true;
           }
         },
         ratio: (newVal) => {
