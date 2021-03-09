@@ -20,14 +20,47 @@ html body {
     opacity: 0;
   }
 
-  .ready-hidden-by-slide-right {
+  .ready-appear-by-slide-up,
+  .ready-appear-by-slide-right,
+  .ready-appear-by-slide-down,
+  .ready-appear-by-slide-left,
+  .ready-hidden-by-slide-up,
+  .ready-hidden-by-slide-right,
+  .ready-hidden-by-slide-down,
+  .ready-hidden-by-slide-left {
     transform: translateX(0);
     transition: transform 2s;
     transition-timing-function: cubic-bezier(0.75, 0, 0, 1);
   }
 
+  .before-appear-by-slide-down,
+  .hidden-by-slide-up {
+    transform: translateY(-100%);
+  }
+
+  .before-appear-by-slide-left,
   .hidden-by-slide-right {
     transform: translateX(100%);
+  }
+
+  .before-appear-by-slide-up,
+  .hidden-by-slide-down {
+    transform: translateY(100%);
+  }
+
+  .before-appear-by-slide-right,
+  .hidden-by-slide-left {
+    transform: translateX(-100%);
+  }
+
+  .appear-by-slide-down,
+  .appear-by-slide-up {
+    transform: translateY(0);
+  }
+
+  .appear-by-slide-left,
+  .appear-by-slide-right {
+    transform: translateX(0);
   }
 
   .ready-hidden-by-offset-slide-right {
