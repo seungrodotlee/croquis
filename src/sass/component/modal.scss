@@ -51,5 +51,17 @@
 }
 
 .modal .cancel-btn {
+  @extend .round-btn;
   @extend .no-background;
+}
+
+.dark-mode {
+  .modal-main {
+    background: $black;
+  }
+
+  .modal-title,
+  .modal-body {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  }
 }

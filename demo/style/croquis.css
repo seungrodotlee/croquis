@@ -3299,7 +3299,7 @@ button.short-btn, .short-btn.button {
   padding: 0.25em;
   border: 0;
 }
-button.round-btn, .modal button.submit-btn, .round-btn.button, .modal .button.submit-btn {
+button.round-btn, .modal button.cancel-btn, .modal button.submit-btn, .round-btn.button, .modal .button.cancel-btn, .modal .button.submit-btn {
   border-radius: 0.85rem;
 }
 button.square-btn, .square-btn.button {
@@ -4540,6 +4540,14 @@ html body .dropdown .dropdown-head:hover {
   background: var(--primary);
   color: white;
   border: 0;
+}
+
+.dark-mode .modal-main {
+  background: #222222;
+}
+.dark-mode .modal-title,
+.dark-mode .modal-body {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .slider {

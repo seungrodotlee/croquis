@@ -38,6 +38,14 @@ croquis.delay = (callback, delay) => {
   });
 };
 
+croquis.sleep = (delay) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(async () => {
+      resolve(true);
+    }, delay);
+  });
+};
+
 croquis.isElement = (obj) => {
   try {
     return obj instanceof HTMLElement || obj instanceof SVGSVGElement;
@@ -125,9 +133,7 @@ croquis.newComponent = function (
 ) {
   let data = arguments[1];
   let camelCasedName = name.toCamelCase().replace(/-/g, "");
-  window[camelCasedName] = class extends (
-    TemplateElement
-  ) {
+  window[camelCasedName] = class extends TemplateElement {
     constructor() {
       super(data);
     }

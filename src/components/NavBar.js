@@ -41,7 +41,16 @@ class NavBar extends TemplateElement {
           this._head.textContent = newVal;
         },
         logo: (newVal) => {
-          this._logoPlace.setAttribute("src", newVal);
+          if (newVal.indexOf(".svg") !== -1) {
+            let svg = document.createElement("svg-");
+            svg.dataset.src = newVal;
+            svg.classList.add("nav-bar-logo");
+            this._logoPlace.insertAfter(svg);
+            this._left.removeChild(this._logoPlace);
+            this._logoPlace = svg;
+          } else {
+            this._logoPlace.setAttribute("src", newVal);
+          }
         },
         parted: (newVal) => {
           newVal = JSON.parse(newVal);

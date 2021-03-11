@@ -33,6 +33,11 @@ class Modal extends TemplateElement {
           this.submitBtn.removeEventListener(callback);
         };
 
+        this.body.close = () => {
+          let parent = this.body.parentElement;
+          parent.removeChild(this.body);
+        };
+
         this.body.onSubmit = this.onSubmit;
         document.body.appendChild(this.body);
       },
@@ -53,6 +58,11 @@ class Modal extends TemplateElement {
     this.submitBtn.addEventListener("click", callback);
   }
 
+  close() {
+    let parent = this.body.parentElement;
+    parent.removeChild(this.body);
+  }
+
   static newInstance(id, title, content, callback) {
     let a = new Modal();
     a.setAttribute("id", id);
@@ -61,8 +71,8 @@ class Modal extends TemplateElement {
 
     document.body.appendChild(a);
 
-    if (callback != null) {
-      a.onSubmit(callback);
+    if (typeof callback == "function") {
+      a.onSubmit(callback.bind(a));
     }
 
     return a;
