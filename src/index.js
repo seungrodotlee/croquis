@@ -16,5 +16,6 @@ import Loop from "./components/Loop.js";
 import Svg from "./components/Svg.js";
 import Spacer from "./components/Spacer.js";
 import Icon from "./components/Icon.js";
+import LettersWindow from "./components/LettersWindow.js";
 import { Row, Col } from "./components/Grid.js";
 import "./util/Transition.js";

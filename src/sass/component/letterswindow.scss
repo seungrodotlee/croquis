@@ -1,0 +1,17 @@
+.letter-window-frame,
+.letter-window {
+  @extend .rel;
+}
+
+.letter-window-frame {
+  overflow: hidden;
+}
+
+.letter-window {
+  transition: transform 1.25s;
+  transition-timing-function: cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+.letter-window.closed {
+  transform: translateX(-100%);
+}

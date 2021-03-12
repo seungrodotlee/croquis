@@ -394,6 +394,23 @@ h4 {
   font-size: 1.5rem;
 }
 
+@media (max-width: 991px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+  }
+}
 input {
   background: transparent;
 }
@@ -434,7 +451,8 @@ body {
   position: absolute;
 }
 
-.rel {
+.rel, .letter-window-frame,
+.letter-window {
   position: relative;
 }
 
@@ -4857,6 +4875,19 @@ td {
 .nav-bar-left-inner > *,
 .nav-bar-right-inner > * {
   white-space: nowrap;
+}
+
+.letter-window-frame {
+  overflow: hidden;
+}
+
+.letter-window {
+  transition: transform 1.25s;
+  transition-timing-function: cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+.letter-window.closed {
+  transform: translateX(-100%);
 }
 
 /*# sourceMappingURL=croquis.css.map */

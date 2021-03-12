@@ -416,6 +416,8 @@ let observer = new MutationObserver((mutationsList) => {
     }
 
     if (mutation.type == "attributes" && mutation.attributeName == "id") {
+      if (mutation.target.getAttribute("id") === null) return;
+
       window.croquis[mutation.target.getAttribute("id").toCamelCase()] =
         mutation.target;
 

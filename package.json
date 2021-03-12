@@ -1,6 +1,6 @@
 {
   "name": "hello-croquis",
-  "version": "0.1.10",
+  "version": "0.1.13",
   "description": "CSS+JS Frontend Framework based on Template System.",
   "main": "src/index.js",
   "repository": {
@@ -21,7 +21,7 @@
   },
   "scripts": {
     "build:all": "npm run build && npm run build:sass",
-    "watch:all": "npm run watch && npm run watch:sass",
+    "watch:all": "concurrently 'npm:watch' 'npm:watch:sass'",
     "build": "./node_modules/.bin/webpack && cp ./demo/script/croquis.js ./dist/croquis.js",
     "watch": "./node_modules/.bin/webpack --watch",
     "build:sass": "sass src/sass/main.scss:dist/croquis.css && cp ./dist/croquis.css ./demo/style/croquis.css",
