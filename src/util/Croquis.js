@@ -20,7 +20,7 @@ _croquis.customElements = [];
 _croquis.loadCallbacks = [];
 
 croquis.fromArray = (name, array) => {
-  if (!(name instanceof String)) {
+  if (!(typeof name === "string")) {
     throw Error("Wrong value handed to name parameter!");
   }
 
