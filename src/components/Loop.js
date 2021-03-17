@@ -93,14 +93,59 @@ class Loop extends TemplateElement {
   }
 
   registryBindingNodes(el) {
-    let nodes = croquis.getTextNodesUnder(el);
+    let elementNodes = el.querySelectorAll(":scope *");
+
+    let textNodes = croquis.getTextNodesUnder(el);
 
     let reg = new RegExp(
       `${this.__bindBracket[0]}.+?${this.__bindBracket[1]}`,
       "g"
     );
 
-    for (let t of nodes) {
+    let objKeys = Object.keys(this.data);
+
+    let filtered = [];
+    for (let k of objKeys) {
+      if (k.indexOf("_") == -1) {
+        filtered.push(k);
+      }
+    }
+
+    objKeys = filtered;
+
+    let idx = this._currentIdx - this.data._removed;
+
+    (() => {
+      let id = el.getAttribute("id");
+
+      if (id === null) return;
+
+      let matchs = id.match(reg);
+
+      if (matchs != null) {
+        for (let target of matchs) {
+          let targetValue = target
+            .replace(this.__bindBracket[0], "")
+            .replace(this.__bindBracket[1], "");
+
+          if (targetValue == this._valBind) {
+            id = id.replace(reg, this.data[objKeys[idx]]);
+          }
+
+          if (targetValue == this._keyBind) {
+            id = id.replace(reg, objKeys[idx]);
+          }
+
+          if (targetValue == this._idxBind) {
+            id = id.replace(reg, this._currentIdx);
+          }
+
+          el.setAttribute("id", id);
+        }
+      }
+    })();
+
+    for (let t of textNodes) {
       let value = t.nodeValue;
       let matches = value.match(reg);
       if (matches != null) {
@@ -123,19 +168,6 @@ class Loop extends TemplateElement {
             cutted = t;
             t = t.splitText(e - s);
           }
-
-          let objKeys = Object.keys(this.data);
-
-          let filtered = [];
-          for (let k of objKeys) {
-            if (k.indexOf("_") == -1) {
-              filtered.push(k);
-            }
-          }
-
-          objKeys = filtered;
-
-          let idx = this._currentIdx - this.data._removed;
 
           if (objKeys != 0) {
             if (targetValue == this._valBind) {

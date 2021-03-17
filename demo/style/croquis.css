@@ -4877,6 +4877,10 @@ td {
   white-space: nowrap;
 }
 
+.letters-window {
+  display: inline-flex;
+}
+
 .letter-window-frame {
   overflow: hidden;
 }

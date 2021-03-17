@@ -36,9 +36,12 @@ class LettersWindow extends TemplateElement {
           let letterWindow = document.createElement("span");
           letterWindow.classList.add("letter-window", "inline-blk", "closed");
 
-          console.log(i);
-          console.log(addedNode.nodeValue[i]);
-          letterWindow.textContent = addedNode.nodeValue[i];
+          let data = addedNode.nodeValue[i];
+          if (data === " ") {
+            data = "&nbsp;";
+          }
+
+          letterWindow.innerHTML = data;
 
           windowFrame.appendChild(letterWindow);
           this.body.appendChild(windowFrame);

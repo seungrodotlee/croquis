@@ -1,3 +1,7 @@
+.letters-window {
+  display: inline-flex;
+}
+
 .letter-window-frame,
 .letter-window {
   @extend .rel;

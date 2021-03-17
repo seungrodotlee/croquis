@@ -19,6 +19,24 @@ _croquis.proxys = new Map();
 _croquis.customElements = [];
 _croquis.loadCallbacks = [];
 
+croquis.fromArray = (name, array) => {
+  if (!(name instanceof String)) {
+    throw Error("Wrong value handed to name parameter!");
+  }
+
+  if (!(array instanceof Array)) {
+    throw Error("Wrong value handed to array parameter!");
+  }
+
+  let temp = {};
+
+  for (let i = 0; i < array.length; i++) {
+    temp[name + i] = array[i];
+  }
+
+  croquis[name] = temp;
+};
+
 croquis.bindRequest = (key, callback) => {
   if (croquis[key] != undefined) {
     callback();
@@ -387,53 +405,53 @@ HTMLElement.prototype.copyAttrsTo = function (target) {
     }
   }
 };
+{
+  let observer = new MutationObserver((mutationsList) => {
+    // for (let mutation of mutationsList)
+    mutationsList.forEach((mutation) => {
+      if (mutation.type == "childList") {
+        for (let addedNode of mutation.addedNodes) {
+          if (addedNode == undefined) return;
 
-let observer = new MutationObserver((mutationsList) => {
-  // for (let mutation of mutationsList)
-  mutationsList.forEach((mutation) => {
-    if (mutation.type == "childList") {
-      for (let addedNode of mutation.addedNodes) {
-        if (addedNode == undefined) return;
+          if (croquis.isElement(addedNode)) {
+            if (addedNode instanceof TemplateElement) {
+              return;
+            }
 
-        if (croquis.isElement(addedNode)) {
-          if (addedNode instanceof TemplateElement) {
-            return;
+            if (addedNode.getAttribute("id") == null) return;
+
+            addedNode.querySelectorAll(":scope *").forEach((el) => {
+              if (el.getAttribute("id") == null) return;
+
+              window.croquis[el.getAttribute("id").toCamelCase()] = el;
+            });
+
+            window.croquis[
+              addedNode.getAttribute("id").toCamelCase()
+            ] = addedNode;
           }
-
-          if (addedNode.getAttribute("id") == null) return;
-
-          addedNode.querySelectorAll(":scope *").forEach((el) => {
-            if (el.getAttribute("id") == null) return;
-
-            window.croquis[el.getAttribute("id").toCamelCase()] = el;
-          });
-
-          window.croquis[
-            addedNode.getAttribute("id").toCamelCase()
-          ] = addedNode;
         }
       }
-    }
 
-    if (mutation.type == "attributes" && mutation.attributeName == "id") {
-      if (mutation.target.getAttribute("id") === null) return;
+      if (mutation.type == "attributes" && mutation.attributeName == "id") {
+        if (mutation.target.getAttribute("id") === null) return;
 
-      window.croquis[mutation.target.getAttribute("id").toCamelCase()] =
-        mutation.target;
+        window.croquis[mutation.target.getAttribute("id").toCamelCase()] =
+          mutation.target;
 
-      if (mutation.oldValue != null) {
-        delete window.croquis[mutation.oldValue];
+        if (mutation.oldValue != null) {
+          delete window.croquis[mutation.oldValue];
+        }
       }
-    }
+    });
   });
-});
 
-observer.observe(document.body, {
-  childList: true,
-  attributes: true,
-  subtree: true,
-});
-
+  observer.observe(document.body, {
+    childList: true,
+    attributes: true,
+    subtree: true,
+  });
+}
 String.prototype.toCamelCase = function () {
   return this.replace(/-([a-z0-9+])/g, function (g) {
     let reg = /^[a-z]/g;
@@ -455,15 +473,17 @@ Array.prototype.remove = function (el) {
   return this;
 };
 
-let childs = document.querySelectorAll("body *");
+{
+  let childs = document.querySelectorAll("body *");
 
-childs.forEach((el) => {
-  if (el instanceof TemplateElement) return;
-  if (el.getAttribute("id") != null) {
-    let camelCasedName = el.getAttribute("id").toCamelCase();
-    croquis[camelCasedName] = el;
-  }
-});
+  childs.forEach((el) => {
+    if (el instanceof TemplateElement) return;
+    if (el.getAttribute("id") != null) {
+      let camelCasedName = el.getAttribute("id").toCamelCase();
+      croquis[camelCasedName] = el;
+    }
+  });
+}
 
 croquis.loaded = (callback) => {
   _croquis.loadCallbacks.push(callback);

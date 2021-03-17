@@ -1,6 +1,6 @@
 {
   "name": "hello-croquis",
-  "version": "0.1.13",
+  "version": "0.1.17",
   "description": "CSS+JS Frontend Framework based on Template System.",
   "main": "src/index.js",
   "repository": {
@@ -20,6 +20,7 @@
     "url": "https://github.com/seungrolee/croquis/issues"
   },
   "scripts": {
+    "build+publish": "npm build && npm publish",
     "build:all": "npm run build && npm run build:sass",
     "watch:all": "concurrently 'npm:watch' 'npm:watch:sass'",
     "build": "./node_modules/.bin/webpack && cp ./demo/script/croquis.js ./dist/croquis.js",
