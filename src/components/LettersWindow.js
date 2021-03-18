@@ -28,7 +28,6 @@ class LettersWindow extends TemplateElement {
         if (!(addedNode instanceof Text))
           throw Error("only textNode can be child of letters-window!");
 
-        console.log(addedNode);
         for (let i = 0; i < addedNode.length; i++) {
           let windowFrame = document.createElement("div");
           windowFrame.classList.add("letter-window-frame", "inline-blk");
